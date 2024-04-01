@@ -41,18 +41,18 @@ function Explore() {
       </section>
       <section>
         <div className="bg-gray-400 h-[120px] w-[95%] mt-6 bg-gradient-to-tr from-gray-400 to-gray-200">
-          <div className="p-3 ">
-            <div className="flex ">
+          <div className="p-3 flex-row">
+            <div className="flex">
               <FaWallet size={30} />
               <p className="ml-3 font-semibold text-xl">Wallet</p>
             </div>
 
             <div className="flex  pl-20 pr-20 items-center ">
-              <p className=" mt- font-semibold text-xl">
+              <span className="flex gap-2 font-semibold text-xl">
                 Funds <span className="text-blue-700">&#8377;0</span>{" "}
-              </p>
-              <div className="pl-[42rem]">
-                <button className="p-3 text-xl rounded-md text-white bg-blue-700 font-arima items-end">
+              </span>
+              <div className="flex w-full justify-end">
+                <button className=" p-3 text-xl rounded-md text-white bg-blue-700 font-arima items-end">
                   Add Money
                 </button>
                 <button className=" p-3 text-xl rounded-md ml-4 text-white bg-red-500 font-arima items-end ">
@@ -63,11 +63,11 @@ function Explore() {
           </div>
         </div>
         {/* {toogleAdd_money? 'translate-x-0': 'translate-x-1'} */}
-        <div className="bg-white flex justify-center relative ">
+        {/* <div className="bg-white flex justify-center relative ">
           <span className="absolute top-[-10.75rem] ">
             <Add_money />
           </span>
-        </div>
+        </div> */}
       </section>
       <section>
         <div className="bg-gray-400 h-[220px] w-[95%] mt-6 bg-gradient-to-b from-gray-300 to-gray-200 p-5">

@@ -2,6 +2,7 @@ import React from "react";
 import { GrNext } from "react-icons/gr";
 import { MdPictureAsPdf } from "react-icons/md";
 import { GoGraph } from "react-icons/go";
+
 const companies_data = [
   {
     id: 1,
@@ -19,68 +20,31 @@ const companies_data = [
     Sector: "CFO",
     image: "",
   },
-  {
-    id: 3,
-    Company_name: "Company",
-    About:
-      "This code snippet appears to be written in Tailwind CSS, a utility-first CSS framework. Here's the breakdown and corrected version:",
-    Sector: "Developer",
-    image: "",
-  },
-  {
-    id: 4,
-    Company_name: "Company",
-    About:
-      "This code snippet appears to be written in Tailwind CSS, a utility-first CSS framework. Here's the breakdown and corrected version:",
-    Sector: "Developer",
-    image: "",
-  },
-  {
-    id: 5,
-    Company_name: "Company",
-    Sector: "Developer",
-    image: "../assets/ceo.png",
-    About:
-      "This code snippet appears to be written in Tailwind CSS, a utility-first CSS framework. Here's the breakdown and corrected version:",
-  },
-  {
-    id: 6,
-    Company_name: "Company",
-    Sector: "Investment Advisor",
-    image: "../assets/ceo.png",
-    About:
-      "This code snippet appears to be written in Tailwind CSS, a utility-first CSS framework. Here's the breakdown and corrected version:",
-  },
-  {
-    id: 7,
-    Company_name: "Company",
-    Sector: "Investment Advisor",
-    image: "../assets/ceo.png",
-    About:
-      "This code snippet appears to be written in Tailwind CSS, a utility-first CSS framework. Here's the breakdown and corrected version:",
-  },
-  {
-    id: 8,
-    Company_name: "Company",
-    Sector: "Investment Advisor",
-    image: "../assets/ceo.png",
-    About:
-      "This code snippet appears to be written in Tailwind CSS, a utility-first CSS framework. Here's the breakdown and corrected version:",
-  },
 ];
 
 function Wealth() {
   return (
-    <section className=" ">
-      <div className="flex justify-end mr-28 mb-3 relative items-center">
-        <span className="flex justify-end text-blue-800 text-lg  "> Next</span>
-        <div className="absolute top-[0.5rem] left-[78.75rem]">
+    <section className="">
+      <div className="flex  mr-2 md:mr-0 mb-3  items-center w-full justify-end">
+        <span className="flex justify-end w-full text-blue-800 text-lg md:hidden">
+          {" "}
+          Next
+        </span>
+        <div className="left-7/12 md:hidden">
+          {" "}
+          {/* Centered on mobile */}
           <span>
             <GrNext />
           </span>
         </div>
+        <span className="hidden md:flex justify-end items-center mr-10 w-full text-blue-800 text-lg">
+          {" "}
+          Next <GrNext />
+        </span>
+
+       
       </div>
-      <div className="w-[81rem] h-full bg-gradient-to-br from-gray-200 to-gray-100 pt-5 pr-8 pl-8">
+      <div className="w-full h-full bg-gradient-to-br pt-5 pr-8 pl-8">
         <div className="flex flex-col">
           <span className="font-bold text-3xl">
             {companies_data[0].Company_name}
@@ -92,8 +56,12 @@ function Wealth() {
           <span className="mt-2 font-semibold text-xl">About</span>
           <span className="mt-2">{companies_data[0].About}</span>
         </div>
-        <div className="flex mt-4 ">
-          <div className="grid grid-cols-6 gap-x-3 gap-y-3">
+        <div className="flex mt-4 flex-wrap md:flex-col">
+          {" "}
+          {/* Wrap content on mobile */}
+          <div className="grid grid-cols-6 gap-x-3 gap-y-3 md:grid-cols-2">
+            {" "}
+            {/* Adjust grid columns for mobile */}
             <span>
               <span className="font-bold">Mkt Cap :</span> xxxx
             </span>
@@ -113,8 +81,10 @@ function Wealth() {
               <span className="font-bold">Previous Valuation :</span> xx Cr.
             </span>
             <span className="font-bold">Earnings YOY :</span>
-            <div className="flex">
-              <span className="font-bold ">Financial Report </span>
+            <div className="flex mt-2 md:mt-0">
+              {" "}
+              {/* Move together on mobile */}
+              <span className="font-bold">Financial Report </span>
               <span className="ml-2">
                 <MdPictureAsPdf size={25} />
               </span>
@@ -122,7 +92,7 @@ function Wealth() {
           </div>
         </div>
         <div className="flex justify-center items-center text-center mt-5">
-          <GoGraph size={300} color="green"/>
+          <GoGraph size={300} color="green" />
         </div>
       </div>
     </section>

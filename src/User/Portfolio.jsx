@@ -6,45 +6,33 @@ import { MdSort } from "react-icons/md";
 function Portfolio() {
   return (
     <div className="">
-      <section>
-        <div className="">
-          <span className="font-semibold text-2xl ">Portfolio</span>
-        </div>
-        <div className="mt-5 ml-3">
-          <div className="flex ">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Filter"
-                className="w-60 mr-5 px-3 py-2  border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
-              />
-              <span className="absolute right-7  top-1/2 -translate-y-1/2 text-gray-400">
-                {/* Icon placement */}
-                <IoFilter size={25} />
-              </span>
-            </div>
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Sort By"
-                className="w-60 px-3 mr-5 py-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
-              />
-              <span className="absolute right-7 top-1/2 -translate-y-1/2 text-gray-400">
-                {/* Icon placement */}
-                <MdSort size={25} />
-              </span>
-            </div>
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search..."
-                className="w-96 px-3 py-2  border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
-              />
-              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
-                {/* Icon placement */}
-                <AiOutlineSearch size={25} />
-              </span>
-            </div>
+      <section className="search-bar">
+        <div className=" gap-2 w-full md:flex ">
+          <div className="flex gap-2 items-center my-3 ">
+            <input
+              type="text"
+              placeholder="Filter"
+              className="w-auto px-3  py-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            />
+            <IoFilter size={25} className="-ml-9 mt-1" />
+          </div>
+          <div className="flex gap-2 items-center my-3">
+            {" "}
+            <input
+              type="text"
+              placeholder="Sort By"
+              className="w-auto px-3 py-2 border border-gray-300  focus:outline-none focus:ring-1 focus:ring-blue-500"
+            />
+            <MdSort size={25} className=" -ml-9" />{" "}
+          </div>
+
+          <div className="flex gap-2 items-center">
+            <input
+              type="text"
+              placeholder="Search..."
+              className={`w-[30rem] px-3 py-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500`}
+            />
+            <AiOutlineSearch size={25} className="-ml-10 mt-1" />
           </div>
         </div>
       </section>

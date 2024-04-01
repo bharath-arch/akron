@@ -4,6 +4,7 @@
 @tailwind utilities;
 
 
+
 html{
     scroll-behavior: smooth ;
     
@@ -16,4 +17,5 @@ html::-webkit-scrollbar{
 }
 body {
     background-color: var(--bodyColor);
+    
 }
