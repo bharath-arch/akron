@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Arima:wght@100..700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+html{
+    scroll-behavior: smooth ;
+    
+}
+html::-webkit-scrollbar{
+    display: none;
+}
+:root {
+    --bodyColor: "#000000";
+}
+body {
+    background-color: var(--bodyColor);
+}
