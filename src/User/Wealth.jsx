@@ -56,10 +56,12 @@ function Wealth() {
           <span className="mt-2 font-semibold text-xl">About</span>
           <span className="mt-2">{companies_data[0].About}</span>
         </div>
-        <div className="flex mt-4 flex-wrap md:flex-col">
+        <div className="flex gap-5 mt-9  ">
           {" "}
           {/* Wrap content on mobile */}
-          <div className="grid grid-cols-6 gap-x-3 gap-y-3 md:grid-cols-2">
+          <div className={`w-1/4 h-auto shadow-md rounded-md 
+                     
+                     md:w-full flex gap-10`}>
             {" "}
             {/* Adjust grid columns for mobile */}
             <span>

@@ -5,11 +5,23 @@ import { TbMoneybag } from "react-icons/tb";
 import { BsFillPeopleFill } from "react-icons/bs";
 import { FaWallet } from "react-icons/fa";
 import Add_money from "../Wallet/Add_money";
-
+import Withdraw_money from "../Wallet/Withdraw_money.jsx";
 
 function Explore() {
+  const [toggle, setActivetoggle] = useState(false);
+  const handletogglebutton = () => {
+    setActivetoggle(true);
+  };
+  const handleclosetogglebutton = () => {
+    setActivetoggle(false);
+  };
+  const withdrawclosetogglebutton =()=>{
+    setActivetoggle(false)
+  }
+  const withdrawtogglebutton =() =>{
+    setActivetoggle(true);
+  }
   return (
-
     <div className="ml-6 mr-6">
       <section>
         <div className="">
@@ -52,22 +64,33 @@ function Explore() {
                 Funds <span className="text-blue-700">&#8377;0</span>{" "}
               </span>
               <div className="flex w-full justify-end">
-                <button className=" p-3 text-xl rounded-md text-white bg-blue-700 font-arima items-end">
+                <button
+                  onClick={handletogglebutton}
+                  className=" p-3 text-xl rounded-md text-white bg-blue-700 font-arima items-end"
+                >
                   Add Money
                 </button>
-                <button className=" p-3 text-xl rounded-md ml-4 text-white bg-red-500 font-arima items-end ">
+                <button
+                  onClick={withdrawtogglebutton}
+                  className=" p-3 text-xl rounded-md ml-4 text-white bg-red-500 font-arima items-end "
+                >
                   Withdraw
                 </button>
               </div>
             </div>
           </div>
         </div>
-        {/* {toogleAdd_money? 'translate-x-0': 'translate-x-1'} */}
-        {/* <div className="bg-white flex justify-center relative ">
+
+     { toggle &&   <div className="bg-white flex justify-center relative ">
           <span className="absolute top-[-10.75rem] ">
-            <Add_money />
+            <Add_money handleclosetogglebutton={handleclosetogglebutton} />
           </span>
-        </div> */}
+        </div>}
+        { toggle && <div className="bg-white flex justify-center relative ">
+          <span className="absolute top-[-10.75rem] ">
+            <Withdraw_money withdrawclosetogglebutton={withdrawclosetogglebutton} />
+          </span>
+        </div>}
       </section>
       <section>
         <div className="bg-gray-400 h-[220px] w-[95%] mt-6 bg-gradient-to-b from-gray-300 to-gray-200 p-5">

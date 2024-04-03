@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 // import Logo from "../assets/logo.png";
 import setBodyColor from "../setBodyColor";
 import { CiCircleChevDown } from "react-icons/ci";
@@ -9,9 +9,13 @@ import User_popup from "../Wallet/User_popup/User_popup";
 import { RxHamburgerMenu } from "react-icons/rx";
 
 function Layout_user() {
+  const path = useLocation();
   setBodyColor({ color: "white" });
-  const [selectLink, setSelectLink] = useState("explore");
+  const [selectLink, setSelectLink] = useState(path.pathname);
   const [activesidebar, setActivesidebar] = useState(true);
+  console.log(path.pathname);
+  console.log(selectLink === "/user/wealth", "select link");
+  useEffect(() => {}, [path]);
 
   return (
     <div className="">
@@ -23,11 +27,12 @@ function Layout_user() {
         <div className=" ">
           <ul className=" font-semibold text-xl">
             <li
-              onClick={() => setSelectLink("explore")}
+              // onClick={() => setSelectLink("explore")}
               className={`${
-                selectLink === "explore" ? "text-blue-900 p-2" : "p-2"
+                path.pathname === "/user/wealth" ? "text-blue-900 p-2" : "p-2"
               }`}
             >
+              {/* {selectLink} */}
               <Link to={"explore"}>Explore</Link>
             </li>
             <li

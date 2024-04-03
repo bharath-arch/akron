@@ -1,12 +1,12 @@
 import React from "react";
 import { IoCloseOutline } from "react-icons/io5";
 
-function Withdraw_money() {
+function Withdraw_money({withdrawclosetogglebutton}) {
   return (
     <div className="  w-96 h-96 border-2 p-3 bg-white">
         <div className="relative mb-3">
             <span className="absolute left-[20.75rem]">
-                <IoCloseOutline size={23}/>
+                <IoCloseOutline size={23} onClick={withdrawclosetogglebutton}/>
             </span>
         </div>
       <span className="font-semibold text-xl">Withdraw</span>
