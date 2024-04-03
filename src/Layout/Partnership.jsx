@@ -81,11 +81,11 @@ const companies = [
 function Partnership() {
   return (
     <div>
-      <section className="mt-5 bg-[#F9F5FE] w-lvw h-[16rem] flex flex-col justify-center">
-        <div className="flex justify-center">
-          <p className="text-5xl font-extrabold ">
+      <section className="mt-5 bg-[#F9F5FE] w-lvw h-[16rem] flex flex-col justify-center text-center">
+        <div className="flex justify-center items-center w-full">
+          <span className="text-5xl  font-extrabold ">
             Benefits of working with us
-          </p>
+          </span>
         </div>
         <div className="flex justify-center mt-8 ">
           <a
@@ -111,8 +111,8 @@ function Partnership() {
           Exclusive benefits when you raise through Tyke
         </p>
       </section>
-      <section className="flex justify-center ml-8 mr-8 ">
-        <div className=" grid grid-cols-3 gap-8 ">
+      <section className="flex w-full   mt-3 md:flex md:justify-center md:ml-8 md:mr-8 ">
+        <div className="flex flex-wrap  justify-center md:grid md:grid-cols-3 md:gap-8 ">
           {companies.map((data, index) => (
             <div className="rounded-lg border-2 border-gray-100 p-7">
               <img
