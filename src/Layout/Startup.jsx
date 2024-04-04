@@ -8,7 +8,7 @@ function Startup() {
     <div className="">
       <div className="md:flex ">
         <div className=" mt-3 ml-5 mr-5 md:ml-28 md:flex-1">
-          <h1 className=" md:text-6xl font-semibold  text-2xl ">
+          <h1 className=" md:text-6xl md:mt-16 font-semibold  text-2xl ">
             Raising capital made easy now
           </h1>
           <p className="md:text-4xl mt-2 text-sm">

@@ -8,7 +8,7 @@ function Home() {
   return (
     <div className="">
     <div className=' md:flex'>
-      <div className=" mt-3 ml-5 md:ml-28 md:flex-1">
+      <div className=" mt-3 ml-5 md:mt-16 md:ml-28 md:flex-1">
         <h1 className='md:text-6xl font-semibold  text-2xl  '>
           Grow your wealth with higher returns
         </h1>
