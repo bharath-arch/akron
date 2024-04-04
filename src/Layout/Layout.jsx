@@ -11,9 +11,9 @@ function Layout() {
   setBodyColor({ color: "white" });
   return (
     <div className="">
-      <div className="flex justify-between text-center items-center ml-8 mr-8 mt-3">
+      <div className="flex items-center justify-between mt-5 mr-5 ml-5 md:flex md:justify-between md:text-center md:items-center md:ml-8 md:mr-8 md:mt-3">
         <div className="">
-          <span className="font-bold text-4xl bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">
+          <span className="font-bold text-2xl  md:text-4xl bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">
             Akron
           </span>
         </div>
@@ -62,24 +62,25 @@ function Layout() {
           </ul>
         </div>
 
-        <div className="flex gap-4 text-xl items-center">
-          <p className="p-1  md:p-2">
+        <div className="flex gap-4 items-center ">
+          <p className="hidden md:items-center md:p-2 md:text-xl">
             <Link to={"/sign_in"}>Sign In</Link>
           </p>
           <Link to={"/Login"}>
             {" "}
             <button
-              className={` p-1 bg-blue-800 rounded-lg text-white  md:p-2 md:bg-blue-800 md:text-white md:rounded-lg `}
+              className={`md:p-3 hidden md:text-xl md:bg-blue-800 md:text-white md:rounded-lg`}
             >
               Get Started
             </button>
           </Link>
-          <button onClick={navtoggle}>
+          <button onClick={navtoggle} className="md:hidden">
             {isOpen ? <RxHamburgerMenu /> : <RxHamburgerMenu />}
           </button>
+          
           {isOpen && (
             <div className="relative ">
-              <ul className=" absolute top-5  right-4 font-semibold text-xl bg-white md:hidden">
+              <ul className=" absolute flex flex-col items-center text-[12px] top-5  right-4 font-semibold  bg-white md:hidden">
                 <li
                   onClick={() => setSelectLink("Home")}
                   className={`${
@@ -87,7 +88,8 @@ function Layout() {
                   }`}
                 >
                   <Link to={""}>Home</Link>
-                </li><hr className="" />
+                </li>
+                <hr className="" />
                 <li
                   onClick={() => setSelectLink("startup")}
                   className={`${
@@ -95,7 +97,8 @@ function Layout() {
                   }`}
                 >
                   <Link to={"/startup"}>Startup</Link>
-                </li><hr className="" />
+                </li>
+                <hr className="" />
                 <li
                   onClick={() => setSelectLink("academy")}
                   className={`${
@@ -103,7 +106,8 @@ function Layout() {
                   }`}
                 >
                   <Link to={"/academy"}>Academy</Link>
-                </li><hr className="" />
+                </li>
+                <hr className="" />
                 <li
                   onClick={() => setSelectLink("partnership")}
                   className={`${
@@ -111,7 +115,8 @@ function Layout() {
                   }`}
                 >
                   <Link to={"/partnership"}>Partnership</Link>
-                </li><hr className="" />
+                </li>
+                <hr className="" />
                 <li
                   onClick={() => setSelectLink("Aboutus")}
                   className={`${
@@ -119,6 +124,12 @@ function Layout() {
                   }`}
                 >
                   <Link to={"/Aboutus"}>About Us</Link>
+                </li><hr className="" />
+                <li onClick={() => setSelectLink("sign_in")}
+                  className={`${
+                    selectLink === "sign_in" ? "text-blue-900 p-2" : "p-2"
+                  }`}>
+                  <Link to={"/sign_in"}>Sign In</Link>
                 </li>
               </ul>
             </div>
