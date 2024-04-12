@@ -59,9 +59,9 @@ function Wealth() {
         <div className="flex gap-5 mt-9  ">
           {" "}
           {/* Wrap content on mobile */}
-          <div className={`w-1/4 h-auto shadow-md rounded-md 
+          <div className={`h-auto flex flex-wrap 
                      
-                     md:w-full flex gap-10`}>
+                     md:w-full  gap-10`}>
             {" "}
             {/* Adjust grid columns for mobile */}
             <span>

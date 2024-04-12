@@ -83,20 +83,20 @@ function Partnership() {
     <div>
       <section className="mt-5 bg-[#F9F5FE] w-lvw h-[16rem] flex flex-col justify-center text-center">
         <div className="flex justify-center items-center w-full">
-          <span className="text-5xl  font-extrabold ">
+          <span className="md:text-5xl  font-extrabold  text-4xl">
             Benefits of working with us
           </span>
         </div>
-        <div className="flex justify-center mt-8 ">
+        <div className="md:flex md:justify-center md:mt-8 flex gap-4  justify-center mt-5 ">
           <a
             href="#Startups"
-            className="pt-2 pb-2 pl-7 pr-7 border-2 text-xl border-blue-700 text-blue-700 rounded-md"
+            className="md:pt-2 md:pb-2 md:pl-7 md:pr-7 md:border-2 md:text-xl md:border-blue-700 md:text-blue-700 md:rounded-md items-center p-2 flex justify-center border-2  rounded-md border-blue-700 text-blue-700"
           >
             Startsups
           </a>
           <a
             href="#Investors"
-            className="pt-2 pb-2 pl-7 pr-7  border-2 ml-8 text-xl  border-blue-700 text-blue-700 rounded-md"
+            className="md:pt-2 md:pb-2 md:pl-7 md:pr-7 md:border-2 md:text-xl md:border-blue-700 md:text-blue-700 md:rounded-md items-center p-2 flex justify-center border-2  rounded-md border-blue-700 text-blue-700"
           >
             Investors
           </a>

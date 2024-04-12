@@ -4,10 +4,10 @@ function Academy() {
   return (
     <div>
       <div className="mt-5 ml-6 mr-6 ">
-        <p className="flex  justify-center font-semibold text-3xl">
+        <p className="md:flex  md:justify-center  font-semibold text-xl md:text-3xl">
           How to Calculate Financial Ratios?
         </p>
-        <p className="mt-5">
+        <p className="mt-5 text-lg">
           {" "}
           Most financial ratios can be calculated using numbers found on a
           company's financial statements, specifically the balance sheet and
