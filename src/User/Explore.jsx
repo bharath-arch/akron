@@ -9,6 +9,7 @@ import Withdraw_money from "../Wallet/Withdraw_money.jsx";
 
 function Explore() {
   const [toggle, setActivetoggle] = useState(false);
+  const [withdrawtoggle, withdrawsetActivetoggle] = useState(false);
   const handletogglebutton = () => {
     setActivetoggle(true);
   };
@@ -16,10 +17,10 @@ function Explore() {
     setActivetoggle(false);
   };
   const withdrawclosetogglebutton =()=>{
-    setActivetoggle(false)
+    withdrawsetActivetoggle(false)
   }
   const withdrawtogglebutton =() =>{
-    setActivetoggle(true);
+    withdrawsetActivetoggle(true);
   }
   return (
     <div className="ml-6 mr-6">
@@ -86,7 +87,7 @@ function Explore() {
             <Add_money handleclosetogglebutton={handleclosetogglebutton} />
           </span>
         </div>}
-        { toggle && <div className="bg-white flex justify-center relative ">
+        { withdrawtoggle && <div className="bg-white flex justify-center relative ">
           <span className="absolute top-[-10.75rem] ">
             <Withdraw_money withdrawclosetogglebutton={withdrawclosetogglebutton} />
           </span>
