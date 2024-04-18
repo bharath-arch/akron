@@ -1,15 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { Toaster } from "react-hot-toast";
 import { successToast, errorToast } from "../Toaster";
 
 function Kyc() {
+  const [formdata, setFormdata] = useState({
+    name: "",
+    email: "",
+    linkedin_url: "",
+    address: "",
+    pan: "",
+    aadhar: "",
+    contact_number: "",
+    whattsapp: "",
+    about_yourself: "",
+    anual_income: "",
+    bank_account_number: "",
+    bank_account_photo: "",
+    where_you_learn_about_us: "",
+    avatar: "",
+    ID_proof:"",
+  });
+  const handleChangeEvent = (e) => {
+    setFormdata({ ...formdata, [e.target.name]: e.target.value });
+  };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
+    try {
+      const response = await fetch("http://localhost:4000/kyc", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formdata),
+      });
+  
+      const data = await response.json();
+      console.log(data); // Handle response data (e.g., success message)
+  
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
 
+    console.log(formdata, "formdata");
+    // toast.success('Successfully toasted!')
+  };
   return (
-    <div> 
-       <Toaster position="top-center" reverseOrder={false} />
+    <div>
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="">
         <div className="flex justify-between text-center items-center ml-8 mr-8 mt-3">
           <div className="">
@@ -35,6 +73,10 @@ function Kyc() {
           </label>
           <input
             type="text"
+            name="name"
+            id="name"
+            value={formdata.name}
+            onChange={handleChangeEvent}
             className=" border-2 rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
             placeholder="Your Name"
           />
@@ -43,6 +85,10 @@ function Kyc() {
           </label>
           <input
             type="email"
+            name="email"
+            id="email"
+            value={formdata.email}
+            onChange={handleChangeEvent}
             className=" border-2 rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
             placeholder="Email"
           />
@@ -51,6 +97,10 @@ function Kyc() {
           </label>
           <input
             type="url"
+            id="linkedin_url"
+            name="linkedin_url"
+            value={formdata.linkedin_url}
+            onChange={handleChangeEvent}
             className=" border-2 rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
             placeholder="Your Name"
           />
@@ -58,6 +108,10 @@ function Kyc() {
             Address
           </label>
           <textarea
+            name="address"
+            id="address"
+            value={formdata.address}
+            onChange={handleChangeEvent}
             className=" border-2 rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
             placeholder="Address"
           ></textarea>
@@ -66,6 +120,10 @@ function Kyc() {
           </label>
           <input
             type="text"
+            name="pan"
+            id="pan"
+            value={formdata.pan}
+            onChange={handleChangeEvent}
             className=" border-2 rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
             placeholder="PAN"
           />
@@ -74,6 +132,10 @@ function Kyc() {
           </label>
           <input
             type="text"
+            name="aadhar"
+            id="aadhar"
+            value={formdata.aadhar}
+            onChange={handleChangeEvent}
             className=" border-2 rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
             placeholder="Aadhar"
           />
@@ -82,6 +144,10 @@ function Kyc() {
           </label>
           <input
             type="text"
+            name="contact_number"
+            id="contact_number"
+            value={formdata.contact_number}
+            onChange={handleChangeEvent}
             className=" border-2 rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
             placeholder="Contact Number"
           />
@@ -90,6 +156,10 @@ function Kyc() {
           </label>
           <input
             type="text"
+            name="whattsapp"
+            id="whattsapp"
+            value={formdata.whattsapp}
+            onChange={handleChangeEvent}
             className=" border-2 rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
             placeholder="Whats app Number"
           />
@@ -97,6 +167,10 @@ function Kyc() {
             Describe about yourself
           </label>
           <textarea
+            name="about_yourself"
+            id="about_yourself"
+            value={formdata.about_yourself}
+            onChange={handleChangeEvent}
             className=" border-2 rounded-2xl w-[100%] h-auto p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
             placeholder="Describe about yourself"
           />
@@ -105,6 +179,10 @@ function Kyc() {
           </label>
           <input
             type="text"
+            id="anual_income"
+            name="anual_income"
+            value={formdata.anual_income}
+            onChange={handleChangeEvent}
             className=" border-2 rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
             placeholder="annual income"
           />
@@ -113,6 +191,10 @@ function Kyc() {
           </label>
           <input
             type="text"
+            name="bank_account_number"
+            id="bank_account_number"
+            value={formdata.bank_account_number}
+            onChange={handleChangeEvent}
             className=" border-2 rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
             placeholder="account Number"
           />
@@ -121,12 +203,20 @@ function Kyc() {
           </label>
           <input
             type="file"
+            name="bank_account_photo"
+            id="bank_account_photo"
+            value={formdata.bank_account_photo}
+            onChange={handleChangeEvent}
             className=" border-2  border-dashed rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
           />
           <label htmlFor="" className="font-semibold text-xl">
             From where you learn about us
           </label>
           <textarea
+            name="where_you_learn_about_us"
+            id="where_you_learn_about_us"
+            value={formdata.where_you_learn_about_us}
+            onChange={handleChangeEvent}
             className=" border-2 rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
             placeholder="From where you learn about us"
           />
@@ -153,6 +243,10 @@ function Kyc() {
           </label>
           <input
             type="file"
+            name="avatar"
+            id="avatar"
+            value={formdata.avatar}
+            onChange={handleChangeEvent}
             className=" border-2 border-dashed rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
             placeholder="Upload your Image"
           />
@@ -161,17 +255,18 @@ function Kyc() {
           </label>
           <input
             type="file"
+            name="ID_proof"
+            id="ID_proof"
+            value={formdata.ID_proof}
+            onChange={handleChangeEvent}
             className=" border-2 border-dashed rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
             placeholder="Upload your ID proof"
           />
           <div className="flex justify-center mt-3 mb-3">
             <button
               className=" p-2 rounded-md w-24 bg-blue-600 border-none text-white hover:bg-blue-700  "
-              onClick={() =>
-                successToast(
-                  "Success! Your KYC application has been submitted."
-                )
-              }
+              onClick={handleSubmit}
+              
             >
               Submit
             </button>
