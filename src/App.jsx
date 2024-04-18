@@ -65,6 +65,11 @@ function App() {
           <Route path="square" element={<Square />} />
           <Route path="portfolio" element={<Portfolio />} />
         </Route>
+
+        
+
+        
+
       </Routes>
      
     </BrowserRouter>

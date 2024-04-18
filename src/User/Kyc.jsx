@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { Toaster } from "react-hot-toast";
 import { successToast, errorToast } from "../Toaster";
 
 function Kyc() {
+  const navigate = useNavigate();
   const [formdata, setFormdata] = useState({
     name: "",
     email: "",
@@ -18,8 +20,9 @@ function Kyc() {
     bank_account_number: "",
     bank_account_photo: "",
     where_you_learn_about_us: "",
+    existing_commitments: "",
     avatar: "",
-    ID_proof:"",
+    ID_proof: "",
   });
   const handleChangeEvent = (e) => {
     setFormdata({ ...formdata, [e.target.name]: e.target.value });
@@ -34,10 +37,14 @@ function Kyc() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formdata),
       });
-  
+
       const data = await response.json();
       console.log(data); // Handle response data (e.g., success message)
-  
+      const message_response = data.message;
+      message_response === "User already exists"
+        ? toast.error(message_response)
+        : navigate("/user");
+      
     } catch (error) {
       console.error("Error submitting form:", error);
     }
@@ -227,13 +234,19 @@ function Kyc() {
           <div className="flex gap-3 items-center">
             <input
               type="radio"
-              name="commitments"
+              name="existing_commitments"
+              id="existing_commitments"
+              value={formdata.existing_commitments}
+              onChange={handleChangeEvent}
               className="w-4 h-4 rounded-full border-gray-300 focus:ring-1 focus:ring-blue-500"
             />
             <label htmlFor="">Yes</label>
             <input
               type="radio"
-              name="commitments"
+              name="existing_commitments"
+              id="existing_commitments"
+              value={formdata.existing_commitments}
+              onChange={handleChangeEvent}
               className="w-4 h-4 rounded-full border-gray-300 focus:ring-1 focus:ring-blue-500"
             />
             <label htmlFor="">No</label>
@@ -263,13 +276,15 @@ function Kyc() {
             placeholder="Upload your ID proof"
           />
           <div className="flex justify-center mt-3 mb-3">
-            <button
-              className=" p-2 rounded-md w-24 bg-blue-600 border-none text-white hover:bg-blue-700  "
-              onClick={handleSubmit}
-              
-            >
-              Submit
-            </button>
+            <Link to={"/user"}>
+              {" "}
+              <button
+                className=" p-2 rounded-md w-24 bg-blue-600 border-none text-white hover:bg-blue-700  "
+                onClick={handleSubmit}
+              >
+                Submit
+              </button>
+            </Link>
           </div>
         </div>
       </section>

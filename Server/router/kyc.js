@@ -20,9 +20,12 @@ router.post("/", async (req, res) => {
         bank_account_number,
         bank_account_photo,
         where_you_learn_about_us,
+        existing_commitments,
         avatar,
         ID_proof ,
     } = req.body;
+
+  
     // Destructure email and password from request body
 
     const existingUser = await Userkyc.findOne({ email }); // Check for existing user
@@ -44,6 +47,7 @@ router.post("/", async (req, res) => {
         bank_account_number,
         bank_account_photo,
         where_you_learn_about_us,
+        existing_commitments,
         avatar,
         ID_proof }); // Create a new Login object
       await newUser.save(); // Save the new user to the database
