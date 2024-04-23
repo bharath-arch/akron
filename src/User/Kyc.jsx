@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { Toaster } from "react-hot-toast";
 import { successToast, errorToast } from "../Toaster";
+import axios from "axios";
 
 function Kyc() {
   const navigate = useNavigate();
@@ -24,33 +25,43 @@ function Kyc() {
     avatar: "",
     ID_proof: "",
   });
+
   const handleChangeEvent = (e) => {
-    setFormdata({ ...formdata, [e.target.name]: e.target.value });
+    if (
+      e.target.name === "avatar" ||
+      e.target.name === "ID_proof" ||
+      e.target.name === "bank_account_photo"
+    ) {
+      setFormdata({ ...formdata, [e.target.name]: e.target.files[0] });
+    } else {
+      setFormdata({ ...formdata, [e.target.name]: e.target.value });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:4000/kyc", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formdata),
+      const formData = new FormData();
+
+      Object.entries(formdata).forEach(([key, value]) => {
+        // console.log(key, value);
+        formData.append(key, value);
       });
 
-      const data = await response.json();
-      console.log(data); // Handle response data (e.g., success message)
-      const message_response = data.message;
-      message_response === "User already exists"
-        ? toast.error(message_response)
-        : navigate("/user");
+      console.log(formData, "----");
+
+      const response = await axios.post("http://localhost:4000/kyc", formData);
       
+      console.log("api called");
+      const data = await response.data.message
+      console.log(data); // Handle response data (e.g., success message) 
+      data === 'User already exists' ? toast.error(data)
+        : navigate("/user");
     } catch (error) {
-      console.error("Error submitting form:", error);
+      console.log(error)
     }
 
-    console.log(formdata, "formdata");
-    // toast.success('Successfully toasted!')
   };
   return (
     <div>
@@ -212,10 +223,18 @@ function Kyc() {
             type="file"
             name="bank_account_photo"
             id="bank_account_photo"
-            value={formdata.bank_account_photo}
+            // value={formdata.bank_account_photo}
             onChange={handleChangeEvent}
             className=" border-2  border-dashed rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
           />
+          {formdata.bank_account_photo && (
+            <img
+              src={URL.createObjectURL(formdata.bank_account_photo)}
+              alt="Bank Account Photo"
+              width={200}
+              height={100}
+            />
+          )}
           <label htmlFor="" className="font-semibold text-xl">
             From where you learn about us
           </label>
@@ -236,7 +255,7 @@ function Kyc() {
               type="radio"
               name="existing_commitments"
               id="existing_commitments"
-              value={formdata.existing_commitments}
+              value="Yes"
               onChange={handleChangeEvent}
               className="w-4 h-4 rounded-full border-gray-300 focus:ring-1 focus:ring-blue-500"
             />
@@ -245,7 +264,7 @@ function Kyc() {
               type="radio"
               name="existing_commitments"
               id="existing_commitments"
-              value={formdata.existing_commitments}
+              value="No"
               onChange={handleChangeEvent}
               className="w-4 h-4 rounded-full border-gray-300 focus:ring-1 focus:ring-blue-500"
             />
@@ -258,11 +277,19 @@ function Kyc() {
             type="file"
             name="avatar"
             id="avatar"
-            value={formdata.avatar}
+            // value={formdata.avatar}
             onChange={handleChangeEvent}
             className=" border-2 border-dashed rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
             placeholder="Upload your Image"
           />
+          {formdata.avatar && (
+            <img
+              src={URL.createObjectURL(formdata.avatar)}
+              alt="avatar"
+              width={200}
+              height={100}
+            />
+          )}
           <label htmlFor="" className="font-semibold text-xl">
             Upload your ID proof
           </label>
@@ -270,11 +297,19 @@ function Kyc() {
             type="file"
             name="ID_proof"
             id="ID_proof"
-            value={formdata.ID_proof}
+            // value={formdata.ID_proof}
             onChange={handleChangeEvent}
             className=" border-2 border-dashed rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
             placeholder="Upload your ID proof"
           />
+          {formdata.ID_proof && (
+            <img
+              src={URL.createObjectURL(formdata.ID_proof)}
+              alt="Bank Account Photo"
+              width={200}
+              height={100}
+            />
+          )}
           <div className="flex justify-center mt-3 mb-3">
             <Link to={"/user"}>
               {" "}

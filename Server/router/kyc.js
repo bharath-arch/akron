@@ -1,75 +1,58 @@
 import express from "express";
-
+import multer from "multer";
 import { Userkyc } from "../models/kyc.js";
 
 const router = express.Router();
 
-router.post("/", async (req, res) => {
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/"); // Specify the directory to store uploaded files
+  },
+  filename: function (req, file, cb) {
+    cb(null, `${Date.now()}-${file.originalname}`); // Create unique filenames
+  },
+});
+
+const upload = multer({ storage: storage });
+
+const cpUpload = upload.fields([
+  { name: "avatar", maxCount: 1 },
+  { name: "ID_proof", maxCount: 1 },
+  { name: "bank_account_photo", maxCount: 1 },
+]);
+
+router.post("/", cpUpload, async (req, res) => {
   try {
-    const {
-        name,
-        email,
-        linkedin_url,
-        address,
-        pan,
-        aadhar,
-        contact_number,
-        whattsapp,
-        about_yourself,
-        anual_income,
-        bank_account_number,
-        bank_account_photo,
-        where_you_learn_about_us,
-        existing_commitments,
-        avatar,
-        ID_proof ,
-    } = req.body;
-
-  
-    // Destructure email and password from request body
-
-    const existingUser = await Userkyc.findOne({ email }); // Check for existing user
+    const existingUser = await Userkyc.findOne({ email: req.body.email });
+    // console.log(existingUser)
+    
 
     if (existingUser) {
+      console.log(existingUser);
       console.log("User already exists");
       return res.json({ message: "User already exists" });
     } else {
-      const newUser = new Userkyc({ name,
-        email,
-        linkedin_url,
-        address,
-        pan,
-        aadhar,
-        contact_number,
-        whattsapp,
-        about_yourself,
-        anual_income,
-        bank_account_number,
-        bank_account_photo,
-        where_you_learn_about_us,
-        existing_commitments,
-        avatar,
-        ID_proof }); // Create a new Login object
-      await newUser.save(); // Save the new user to the database
-      console.log("User created successfully");
-      return res.json({ message: "User created successfully" });
+      const newUser = new Userkyc({ ...req.body });
+
+      if (req.files) {
+        newUser.avatar = req.files.avatar[0].filename; // Assuming single file for avatar
+
+        if (req.files.ID_proof) {
+          newUser.ID_proof = req.files.ID_proof[0].filename;
+        }
+
+        if (req.files.bank_account_photo) {
+          newUser.bank_account_photo = req.files.bank_account_photo[0].filename;
+        }
+      }
+
+      const savedUser = await newUser.save();
+      return res.status(201).json({ result: savedUser, message: "User Created" }).end();
     }
   } catch (error) {
     console.error("Error creating user:", error);
-    return res.status(500).json({ message: "Internal Server Error" }); // Generic error message for client
+    return res.status(500).json({ message: "Internal Server Error" });
   }
 });
-
-//     const isMatch = await Userkyc.findOne({aadhar : req.body.aadhar});
-
-//     if(!isMatch){
-//         const newUserkyc = new Userkyc(req.body)
-//         const saveUserkyc = await newUserkyc.save()
-//         return res.status(201).json({result: saveUserkyc ,message : "new user saved"})
-//     }
-//     else {
-//         return res.status(409).json({message:"aadhar is existing"}).end();
-//     }
-// })
 
 export default router;

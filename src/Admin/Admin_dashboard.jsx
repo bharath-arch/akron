@@ -1,6 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from 'axios'
 
 function Admin_dashboard() {
+
+
+  const [data,setData] = useState()
+  const [error,setError] = useState()
+
+  useEffect(()=>{
+    const fetchData = async () =>{
+
+      try{
+        const response = await axios.get("http://localhost:4000/");
+        setData(response.data)
+      }
+      catch(error){
+        setError(error)
+        console.log(error);
+      }
+
+    }
+    fetchData()
+  },[])
+
+//   const onPageload = async () => {
+//     try {
+//       const response  = await axios.get()
+//   }
+//   catch(error){
+//     console.log(error);
+//   }
+// }
+
+// onload(onPageload)
+
+
   return (
     <div>
       {" "}
