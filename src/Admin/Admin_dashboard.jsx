@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios'
+import { Link } from "react-router-dom";
 
 function Admin_dashboard() {
 
 
-  const [data,setData] = useState()
+  const [data,setData] = useState([])
   const [error,setError] = useState()
 
   useEffect(()=>{
@@ -12,8 +13,9 @@ function Admin_dashboard() {
 
       try{
         const response = await axios.get("http://localhost:4000/company_approve");
-        setData(response.data)
         console.log(response.data)
+        setData(response.data.result)
+        
       }
       catch(error){
         setError(error)
@@ -43,11 +45,14 @@ function Admin_dashboard() {
       </div>
       <section className="flex gap-2 flex-col pt-10 pl-16">
         <span className="text-2xl font-semibold">Admin Dashboard</span>
-        {data.map((value,index)=>{
-          spa
-        })}
-        {/* <span className="text-lg">Application Details 1</span>
-        <span className="text-lg">Application Details 2</span> */}
+        {data.map((value, index) => (
+          <div key={index} className="mt-3">
+            <Link to={`application_data/${value._id}`}>{value.email && <span className="cursor-pointer">Application Detail: {value.email}</span> }</Link>
+            
+            
+            {/* Render other fields here */}
+          </div>
+        ))}
       </section>
     </div>
   );

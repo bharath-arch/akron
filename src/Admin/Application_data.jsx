@@ -2,7 +2,7 @@ import React from "react";
 import { GrNext } from "react-icons/gr";
 import { MdPictureAsPdf } from "react-icons/md";
 import { GoGraph } from "react-icons/go";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 const companies_data = [
   {
     id: 1,
@@ -14,7 +14,10 @@ const companies_data = [
   },
 ];
 
+
 function Application_data() {
+  const id = useParams();
+  console.log(id)
   return (
     <section className="  ">
       <div>
@@ -123,10 +126,10 @@ function Application_data() {
           <GoGraph size={300} color="green" />
         </div>
         <div className="flex justify-end pb-5">
-        <button class="px-3 py-2 text-xl rounded-md text-white w-[8rem] bg-blue-700 font-arima hover:bg-blue-800">
+        <button className="px-3 py-2 text-xl rounded-md text-white w-[8rem] bg-blue-700 font-arima hover:bg-blue-800">
           Accept
         </button>
-        <button class="px-3 ml-2 py-2 text-xl rounded-md text-white w-[8rem] bg-red-700 font-arima hover:bg-red-800">
+        <button className="px-3 ml-2 py-2 text-xl rounded-md text-white w-[8rem] bg-red-700 font-arima hover:bg-red-800">
           Reject
         </button>
       </div>

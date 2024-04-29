@@ -81,7 +81,7 @@ function Verification() {
                     maxLength="1"
                     value={value}
                     onChange={(e) => handleChange(index, e.target.value)}
-                    className=" border-2 rounded-lg w-[14%] ml-1 p-2 align-middle  border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                    className=" border-2 rounded-lg w-[14%] ml-1 p-2 items-center   border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
                   />
                 ))}
               </div>
