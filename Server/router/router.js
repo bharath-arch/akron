@@ -32,7 +32,7 @@ router.post("/", async (req, res) => {
     });
     return res
       .status(200)
-      .json({ message: "please check your mail", token: token });
+      .json({ message: "please check your mail", token: token, email : req.body.email });
   } else {
     return res.status(409).json({ message: "mail is existing" }).end();
   }
@@ -48,3 +48,7 @@ export function generateOTP(length) {
   }
   return OTP;
 }
+
+router.get('/email',async (req,res)=>{
+
+})

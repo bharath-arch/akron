@@ -11,8 +11,9 @@ function Admin_dashboard() {
     const fetchData = async () =>{
 
       try{
-        const response = await axios.get("http://localhost:4000/");
+        const response = await axios.get("http://localhost:4000/company_approve");
         setData(response.data)
+        console.log(response.data)
       }
       catch(error){
         setError(error)
@@ -23,16 +24,6 @@ function Admin_dashboard() {
     fetchData()
   },[])
 
-//   const onPageload = async () => {
-//     try {
-//       const response  = await axios.get()
-//   }
-//   catch(error){
-//     console.log(error);
-//   }
-// }
-
-// onload(onPageload)
 
 
   return (
@@ -52,8 +43,11 @@ function Admin_dashboard() {
       </div>
       <section className="flex gap-2 flex-col pt-10 pl-16">
         <span className="text-2xl font-semibold">Admin Dashboard</span>
-        <span className="text-lg">Application Details 1</span>
-        <span className="text-lg">Application Details 2</span>
+        {data.map((value,index)=>{
+          spa
+        })}
+        {/* <span className="text-lg">Application Details 1</span>
+        <span className="text-lg">Application Details 2</span> */}
       </section>
     </div>
   );

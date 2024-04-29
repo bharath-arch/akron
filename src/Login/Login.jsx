@@ -53,7 +53,7 @@ function Login() {
             <div className="text-center items-center text-[0.75rem] mr-4 font-serif font-light  mt-2">
               <p>
                 <span>Don’t have an account ? </span>{" "}
-                <span className="text-blue-800">Sign up instead</span>
+                <Link to="sign_in"> <span className="text-blue-800">Sign up instead</span></Link>
               </p>
               <p>
                <Link to="sign_in"> <span className="text-blue-800">Signup as Founder</span></Link>

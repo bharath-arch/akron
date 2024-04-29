@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import setBodyColor from "../setBodyColor";
 import { FcGoogle } from "react-icons/fc";
 import axios from "axios";
 
 function Sign_in() {
   setBodyColor({ color: "lightgray" });
+
+  const navigate = useNavigate();
   const [formdata, setFormdata] = useState({ email: "" });
 
   const handleChangeEvent = (e) => {
@@ -14,34 +16,28 @@ function Sign_in() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
-
-
-      // const formData = new FormData();
-
-      // Object.entries(formdata).forEach(([key, value]) => {
-      //   console.log(key, value);
-      //   formData.append(key, value);
-      // });
-     
-      console.log(formdata);
       const response = await axios.post(
         "http://localhost:4000/register/",
         formdata
       );
-      const data = await response.data.message;
-
-      // if (data === "User already exists") {
-      //   // Implement error handling (e.g., display toast message)
-      // } else {
-      //   navigate("/user");
-      // }
+      console.log(response);
+  
+      // Assuming response.data contains the email
+      localStorage.setItem('email', response.data.email);
+      localStorage.setItem('token', response.data.token);
+    console.log(response.data.token)
+      
+      // Navigate only after successful response
+      navigate("/verification");
     } catch (error) {
       // Handle errors appropriately (e.g., display user-friendly message)
       console.error(error);
     }
   };
+  
+
 
   return (
     <div className="m-4">
@@ -74,12 +70,13 @@ function Sign_in() {
               {/* <Link to={"/verification"}> */}
                 {" "}
                 <div className="flex justify-center items-center  ">
-                  <button
+                 <Link to={"/verification"}>
+                  <button 
                     onClick={handleSubmit}
-                    className="mt-3 text-center border-2 rounded-lg w-[100%] p-2 font-arima bg-blue-600 text-white text-xl items-center"
+                    className="mt-3 text-center border-2 rounded-lg w-[22rem] p-2 font-arima bg-blue-600 text-white text-xl items-center"
                   >
                     Continue
-                  </button>
+                  </button></Link> 
                 </div>
               {/* </Link> */}
             </form>

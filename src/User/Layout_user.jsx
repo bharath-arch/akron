@@ -117,13 +117,20 @@ function Layout_user() {
             </li>
           </ul>
         </div>
-
+        <div className="flex justify-center items-center gap-3">
+        {localStorage.getItem("email") && (
+          <span>
+            {" "}
+            <b className="text-xl">Welcome</b> {localStorage.getItem("email").split("@gmail.com")}
+          </span>
+        )}
         <div className="h-10 w-10 border-1 rounded-full bg-red-600 items-center text-center">
           <div className="relative">
             <span className="absolute top-5 left-2 right-5">
               <User_popup />
             </span>
           </div>
+        </div>
         </div>
         <div
           className="md:hidden flex"
