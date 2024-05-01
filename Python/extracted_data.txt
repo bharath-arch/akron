@@ -1,0 +1,7 @@
+Total income: Pattern not found
+Profit/Loss Before Tax: Pattern not found
+Net Profit/Loss: Pattern not found
+Total Assets: Pattern not found
+Equity Share Capital: Pattern not found
+Current Liabilities: Pattern not found
+Cash and Cash Equivalents: Pattern not found

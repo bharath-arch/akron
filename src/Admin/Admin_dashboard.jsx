@@ -47,7 +47,7 @@ function Admin_dashboard() {
         <span className="text-2xl font-semibold">Admin Dashboard</span>
         {data.map((value, index) => (
           <div key={index} className="mt-3">
-            <Link to={`application_data/${value._id}`}>{value.email && <span className="cursor-pointer">Application Detail: {value.email}</span> }</Link>
+            <Link to={`/${value._id}`}>{value.email && <span className="cursor-pointer">Application Detail: {value.email}</span> }</Link>
             
             
             {/* Render other fields here */}

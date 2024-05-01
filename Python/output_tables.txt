@@ -1,0 +1,303 @@
+Table 1:
+                                                            0              2              3
+                                                                                           
+                                                                                           
+                                                  Particulars          As at          As at
+                                                              March 31, 2023 March 31, 2022
+                                                       Assets                              
+                                           Non-current assets                              
+                                Property, plant and equipment         696.34         773.50
+                                          Right-of-use assets          82.11         133.83
+                                     Capital work-in-progress           2.57          15.21
+                                        Investment properties          29.21          30.86
+                                                     Goodwill              -              -
+                                      Other intangible assets          58.48         121.11
+                          Intangible assets under development           3.43           4.42
+                Investments in an associate and joint venture              -              -
+                                             Financial assets                              
+                                            Other investments           0.03           0.03
+                                            Trade receivables              -              -
+                                       Other financial assets         433.14         264.31
+                                          Deferred tax assets           0.20          17.48
+                                     Other non-current assets          40.22          29.24
+                                                                    1,345.73       1,389.99
+                                               Current assets                              
+                                                  Inventories       1,827.13       2,207.90
+                                             Financial assets                              
+                                            Trade receivables       1,170.44       1,376.95
+                                    Cash and cash equivalents         367.31         437.38
+                                Bank balance other than above              -          63.05
+                                                        Loans           0.61           0.96
+                                       Other financial assets         149.05         120.50
+                                      Current tax assets, net           0.54           1.11
+                                         Other current assets         627.10         811.26
+                                                                    4,142.18       5,019.11
+                                         Assets held for sale          35.47          65.76
+                                                 Total assets       5,523.38       6,474.86
+                                       Equity and liabilities                              
+                                                       Equity                              
+                                         Equity share capital       2,454.40       1,843.49
+                                                 Other equity     (1,355.26)     (5,369.22)
+                                    Non-controlling interests              -        (36.08)
+                                                                    1,099.14     (3,561.81)
+                                      Non-current liabilities                              
+                                        Financial liabilities                              
+                                                   Borrowings       1,517.27       5,592.44
+                                            Lease liabilities          18.06          57.54
+                                  Other financial liabilities          19.46          21.67
+                                                   Provisions         168.18         130.43
+                                Other non-current liabilities           0.48           0.19
+                                                                    1,723.45       5,802.27
+                                          Current liabilities                              
+                                        Financial liabilities                              
+                                                   Borrowings         387.61         798.12
+                                            Lease liabilities          14.98          17.12
+                                               Trade payables         894.64       1,840.49
+                                  Other financial liabilities         201.55         363.26
+                                         Contract liabilities         573.04         477.25
+                                    Other current liabilities          58.13          81.04
+                                                   Provisions         569.09         483.61
+                                 Current tax liabilities, net           1.75         173.51
+                                                                    2,700.79       4,234.40
+Liabilities directly associated with the assets held for sale              -              -
+                                 Total equity and liabilities       5,523.38       6,474.86
+                   Summary of significant accounting policies                              
+
+Table 2:
+                                                                  0              2              3
+                                                                                                 
+                                                        Particulars March 31, 2023 March 31, 2022
+                                                             Income                              
+                              Revenue from contracts with customers       5,946.84       6,519.95
+                                             Other operating income          23.69          61.83
+                                                       Other income          19.63          22.19
+                                                       Total income       5,990.16       6,603.97
+                                                           Expenses                              
+   Cost of raw materials, components consumed and services rendered       3,626.76       4,091.95
+                                         Purchase of stock-in-trade              -              -
+  Changes in inventories of finished goods, semi-finished goods and         155.90         239.61
+                                                   work-in-progress                              
+                                          Employee benefits expense         609.22         545.36
+                                                      Finance costs         420.76         734.52
+Depreciation and amortisation expense (including impairment losses)         259.68         259.84
+                                                     Other expenses         746.73         815.41
+                                                     Total expenses       5,819.05       6,686.69
+                    Profit/ (loss) before exceptional items and tax         171.11        (82.72)
+                                                  Exceptional items     (2,720.60)        (83.12)
+                                          Profit/ (loss) before tax       2,891.71           0.40
+                                                        Tax expense                              
+                                                        Current tax           4.61         184.07
+                                                       Deferred tax         (0.19)        (17.48)
+                                           Profit/ (loss) after tax       2,887.29       (166.19)
+            Share of profit/ (loss) of associate and joint ventures              -        (10.36)
+                                    Net profit/ (loss) for the year       2,887.29       (176.55)
+
+Table 3:
+                                                                                    0                             2
+                                              Earnings/ (loss) per equity share (EPS)                              
+                      - \nBasic earnings per share [Nominal value of share ₹ 2 (₹ 2)]                        (0.21)
+                    - \nDiluted earnings per share [Nominal value of share ₹ 2 (₹ 2)]                        (0.21)
+                                           Summary of significant accounting policies                              
+The accompanying notes are an integral part of the consolidated financial statements.                              
+                                                      In terms of our report attached                              
+                                                         For Walker Chandiok & Co LLP                              
+                                                                Chartered Accountants                              
+                                       ICAI Firm Registration Number: 001076N/N500013                              
+                                                                     Shashi Tadwalkar                              
+                                                                              Partner Group Chief Executive Officer
+                                                               Membership No.: 101797                              
+                                                                                                                   
+                                                                                                                   
+                                                                                                                   
+                                                                          Place: Pune                              
+                                                                   Date: May 30, 2023                              
+
+Table 4:
+                                               0                                               2
+                                                 All amounts in ₹ Crore, unless otherwise stated
+            Equity share capital (refer Note 19)                                                
+Equity shares, subscribed and fully, partly paid                                      ₹ in Crore
+                                At April 1, 2021                                        1,701.60
+                       Movement in share capital                                          141.89
+                               At March 31, 2022                                        1,843.49
+                       Movement in share capital                                          610.91
+                               At March 31, 2023                                        2,454.40
+
+Table 5:
+                               0           2           3     4             5       6       7      8        9        10          11          12       13         14      15         16
+                                  of compound          of       consolidation reserve reserve                                      translation  against     equity                   
+                                    financial  compulsory                                                                              reserve    share                              
+                                  instruments convertible                                                                                      warrants                              
+                                               debentures                                                                                                                            
+              As at April 1, 2021       41.65       49.98 23.30          0.03   15.00    1.11 916.89 9,563.40 6,273.42 (21,676.92)    (497.32)   231.84 (5,044.63) (57.68) (5,102.31)
+      Profit/ (loss) for the year           -           -     -             -       -       -      -        -        -    (199.59)           -        -   (199.59)   23.04   (176.55)
+       Other comprehensive income           -           -     -             -       -       -      -        -        -        3.33     (85.16)        -    (81.83)       -    (81.83)
+                  (refer Note 36)                                                                                                                                                    
+       Total comprehensive income           -           -     -             -       -       -      -        -        -    (196.26)     (85.16)        -   (281.42)   23.04   (258.38)
+   Conversion of July 2019 FCCB's           -           -     -             -       -       -      -     8.61        -           -           -        -     (3.62)       -     (3.62)
+Gain on cancellation of July 2019           -           -     -             -       -       -      -        -        -           -           -        -     (0.76)       -     (0.76)
+                           FCCB's                                                                                                                                                    
+ Conversion of August 2032 FCCB's     (27.72)           -     -             -       -       -      -    29.73        -           -           -        -       2.01       -       2.01
+         Conversion of compulsory           -     (49.98)     -             -       -       -      -     9.18        -           -           -        -    (40.80)       -    (40.80)
+           convertible debentures                                                                                                                                                    
+  Foreign currency translation on           -           -     -             -       -       -      -        -        -           -           -        -          -  (1.44)     (1.44)
+        non-controlling interests                                                                                                                                                    
+             As at March 31, 2022       13.93           - 23.30          0.03   15.00    1.11 916.89 9,610.92 6,273.42 (21,873.18)    (582.48)   231.84 (5,369.22) (36.08) (5,405.30)
+
+Table 6:
+                               0  2           3           4  5     6             7       8       9                 10       11       12          13          14       15         16      17         18
+                                     of compound          of          consolidation reserve reserve                                                 translation  against     equity                   
+                                       financial  compulsory                                                                                            reserve    share                              
+                                     instruments convertible                                                                                                    warrants                              
+                                                  debentures                                                                                                                                          
+              As at April 1, 2022  -       13.93              - 23.30          0.03   15.00    1.11            916.89 9,610.92 6,273.42 (21,873.18)    (582.48)   231.84 (5,369.22) (36.08) (5,405.30)
+      Profit/ (loss) for the year  -           -              -     -             -       -       -                 -        -        -    2,849.01           -        -   2,849.01   38.28   2,887.29
+       Other comprehensive income  -           -              -     -             -       -       -                 -        -        -      (9.22)     (25.66)        -    (34.88)       -    (34.88)
+                  (refer Note 36)                                                                                                                                                                     
+       Total comprehensive income  -           -              -     -             -       -       -                 -        -        -    2,839.79     (25.66)        -   2,814.13   38.28   2,852.41
+     Reversal of earlier year tax  -           -              -     -             -       -       -                 -        -        -      157.09           -        -     157.09       -     157.09
+Extinguishment of warrants (refer  -           -              -     -             -       -       -                 -        -   231.84           -           - (231.84)          -       -          -
+                          Note 4)                                                                                                                                                                     
+ Conversion of August 2032 FCCB's  -     (13.93)              -     -             -       -       -                 -    13.93        -           -           -        -          -       -          -
+                (refer Note 19.6)                                                                                                                                                                     
+         Premium on conversion of  -           -              -     -             -       -       -                 -   402.86        -           -           -        -     402.86       -     402.86
+optionally convertible debentures                                                                                                                                                                     
+                   (refer Note 4)                                                                                                                                                                     
+Premium on issue of Rights equity  -           -              -     -             -       -       -                 -   659.67        -           -           -        -     659.67       -     659.67
+         shares (refer Note 19.7)                                                                                                                                                                     
+             Share issue expenses  -           -              -     -             -       -       -                 -  (19.79)        -           -           -        -    (19.79)       -    (19.79)
+  Foreign currency translation on  -           -              -     -             -       -       -                 -        -        -           -           -        -          -  (2.20)     (2.20)
+        non-controlling interests                                                                                                                                                                     
+             As at March 31, 2023  -           -              - 23.30          0.03   15.00    1.11 916.89  10,667.59          6,505.26 (18,876.30)    (608.14)        - (1,355.26)       - (1,355.26)
+                                                                                                                                                                                                      
+                                                                                                                                                                                                      
+
+Table 7:
+                                                                                    0                             2
+                                     Refer Note 20 for nature and purpose of reserves                              
+                          Summary of significant accounting policies (refer Note 2.4)                              
+The accompanying notes are an integral part of the consolidated financial statements.                              
+                                                      In terms of our report attached                              
+                                                         For Walker Chandiok & Co LLP                              
+                                                                Chartered Accountants                              
+                                       ICAI Firm Registration Number: 001076N/N500013                              
+                                                                     Shashi Tadwalkar               J. P. Chalasani
+                                                                              Partner Group Chief Executive Officer
+                                                               Membership No.: 101797                              
+                                                                                               Geetanjali S. Vaidya
+                                                                                                  Company Secretary
+                                                                                             Membership No.: A18026
+                                                                          Place: Pune                   Place: Pune
+                                                                   Date: May 30, 2023            Date: May 30, 2023
+
+Table 8:
+                                                                    0          2        3
+                                            Profit/ (loss) before tax   2,891.71     0.40
+                                                     Adjustments for:                    
+  Depreciation and amortisation expense (including impairment losses)     259.68   259.84
+                                                    Exceptional items (2,720.60)  (83.12)
+                Loss on disposal of property, plant and equipment net       1.38    10.53
+                                           Gain on sale of investment     (0.10)        -
+                                                         Other income    (29.80)  (32.88)
+                           Interest expenses and other borrowing cost     382.97   702.57
+                      Operation, maintenance and warranty expenditure      95.22   155.12
+                                       Liquidated damages expenditure      34.61    47.07
+                                    Performance guarantee expenditure     103.23    71.80
+                                                Bad debts written off      15.58    26.95
+                                     Impairment allowance/ (reversal)     (3.23)     1.24
+           Allowance/ (reversal) for doubtful debts and advances, net     (6.64)    25.45
+                                        Adjustments for consolidation    (10.31)  (99.27)
+                                 Capital work-in-progress written off          -    17.49
+                                            Exchange differences, net      11.11    32.27
+             Operating profit / (loss) before working capital changes   1,024.81 1,135.46
+                                         Movements in working capital                    
+           (Increase) / decrease in financial assets and other assets       0.59   353.48
+                           (Increase) / decrease in trade receivables     193.08 (230.49)
+                                 (Increase) / decrease in inventories     380.77  (48.52)
+(Decrease) / increase in other liabilities, financial liabilities and (1,117.66)    82.54
+                                                           provisions                    
+                 Cash (used in) / generated from operating activities     481.59 1,292.47
+                                   Direct taxes paid (net of refunds)    (14.93)     9.43
+             Net cash (used in) / generated from operating activities     466.66 1,301.90
+                                  Cash flow from investing activities                    
+     Payment for purchase of property, plant and equipments including   (100.68)  (76.72)
+                        capital work-in-progress and capital advances                    
+                  Proceeds from sale of property, plant and equipment      86.48     0.90
+       Proceeds from sale of stake in subsidiaries and joint ventures      76.96    10.67
+                                    Income from investment properties      10.17     9.93
+                                 Inter-corporate deposits repaid, net          -    20.31
+                                                    Interest received      11.98    16.48
+             Net cash (used in) / generated from investing activities      84.91  (18.43)
+
+Table 9:
+                                                                                    0                             2
+                                                                         Cash on hand                              
+                                                                                Total                        500.43
+                          Summary of significant accounting policies (refer Note 2.4)                              
+                                          The figures in brackets represent outflows.                              
+The accompanying notes are an integral part of the consolidated financial statements.                              
+                                                      In terms of our report attached                              
+                                                         For Walker Chandiok & Co LLP                              
+                                                                Chartered Accountants                              
+                                       ICAI Firm Registration Number: 001076N/N500013                              
+                                                                     Shashi Tadwalkar                              
+                                                                              Partner Group Chief Executive Officer
+                                                               Membership No.: 101797                              
+                                                                                                                   
+                                                                                                                   
+                                                                                                                   
+                                                                          Place: Pune                              
+                                                                   Date: May 30, 2023                              
+
+Table 10:
+ 0                                                                                                                               2
+                                                                                                                                  
+                                                                                   All amounts in ₹ Crore, unless otherwise stated
+1.                                                                                                                                
+        Suzlon  Energy  Limited  (the  ‘Company’)  is  a  public  company  domiciled  in  India  and  is  incorporated  under  the
+                 provisions of the Companies Act applicable in India. Its shares are listed on the Bombay Stock Exchange (BSE) and
+              the National Stock Exchange (NSE) in India. The registered office of the Company is located at “Suzlon”, 5, Shrimali
+                     Society, Near Shree Krishna Complex, Navrangpura, Ahmedabad-380009, India. The principal place of business is
+                                                                                                                                  
+   The  Company  along  with  its  subsidiaries,  associates  and  joint  ventures  (together  referred  to  as  ‘the  Group’)  is
+          primarily  engaged  in  the  business  of  manufacturing,  project  execution  and  operation  and  maintenance  service
+                                                                                                                                  
+               The consolidated financial statements were authorised for issue in accordance with a resolution of the directors on
+                                                                                                                                  
+                                                                                                                                  
+                                                                                                                                  
+
+Table 11:
+                                                                                                    0                    2                 3                    4       5
+Information about the composition of the Group considered in these consolidated financial statements:                                                                    
+                                                                                                                                                                         
+                                                                                                  Sl. Principal activities        Country of % of ownership as at        
+                                                                                                  No.                          incorporation            March 31,        
+                                                                                                                                                             2023    2022
+                                                                                                    1           Investment   The Netherlands              100.00% 100.00%
+                                                                                                    2    Independent power             India               70.00%  70.00%
+                                                                                                          producer (‘IPP’)                                               
+                                                                                                    3                  IPP             India              100.00% 100.00%
+                                                                                                    4           Technology   The Netherlands              100.00% 100.00%
+                                                                                                    5           Investment           Germany              100.00% 100.00%
+                                                                                                    6        Manufacturing             India              100.00% 100.00%
+                                                                                                    7                  IPP             India              100.00% 100.00%
+                                                                                                    8            Marketing               USA                    -  79.90%
+                                                                                                    9                Solar             India              100.00% 100.00%
+                                                                                                   10                  IPP             India               70.00%  70.00%
+                                                                                                   11    Marketing and OMS           Denmark              100.00% 100.00%
+                                                                                                   12    Marketing and OMS         Australia              100.00% 100.00%
+                                                                                                   13           Investment   The Netherlands              100.00% 100.00%
+                                                                                                   14    Marketing and OMS Republic of South              100.00% 100.00%
+                                                                                                                                       Korea                             
+                                                                                                   15           Investment         Mauritius              100.00% 100.00%
+                                                                                                   16                  OMS             India              100.00% 100.00%
+                                                                                                   17    Project execution             India              100.00% 100.00%
+                                                                                                   18    Project execution             India                    -       -
+                                                                                                                                                                         
+                                                                                                   19        Manufacturing               USA              100.00% 100.00%
+                                                                                                   20    Marketing and OMS         Sri Lanka              100.00% 100.00%
+                                                                                                                                                                         
+                                                                                                   21            Marketing        Bosnia and                    -  50.00%
+                                                                                                                                 Herzegovina                             
+

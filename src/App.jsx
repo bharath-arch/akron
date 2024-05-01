@@ -27,6 +27,7 @@ import Founder_form from "./User/Founder_form";
 import Company_dashboard from "./Company/Company_dashboard"
 import Admin_dashboard from "./Admin/Admin_dashboard"
 import Application_data from "./Admin/Application_data";
+import Admin_login from "./Admin/Admin_login";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -53,8 +54,9 @@ function App() {
         <Route path="/startup/founder_form" element={<Founder_form />}></Route>
         <Route path="/company_dashboard" element={<Company_dashboard />}></Route>
         <Route path="/admin_dashboard" element={<Admin_dashboard />}></Route>
+        <Route path="/Admin_login"  element={<Admin_login />}></Route>
         {/* <Route path="/Application_data/admin_dashboard" element={<Admin_dashboard />}></Route> */}
-        <Route path="admin_dashboard/application_data/:id" element={<Application_data />}></Route>
+        <Route path="/:id" element={<Application_data />}></Route>
        
 
         <Route path="/user" element={<Layout_user />}>
