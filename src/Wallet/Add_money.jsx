@@ -6,7 +6,7 @@ function Add_money({handleclosetogglebutton}) {
     <div className="  w-96 h-96 border-2 p-3 bg-white">
         <div className="relative mb-3">
             <span onClick={handleclosetogglebutton} className="absolute left-[20.75rem]">
-                <IoCloseOutline size={23} className="hover:bg-red-600"/>
+                <IoCloseOutline size={23} className="hover:bg-red-600 cursor-pointer"/>
             </span>
         </div>
       <span className="font-semibold text-xl">Add Money</span>

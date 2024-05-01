@@ -52,6 +52,7 @@ function App() {
         <Route path="/user/profile" element={<Profile />} />
         <Route path="/user/kyc" element={<Kyc />}></Route>
         <Route path="/startup/founder_form" element={<Founder_form />}></Route>
+        <Route path="/founder_form" element={<Founder_form />}></Route>
         <Route path="/company_dashboard" element={<Company_dashboard />}></Route>
         <Route path="/admin_dashboard" element={<Admin_dashboard />}></Route>
         <Route path="/Admin_login"  element={<Admin_login />}></Route>

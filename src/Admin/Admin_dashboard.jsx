@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import setBodyColor from "../setBodyColor";
 
 function Admin_dashboard() {
+
+  setBodyColor({ color: "lightgray" });
 
 
   const [data,setData] = useState([])
@@ -40,6 +43,7 @@ function Admin_dashboard() {
           </div>
           <div className=" flex gap-5 items-center text-center ">
           <span className="font-semibold text-xl">Manage User’s</span>
+          
           <span className="text-xl">Logout</span></div>
         </div>
       </div>

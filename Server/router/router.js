@@ -46,6 +46,7 @@ export function generateOTP(length) {
   for (let i = 0; i < length; i++) {
     OTP += chars[Math.floor(Math.random() * chars.length)];
   }
+  
   return OTP;
 }
 

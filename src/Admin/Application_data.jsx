@@ -19,9 +19,7 @@ function Application_data() {
   
 const navigate = useNavigate()
 
-const handleSubmit = ()=>{
-  navigate('/admin_dashboard')
-}
+
   const id = useParams();
   console.log(id)
   return (
@@ -36,7 +34,7 @@ const handleSubmit = ()=>{
               </span>
             </div>
             <div className=" flex gap-5 items-center text-center ">
-             <Link to= "/admin_dashboard"> <span className="font-semibold text-xl" onClick={handleSubmit}>Admin Dashboard</span></Link>
+             <Link to= "/admin_dashboard"> <span className="font-semibold text-xl" onClick={navigate('/admin_dashboard')}>Admin Dashboard</span></Link>
               <span className="text-xl">Logout</span>
             </div>
           </div>

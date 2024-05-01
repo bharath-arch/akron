@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { Toaster } from "react-hot-toast";
 import toast from "react-hot-toast";
@@ -14,6 +14,8 @@ function Verification() {
     token: '',
     otp: '',
   });
+
+  const otpInputs = useRef([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,8 +36,6 @@ function Verification() {
     } catch (err) {
       console.log(err);
     }
-    
-   
   };
 
   const handleChange = (index, value) => {
@@ -43,6 +43,11 @@ function Verification() {
     newOtp[index] = value;
     setOtp(newOtp);
     console.log(`Value at index ${index}: ${value}`);
+
+    // Move focus to next input field if a digit is entered
+    if (value && index < otp.length - 1) {
+      otpInputs.current[index + 1].focus();
+    }
   };
 
   useEffect(() => {
@@ -73,15 +78,16 @@ function Verification() {
               Enter OTP
             </p>
             <form onSubmit={handleSubmit}>
-              <div className="flex justify-center text-center items-center">
+              <div className="flex justify-center ">
                 {otp.map((value, index) => (
                   <input
+                    ref={(el) => (otpInputs.current[index] = el)} // Assigning ref to input field
                     key={index}
                     type="text"
                     maxLength="1"
                     value={value}
                     onChange={(e) => handleChange(index, e.target.value)}
-                    className=" border-2 rounded-lg w-[14%] ml-1 p-2 items-center   border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                    className=" border-2 rounded-lg w-[14%] ml-1 p-2 items-center text-center  border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
                   />
                 ))}
               </div>

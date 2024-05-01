@@ -4,9 +4,12 @@ import { Toaster } from "react-hot-toast";
 import toast from "react-hot-toast";
 import axios from "axios"
 import { successToast, errorToast } from "../Toaster";
+import setBodyColor from "../setBodyColor";
 
 function Founder_form() {
   // const navigate = useNavigate();
+  setBodyColor({ color: "white" });
+
   const [formdata, setFormdata] = useState({
     name: "",
     email: "",
@@ -68,6 +71,7 @@ function Founder_form() {
       console.log(error);
     }
   };
+
   return (
     <div>
       <div className="">
@@ -78,7 +82,7 @@ function Founder_form() {
               Akorn
             </span>
           </div>
-          <span>Login</span>
+          <span className="text-xl cursor-pointer">Logout</span>
         </div>
       </div>
       <section className="pl-16 pt-10 pr-16">

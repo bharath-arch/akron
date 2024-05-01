@@ -11,17 +11,17 @@ function Explore() {
   const [toggle, setActivetoggle] = useState(false);
   const [withdrawtoggle, withdrawsetActivetoggle] = useState(false);
   const handletogglebutton = () => {
-    setActivetoggle(true);
+    setActivetoggle(!toggle);
   };
   const handleclosetogglebutton = () => {
     setActivetoggle(false);
   };
-  const withdrawclosetogglebutton =()=>{
-    withdrawsetActivetoggle(false)
-  }
-  const withdrawtogglebutton =() =>{
-    withdrawsetActivetoggle(true);
-  }
+  const withdrawclosetogglebutton = () => {
+    withdrawsetActivetoggle(false);
+  };
+  const withdrawtogglebutton = () => {
+    withdrawsetActivetoggle(!withdrawtoggle);
+  };
   return (
     <div className="ml-6 mr-6">
       <section>
@@ -82,16 +82,22 @@ function Explore() {
           </div>
         </div>
 
-     { toggle &&   <div className="bg-white flex justify-center relative ">
-          <span className="absolute top-[-10.75rem] ">
-            <Add_money handleclosetogglebutton={handleclosetogglebutton} />
-          </span>
-        </div>}
-        { withdrawtoggle && <div className="bg-white flex justify-center relative ">
-          <span className="absolute top-[-10.75rem] ">
-            <Withdraw_money withdrawclosetogglebutton={withdrawclosetogglebutton} />
-          </span>
-        </div>}
+        {toggle && (
+          <div className="bg-white flex justify-center relative ">
+            <span className="absolute top-[-10.75rem] ">
+              <Add_money handleclosetogglebutton={handleclosetogglebutton} />
+            </span>
+          </div>
+        )}
+        {withdrawtoggle && (
+          <div className="bg-white flex justify-center relative ">
+            <span className="absolute top-[-10.75rem] ">
+              <Withdraw_money
+                withdrawclosetogglebutton={withdrawclosetogglebutton}
+              />
+            </span>
+          </div>
+        )}
       </section>
       <section>
         <div className="bg-gray-400 h-[220px] w-[95%] mt-6 bg-gradient-to-b from-gray-300 to-gray-200 p-5">
