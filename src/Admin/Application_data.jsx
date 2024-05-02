@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { GrNext } from "react-icons/gr";
-import { MdPictureAsPdf } from "react-icons/md";
-import { GoGraph } from "react-icons/go";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import setBodyColor from "../setBodyColor";
 import axios from "axios";
+import { MdPictureAsPdf } from "react-icons/md";
+import { GoGraph } from "react-icons/go";
+
 const companies_data = [
   {
     id: 1,
@@ -16,40 +16,30 @@ const companies_data = [
   },
 ];
 
-
 function Application_data() {
-  
+  setBodyColor({ color: 'lightgray' });
 
-setBodyColor({color : 'lightgray'})
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const [data, setData] = useState([]);
 
-const navigate = useNavigate()
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Include the parameter in the URL
+        const response = await axios.get('http://localhost:4000/company_data',{id});
+        console.log(response.data);
+        setData(response.data.result);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [id]); // Include 'id' in the dependency array
 
-const [data,setData] = useState()
-
-useEffect(()=>{
-  const fetchData = async () =>{
-
-    try{
-      const response = await axios.get("http://localhost:4000/company_data");
-      console.log(response.data)
-      setData(response.data.result)
-      
-    }
-    catch(error){
-     
-      console.log(error);
-    }
-
-  }
-  fetchData()
-},[])
-
-  const id = useParams();
-  console.log(id)
   return (
     <section className="  ">
       <div>
-        {" "}
         <div className="">
           <div className="flex justify-between text-center items-center ml-8 mr-8 mt-3">
             <div className="">
@@ -57,8 +47,10 @@ useEffect(()=>{
                 Akorn
               </span>
             </div>
-            <div className=" flex gap-5 items-center text-center ">
-             <Link to= "/admin_dashboard"> <span className="font-semibold text-xl" onClick={navigate('/admin_dashboard')}>Admin Dashboard</span></Link>
+            <div className="flex gap-5 items-center text-center ">
+              <Link to="/admin_dashboard">
+                <span className="font-semibold text-xl" onClick={() => navigate('/admin_dashboard')}>Admin Dashboard</span>
+              </Link>
               <span className="text-xl">Logout</span>
             </div>
           </div>
@@ -154,15 +146,14 @@ useEffect(()=>{
           <GoGraph size={300} color="green" />
         </div>
         <div className="flex justify-end pb-5">
-        <button className="px-3 py-2 text-xl rounded-md text-white w-[8rem] bg-blue-700 font-arima hover:bg-blue-800">
-          Accept
-        </button>
-        <button className="px-3 ml-2 py-2 text-xl rounded-md text-white w-[8rem] bg-red-700 font-arima hover:bg-red-800">
-          Reject
-        </button>
+          <button className="px-3 py-2 text-xl rounded-md text-white w-[8rem] bg-blue-700 font-arima hover:bg-blue-800">
+            Accept
+          </button>
+          <button className="px-3 ml-2 py-2 text-xl rounded-md text-white w-[8rem] bg-red-700 font-arima hover:bg-red-800">
+            Reject
+          </button>
+        </div>
       </div>
-      </div>
-      
     </section>
   );
 }
