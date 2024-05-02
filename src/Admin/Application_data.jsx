@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { GrNext } from "react-icons/gr";
 import { MdPictureAsPdf } from "react-icons/md";
 import { GoGraph } from "react-icons/go";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import setBodyColor from "../setBodyColor";
+import axios from "axios";
 const companies_data = [
   {
     id: 1,
@@ -17,8 +19,30 @@ const companies_data = [
 
 function Application_data() {
   
+
+setBodyColor({color : 'lightgray'})
+
 const navigate = useNavigate()
 
+const [data,setData] = useState()
+
+useEffect(()=>{
+  const fetchData = async () =>{
+
+    try{
+      const response = await axios.get("http://localhost:4000/company_data");
+      console.log(response.data)
+      setData(response.data.result)
+      
+    }
+    catch(error){
+     
+      console.log(error);
+    }
+
+  }
+  fetchData()
+},[])
 
   const id = useParams();
   console.log(id)
