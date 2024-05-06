@@ -4,17 +4,9 @@ import setBodyColor from "../setBodyColor";
 import axios from "axios";
 import { MdPictureAsPdf } from "react-icons/md";
 import { GoGraph } from "react-icons/go";
+import Spinner from './Spinner'
 
-const companies_data = [
-  {
-    id: 1,
-    Company_name: "Company",
-    About:
-      "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit culpa labore dolores laudantium ut magni ducimus voluptate ipsa dolore aut?",
-    Sector: "Energy",
-    image: "",
-  },
-];
+
 
 function Application_data() {
   setBodyColor({ color: "lightgray" });
@@ -167,7 +159,7 @@ function Application_data() {
         </button>
       </div>
     </div>
-  </section>):(<p>Loading...</p>)}
+  </section>):(<Spinner></Spinner>)}
   </div>
   );
 }
