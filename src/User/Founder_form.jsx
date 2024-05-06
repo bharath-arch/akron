@@ -14,6 +14,8 @@ function Founder_form() {
     name: "",
     email: "",
     linkedin_founder: "",
+    sector:"",
+    market_cap:"",
     linkedin_company: "",
     company_name: "",
     address: "",
@@ -98,8 +100,9 @@ function Founder_form() {
           </div>
         </div>
         <div className="flex flex-col gap-2 mt-3">
+          
           <label htmlFor="" className="font-semibold text-xl">
-            Your Name
+            Name
           </label>
           <input
             type="text"
@@ -107,7 +110,29 @@ function Founder_form() {
             value={formdata.name}
             onChange={handleChangeEvent}
             className=" border-2 rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
-            placeholder="Your Name"
+            placeholder="Company Name"
+          />
+          <label htmlFor="" className="font-semibold text-xl">
+            Sector
+          </label>
+          <input
+            type="text"
+            name="sector"
+            value={formdata.sector}
+            onChange={handleChangeEvent}
+            className=" border-2 rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
+            placeholder="Sector"
+          />
+          <label htmlFor="" className="font-semibold text-xl">
+            Market Capitilization
+          </label>
+          <input
+            type="text"
+            name="market_cap"
+            value={formdata.market_cap}
+            onChange={handleChangeEvent}
+            className=" border-2 rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
+            placeholder="Market Capitilization in Cr"
           />
           <label htmlFor="" className="font-semibold text-xl">
             Email
@@ -131,17 +156,7 @@ function Founder_form() {
             className=" border-2 rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
             placeholder="Your Name"
           />
-          <label htmlFor="" className="font-semibold text-xl">
-            LinkedIn Page of the Company
-          </label>
-          <input
-            type="url"
-            name="linkedin_company"
-            value={formdata.linkedin_company}
-            onChange={handleChangeEvent}
-            className=" border-2 rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
-            placeholder="Your Name"
-          />
+         
           <label htmlFor="" className="font-semibold text-xl">
             Registered Company Name
           </label>
@@ -149,6 +164,17 @@ function Founder_form() {
             type="text"
             name="company_name"
             value={formdata.company_name}
+            onChange={handleChangeEvent}
+            className=" border-2 rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
+            placeholder="Your Name"
+          />
+           <label htmlFor="" className="font-semibold text-xl">
+            LinkedIn Page of the Company
+          </label>
+          <input
+            type="url"
+            name="linkedin_company"
+            value={formdata.linkedin_company}
             onChange={handleChangeEvent}
             className=" border-2 rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
             placeholder="Your Name"

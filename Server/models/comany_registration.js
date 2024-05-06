@@ -7,6 +7,8 @@ const companyRegistraion = new mongoose.Schema(
     linkedin_founder: { type: String },
     linkedin_company: { type: String },
     company_name: { type: String },
+    sector: { type: String },
+    market_cap: { type: String },
     address: { type: String },
     pan: { type: String },
     website: { type: String },
