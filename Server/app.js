@@ -30,6 +30,7 @@ app.use("/company_registration",companyRouter)
 app.use('/company_approve',approveCompanyRouter)
 app.use('/admin_login',adminLogin)
 app.use('/company_data',companyDataRouter)
+app.use('/uploads',express.static('uploads'))
 
 app.get('/test',(req,res)=>{
     res.json({message :"Server working!"})

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import toast from "react-hot-toast";
-import axios from "axios"
+import axios from "axios";
 import { successToast, errorToast } from "../Toaster";
 import setBodyColor from "../setBodyColor";
 
@@ -14,8 +14,8 @@ function Founder_form() {
     name: "",
     email: "",
     linkedin_founder: "",
-    sector:"",
-    market_cap:"",
+    sector: "",
+    market_cap: "",
     linkedin_company: "",
     company_name: "",
     address: "",
@@ -34,14 +34,22 @@ function Founder_form() {
     amount_expected_to_raise: "",
   });
   const handleChangeEvent = (e) => {
-    
-    if (e.target.name === "pitch" || e.target.name === "financials") {
+    if (e.target.name === "pitch") {
       console.log(e.target.name);
       setFormdata({ ...formdata, [e.target.name]: e.target.files[0] });
-    } else {
+    }
+    else {
       setFormdata({ ...formdata, [e.target.name]: e.target.value });
     }
   };
+
+  const handleChangeEventFile = e =>{
+    if (e.target.name === "financials") {
+      console.log(e.target.name);
+      console.log(e.target.files[0] );
+      setFormdata({ ...formdata, [e.target.name]: e.target.files[0] });
+    } 
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -63,12 +71,20 @@ function Founder_form() {
       //   toast.error("data")
       // }
 
-      const response = await axios.post("http://localhost:4000/company_registration/register", formData);
+      const response = await axios.post(
+        "http://localhost:4000/company_registration/register",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
 
       console.log("api called");
       const data = await response.data.message;
       console.log(data); // Handle response data (e.g., success message)
-      data === "User already exists" ? toast.error(data) : toast.success('We will notify you soon');
+      data === "User already exists"
+        ? toast.error(data)
+        : toast.success("We will notify you soon");
     } catch (error) {
       console.log(error);
     }
@@ -77,7 +93,7 @@ function Founder_form() {
   return (
     <div>
       <div className="">
-      <Toaster position="top-center" reverseOrder={false} />
+        <Toaster position="top-center" reverseOrder={false} />
         <div className="flex justify-between text-center items-center ml-8 mr-8 mt-3">
           <div className="">
             <span className="font-bold text-4xl bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">
@@ -100,7 +116,6 @@ function Founder_form() {
           </div>
         </div>
         <div className="flex flex-col gap-2 mt-3">
-          
           <label htmlFor="" className="font-semibold text-xl">
             Name
           </label>
@@ -156,7 +171,7 @@ function Founder_form() {
             className=" border-2 rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
             placeholder="Your Name"
           />
-         
+
           <label htmlFor="" className="font-semibold text-xl">
             Registered Company Name
           </label>
@@ -168,7 +183,7 @@ function Founder_form() {
             className=" border-2 rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
             placeholder="Your Name"
           />
-           <label htmlFor="" className="font-semibold text-xl">
+          <label htmlFor="" className="font-semibold text-xl">
             LinkedIn Page of the Company
           </label>
           <input
@@ -323,7 +338,7 @@ function Founder_form() {
           <input
             type="file"
             name="financials"
-            onChange={handleChangeEvent}
+            onChange={handleChangeEventFile}
             className=" border-2 border-dashed rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
             placeholder="Upload your Financials"
           />

@@ -14,6 +14,7 @@ function Application_data() {
   const [data, setData] = useState([]);
 
   const { id } = useParams(); // Corrected extraction of id from useParams
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -85,7 +86,7 @@ function Application_data() {
                   {data.isMatch?.market_cap} Cr.
                 </span>
                 <span>
-                  <span className="font-bold">P/E Ratio : </span> xx.x
+                  <span className="font-bold">P/E Ratio : </span>
                 </span>
                 <span>
                   <span className="font-bold">Industry P/E :</span> xx.x
@@ -94,7 +95,20 @@ function Application_data() {
                   <span className="font-bold">ROE :</span> xx
                 </span>
                 <span>
-                  <span className="font-bold">EPS :</span> xx
+                  <span className="font-bold">
+                    EPS in{" "}
+                    {(() => {
+                      const keysOfEps = Object.keys(data.incomeExpenses[10]);
+                      const lastKey = keysOfEps[keysOfEps.length - 1];
+                      return lastKey;
+                    })()}{" "}
+                    :{" "}
+                  </span>
+                  {(() => {
+                    const keysOfEps = Object.keys(data.incomeExpenses[10]);
+                    const lastKey = keysOfEps[keysOfEps.length - 1];
+                    return data.incomeExpenses[10][lastKey];
+                  })()}
                 </span>
                 <span>
                   <span className="font-bold">Previous Valuation :</span> xx Cr.
@@ -195,7 +209,19 @@ function Application_data() {
                 <span className="font-bold ">Financial Report </span>
 
                 <span className="ml-2">
-                  <MdPictureAsPdf size={25} />
+                  <MdPictureAsPdf
+                    className="cursor-pointer"
+                    size={25}
+                    onClick={() => {
+                      const pdfUrl = `http://localhost:4000/uploads/${data.isMatch.financials}`;
+                      const link = document.createElement("a");
+                      link.href = pdfUrl;
+                      link.download = data.isMatch.financials || "document.pdf"; // Use the fetched file name if available, otherwise fallback to a default name
+                      document.body.appendChild(link);
+                      link.click();
+                      document.body.removeChild(link);
+                    }}
+                  />
                 </span>
               </div>
             </div>
