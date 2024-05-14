@@ -31,6 +31,27 @@ function Application_data() {
     fetchData();
   }, [id]); // Include 'id' in the dependency array
 
+  const acceptCompany = async () => {
+    try {
+      const response = await axios.put(
+        `http://localhost:4000/company_approve/${id}`
+      );
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const rejectCompany = async () => {
+    try {
+      const response = await axios.put(
+        `http://localhost:4000/company_approve/rejectCompany/${id}`
+      );
+      console.log(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div>
       {data.isMatch ? (
@@ -156,7 +177,16 @@ function Application_data() {
                 {data.isMatch.community_fund_raising_reason}.
               </span>
               <span>
-                <span className="font-bold">Pitch :</span>
+                <span className="font-bold">Pitch : {data.isMatch.pitch} </span>
+
+                <video width="320" height="240" controls>
+                  <source
+                    src={`http://localhost:4000/uploads/${data.isMatch.pitch}`}
+                    type="video/mp4"
+                    alt="video"
+                  />
+                  Your browser does not support the video tag.
+                </video>
               </span>
               <span>
                 <span className="font-bold">Reqested Amount :</span>{" "}
@@ -225,17 +255,28 @@ function Application_data() {
                 </span>
               </div>
             </div>
-
             <div className="flex justify-center items-center text-center mt-5">
               <GoGraph size={300} color="green" />
             </div>
             <div className="flex justify-end pb-5">
-              <button className="px-3 py-2 text-xl rounded-md text-white w-[8rem] bg-blue-700 font-arima hover:bg-blue-800">
-                Accept
-              </button>
-              <button className="px-3 ml-2 py-2 text-xl rounded-md text-white w-[8rem] bg-red-700 font-arima hover:bg-red-800">
-                Reject
-              </button>
+              {data.isMatch.status === null ? (
+                <>
+                  <button
+                    className="px-3 py-2 text-xl rounded-md text-white w-[8rem] bg-blue-700 font-arima hover:bg-blue-800"
+                    onClick={acceptCompany}
+                  >
+                    Accept
+                  </button>
+                  <button
+                    className="px-3 ml-2 py-2 text-xl rounded-md text-white w-[8rem] bg-red-700 font-arima hover:bg-red-800"
+                    onClick={rejectCompany}
+                  >
+                    Reject
+                  </button>
+                </>
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </section>

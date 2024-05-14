@@ -9,7 +9,8 @@ import circularJSON from "circular-json";
 const router = express.Router();
 router.post("/:id", async (req, res) => {
   const id = req.params.id;
-  console.log(id);
+  // console.log(id);
+  // console.log('hello')
   const isMatch = await Registraion.findById(id); // Ensure to await the findById method
 
   if (isMatch) {

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import axios from 'axios'
+import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import setBodyColor from "../setBodyColor";
 
 function Admin_dashboard() {
-
   setBodyColor({ color: "lightgray" });
 
   const navigate = useNavigate(); // Initialize navigate hook
@@ -15,7 +14,9 @@ function Admin_dashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/company_approve");
+        const response = await axios.get(
+          "http://localhost:4000/company_approve/dashboard_data"
+        );
         console.log(response.data);
         setData(response.data.result);
       } catch (error) {
@@ -28,7 +29,7 @@ function Admin_dashboard() {
 
   useEffect(() => {
     // Use navigate within useEffect
-    navigate('/admin_dashboard'); // Adjust this to the appropriate route
+    navigate("/admin_dashboard"); // Adjust this to the appropriate route
   }, [navigate]); // Add navigate to dependency array
 
   return (
@@ -48,9 +49,63 @@ function Admin_dashboard() {
       </div>
       <section className="flex gap-2 flex-col pt-10 pl-16">
         <span className="text-2xl font-semibold">Admin Dashboard</span>
+
         {data.map((value, index) => (
           <div key={index} className="mt-3">
-            <Link to={`/${value._id}`}>{value.pan && <span className="cursor-pointer">Application Detail: {value.pan}</span>}</Link>
+            {value.status === null ? (
+              <Link to={`/${value._id}`}>
+                {value.pan && (
+                  <span className="cursor-pointer">
+                    Application Detail: {value.pan}
+                  </span>
+                )}
+              </Link>
+            ) : (
+              ""
+            )}
+
+            {/* Render other fields here */}
+          </div>
+        ))}
+      </section>
+      <section className="flex gap-2 flex-col pt-10 pl-16">
+        <span className="text-xl font-semibold text-red-500">Rejected</span>
+
+        {data.map((value, index) => (
+          <div key={index} className="mt-3">
+            {value.status === false ? (
+              <Link to={`/${value._id}`}>
+                {value.pan && (
+                  <span className="cursor-pointer">
+                    Application Detail: {value.pan}
+                  </span>
+                )}
+              </Link>
+            ) : (
+              ""
+            )}
+
+            {/* Render other fields here */}
+          </div>
+        ))}
+      </section>
+      <section className="flex gap-2 flex-col pt-10 pl-16">
+        <span className="text-xl font-semibold text-green-500">Approved</span>
+
+        {data.map((value, index) => (
+          <div key={index} className="mt-3">
+            {value.status === true ? (
+              <Link to={`/${value._id}`}>
+                {value.pan && (
+                  <span className="cursor-pointer">
+                    Application Detail: {value.pan}
+                  </span>
+                )}
+              </Link>
+            ) : (
+              ""
+            )}
+
             {/* Render other fields here */}
           </div>
         ))}
