@@ -3,45 +3,48 @@ import { Link, useNavigate } from "react-router-dom";
 import setBodyColor from "../setBodyColor";
 import { FcGoogle } from "react-icons/fc";
 import axios from "axios";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 function Sign_in() {
   setBodyColor({ color: "lightgray" });
-
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [formdata, setFormdata] = useState({ email: "" });
+  const [invalidEmail, setInvalidEmail] = useState(false);
 
   const handleChangeEvent = (e) => {
     setFormdata({ ...formdata, [e.target.name]: e.target.value });
+   
   };
+
+  function validateEmail(email) {
+    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return pattern.test(email);
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    try {
-      const response = await axios.post(
-        "http://localhost:4000/register/",
-        formdata
-      );
-      console.log(response);
-  
-      // Assuming response.data contains the email
-      localStorage.setItem('email', response.data.email);
-      localStorage.setItem('token', response.data.token);
-    console.log(response.data.token)
-      
-      // Navigate only after successful response
-      navigate("/verification");
-    } catch (error) {
-      // Handle errors appropriately (e.g., display user-friendly message)
-      console.error(error);
+    if (formdata.email === "" || !validateEmail(formdata.email)) {
+      setInvalidEmail(true);
+    } else {
+      setInvalidEmail(false);
+      try {
+        setLoading(true);
+        const response = await axios.post("http://localhost:4000/register/", formdata);
+        localStorage.setItem("email", response.data.email);
+        localStorage.setItem("token", response.data.token);
+        console.log(response.data.token);
+        navigate("/verification");
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
-  
-
 
   return (
     <div className="m-4">
-      {/* <Helmet bodyAttributes={{style: 'background-color : #fff'}}/> */}
       <div className="">
         <span className="font-bold text-4xl bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">
           Akron
@@ -59,32 +62,33 @@ function Sign_in() {
                 name="email"
                 value={formdata.email}
                 onChange={handleChangeEvent}
-                className=" border-2 rounded-lg w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className={`border-2 rounded-lg w-[100%] p-2 border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500 ${
+                  invalidEmail && "border-red-500"
+                }`}
                 placeholder="Enter your Email "
               />
+              {invalidEmail && (
+                <p className="text-red-500 text-[0.75rem] ml-2 mt-1">Invalid email address</p>
+              )}
               <p className="text-[0.75rem] mr-4 font-serif font-light mt-2">
                 By clicking Continue, you agree to our{" "}
                 <span className="text-blue-800">Terms & Conditions</span> and{" "}
                 <span className="text-blue-800">Privacy Policy</span> Continue
               </p>
-              {/* <Link to={"/verification"}> */}
-                {" "}
-                <div className="flex justify-center items-center  ">
-                 <Link to={"/verification"}>
-                  <button 
-                    onClick={handleSubmit}
-                    className="mt-3 text-center border-2 rounded-lg w-[22rem] p-2 font-arima bg-blue-600 text-white text-xl items-center"
-                  >
-                    Continue
-                  </button></Link> 
-                </div>
-              {/* </Link> */}
+              <div className="flex justify-center items-center  ">
+                <button
+                  onClick={handleSubmit}
+                  className="mt-3 text-center border-2 rounded-lg w-[22rem] p-2 font-arima bg-blue-600 text-white text-xl items-center"
+                >
+                  {loading ? <p>loading...</p> : "Continue"}
+                </button>
+              </div>
             </form>
 
-            <div class="flex py-5 items-center">
-              <div class="flex-grow border-t border-gray-400"></div>
-              <span class="flex-shrink mx-4 text-gray-400">OR</span>
-              <div class="flex-grow border-t border-gray-400"></div>
+            <div className="flex py-5 items-center">
+              <div className="flex-grow border-t border-gray-400"></div>
+              <span className="flex-shrink mx-4 text-gray-400">OR</span>
+              <div className="flex-grow border-t border-gray-400"></div>
             </div>
             <div className="flex justify-between border-2 p-2 rounded-lg text-center items-center">
               <span className="">
@@ -92,7 +96,7 @@ function Sign_in() {
               </span>
               <span className="mr-16 font-arima">Continue with Google</span>
             </div>
-            <div className="text-center items-center text-[0.75rem] mr-4 font-serif font-light  mt-2">
+            <div className="text-center items-center text-[0.75rem] mr-4 font-serif font-light mt-2">
               <p>
                 <span> have an account ? </span>{" "}
                 <span className="text-blue-800">Login instead</span>
