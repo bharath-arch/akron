@@ -1,40 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { IoFilter } from "react-icons/io5";
 import { MdSort } from "react-icons/md";
-
-const companies_data = [
-  { id: 1, Company_name: "Company", Sector: "CEO", image: "" },
-  { id: 2, Company_name: "Company", Sector: "CFO", image: "" },
-  { id: 3, Company_name: "Company", Sector: "Developer", image: "" },
-  { id: 4, Company_name: "Company", Sector: "Developer", image: "" },
-  {
-    id: 5,
-    Company_name: "Company",
-    Sector: "Developer",
-    image: "../assets/ceo.png",
-  },
-  {
-    id: 6,
-    Company_name: "Company",
-    Sector: "Investment Advisor",
-    image: "../assets/ceo.png",
-  },
-  {
-    id: 7,
-    Company_name: "Company",
-    Sector: "Investment Advisor",
-    image: "../assets/ceo.png",
-  },
-  {
-    id: 8,
-    Company_name: "Company",
-    Sector: "Investment Advisor",
-    image: "../assets/ceo.png",
-  },
-];
+import axios from 'axios'
 
 function Id() {
+  const [data, setData] = useState([]);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:4000/company_approve/dashboard_data"
+        );
+        console.log(response.data);
+        setData(response.data.result);
+      } catch (error) {
+        setError(error);
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
   return (
     <div className="container">
       <section className="search-bar">
@@ -68,7 +55,7 @@ function Id() {
         </div>
       </section>
       <section className="flex flex-wrap gap-5 mt-9 w-full justify-center">
-        {companies_data.map((data, index) => (
+        {data.map((data, index) => (
           <div
             key={index}
             className={`w-full sm:mb-0 sm:mr-0 
@@ -76,9 +63,9 @@ function Id() {
                      md:w-1/4 h-auto bg-gray-200 p-2  mr-4  shadow-md rounded-md `}
           >
             <span className="flex justify-center text-center flex-col">
-              {data.Company_name}
+              {data.company_name}
               <br />
-              {data.Sector}
+              {data.sector}
             </span>
           </div>
         ))}

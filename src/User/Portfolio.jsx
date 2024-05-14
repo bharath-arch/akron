@@ -2,8 +2,26 @@ import React from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { IoFilter } from "react-icons/io5";
 import { MdSort } from "react-icons/md";
+import axios from 'axios'
 
 function Portfolio() {
+  // const [data, setData] = useState([]);
+  // const [error, setError] = useState(null);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         "http://localhost:4000/company_approve/dashboard_data"
+  //       );
+  //       console.log(response.data);
+  //       setData(response.data.result);
+  //     } catch (error) {
+  //       setError(error);
+  //       console.log(error);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
   return (
     <div className="">
       <section className="search-bar">
