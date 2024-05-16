@@ -28,9 +28,12 @@ import Company_dashboard from "./Company/Company_dashboard"
 import Admin_dashboard from "./Admin/Admin_dashboard"
 import Application_data from "./Admin/Application_data";
 import Admin_login from "./Admin/Admin_login";
+import Manage_user from './Admin/Manage_user';
+import Kyc_approval from './Admin/Kyc_approval';
+
 
 function App() {
-  const [count, setCount] = useState(0);
+ 
  
   return (
     
@@ -56,7 +59,9 @@ function App() {
         <Route path="/company_dashboard" element={<Company_dashboard />}></Route>
         <Route path="/admin_dashboard" element={<Admin_dashboard />}></Route>
         <Route path="/Admin_login"  element={<Admin_login />}></Route>
+        <Route path="/manage_user"  element={<Manage_user/>}></Route>
         {/* <Route path="/Application_data/admin_dashboard" element={<Admin_dashboard />}></Route> */}
+        <Route path="/manage_user/kyc/:id" element={<Kyc_approval/>}></Route>
         <Route path="/:id" element={<Application_data />}></Route>
        
 

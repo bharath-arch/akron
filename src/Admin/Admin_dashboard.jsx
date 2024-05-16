@@ -42,7 +42,7 @@ function Admin_dashboard() {
             </span>
           </div>
           <div className=" flex gap-5 items-center text-center ">
-            <span className="font-semibold text-xl">Manage User’s</span>
+            <Link to={'/manage_user'}><span className="font-semibold text-xl">Manage User’s</span></Link>
             <span className="text-xl">Logout</span>
           </div>
         </div>

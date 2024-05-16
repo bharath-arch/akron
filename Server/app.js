@@ -12,6 +12,8 @@ import verifyOtp from "./router/verifyOtp.js"
 import approveCompanyRouter from './router/company_approve.js'
 import adminLogin from './router/adminLogin.js'
 import companyDataRouter from './router/python/python_value.js'
+import kycApprovalRouer from './router/kyc_approval.js'
+
 
 
 const app = express()
@@ -22,7 +24,7 @@ dotenv.config()
 app.use(express.json())
 app.use(express.static('uploads'))
 
-
+app.use('/kyc_approval',kycApprovalRouer)
 app.use('/register',userRouter)
 app.use('/kyc',kycRouter)
 app.use('/addmoney',amountUpdate)
