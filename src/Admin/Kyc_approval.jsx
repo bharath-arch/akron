@@ -2,11 +2,36 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import Spinner from "./Spinner";
+import setBodyColor from "../setBodyColor.js";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 
 function Kyc_approval() {
   const [data, setData] = useState(null);
   const { id } = useParams();
   const navigate = useNavigate();
+  setBodyColor({ color: "white" });
+
+  const acceptRequest = async () => {
+    try {
+      const response = await axios.put(
+        `http://localhost:4000/kyc_approval/accept/${id}`
+      );
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const rejectRequest = async () => {
+    try {
+      const response = await axios.put(
+        `http://localhost:4000/kyc_approval/reject/${id}`
+      );
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
     const callServer = async () => {
@@ -50,28 +75,99 @@ function Kyc_approval() {
               </div>
             </div>
           </div>
-          <div className="flex flex-col">
-            <label>Name: {data.name}</label>
-            <label>Email: {data.email}</label>
-            <label>Phone Number: {data.contact_number}</label>
-            <label>ID Proof: {data.ID_proof}</label>
-            <label>Status: {data.Status}</label>
-            <label>Aadhar Number: {data.aadhar}</label>
-            <label>About Yourself: {data.about_yourself}</label>
-            <label>Address: {data.address}</label>
-            <label>Annual Income: {data.anual_income}</label>
-            <label>Bank Account Number: {data.bank_account_number}</label>
-            <label>Bank Account Photo: {data.bank_account_photo}</label>
-            <label>Existing Commitments: {data.existing_commitments}</label>
-            <label>LinkedIn URL: {data.linkedin_url}</label>
-            <label>PAN: {data.pan}</label>
-            <label>WhatsApp: {data.whattsapp}</label>
+          <div className="ml-20 mt-20 leading-10 ">
+            <div className="grid grid-cols-3 gap-3">
+              <label>
+                <b>Name : </b> {data.name}
+              </label>
+              <label>
+                <b>Email : </b>
+                {data.email}
+              </label>
+              <label>
+                <b>Phone Number :</b> {data.contact_number}
+              </label>
+
+              <label>
+                <b>Status :</b> {data.Status}
+              </label>
+              <label>
+                <b>Aadhar Number : </b>
+                {data.aadhar}
+              </label>
+              <label>
+                <b>About Yourself :</b> {data.about_yourself}
+              </label>
+              <label>
+                <b>Address :</b> {data.address}
+              </label>
+              <label>
+                <b>Annual Income :</b> {data.anual_income}
+              </label>
+              <label>
+                <b>Bank Account Number : </b>
+                {data.bank_account_number}
+              </label>
+
+              <label>
+                <b>Existing Commitments :</b> {data.existing_commitments}
+              </label>
+              <label>
+                <b>LinkedIn URL :</b> {data.linkedin_url}
+              </label>
+              <label>
+                <b>PAN :</b> {data.pan}
+              </label>
+              <label>
+                <b>WhatsApp :</b> {data.whattsapp}
+              </label>
+              <label>
+                <b>Where You Learned About Us:</b>{" "}
+                {data.where_you_learn_about_us}
+              </label>
+            </div>
+          </div>
+          <div className="ml-20 mt-10 mr-10 flex  border p-2">
+            {" "}
             <label>
-              Where You Learned About Us: {data.where_you_learn_about_us}
+              <b>Bank Account Photo :</b>{" "}
+              <img
+                className="w-[400px] h-[400px]"
+                src={`http://localhost:4000/uploads/${data.bank_account_photo}`}
+                alt=""
+              />
+            </label>
+          </div>{" "}
+          <div className="ml-20 mt-10 mr-10 flex border p-2 mb-5 ">
+            <label>
+              <b>ID Proof :</b>
+              <img
+                className="w-[400px] h-[400px]"
+                src={`http://localhost:4000/uploads/${data.ID_proof}`}
+                alt=""
+              />
             </label>
           </div>
-
-          {/* Render your additional content here based on data */}
+          {data.Status === "pending" ? (
+            <div className="flex justify-center mb-10">
+              <Stack spacing={2} direction="row">
+                <Button
+                  variant="contained"
+                  color="success"
+                  onClick={acceptRequest}
+                >
+                  Accept
+                </Button>
+                <Button
+                  variant="outlined"
+                  color="error"
+                  onClick={rejectRequest}
+                >
+                  Reject
+                </Button>
+              </Stack>
+            </div>
+          ) : null}
         </section>
       ) : (
         <Spinner />

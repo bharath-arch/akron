@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import setBodyColor from "../setBodyColor";
 
 function Admin_dashboard() {
-  setBodyColor({ color: "lightgray" });
+  setBodyColor({ color: "white" });
 
   const navigate = useNavigate(); // Initialize navigate hook
 

@@ -18,7 +18,7 @@ const kyc = new mongoose.Schema(
     existing_commitments: { type: String },
     avatar: { type: String },
     ID_proof: { type: String },
-    Status : {type : String , default : 'pending'}
+    Status : {type : String , default : 'null'}
   },
   {
     timestamps: true,
