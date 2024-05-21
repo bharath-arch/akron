@@ -1,7 +1,8 @@
-import React from "react";
-import { GrNext } from "react-icons/gr";
+import React, { useEffect, useState } from "react";
+import { GrNext, GrPrevious } from "react-icons/gr";
 import { MdPictureAsPdf } from "react-icons/md";
 import { GoGraph } from "react-icons/go";
+import axios from "axios";
 
 const companies_data = [
   {
@@ -23,8 +24,57 @@ const companies_data = [
 ];
 
 function Wealth() {
+  const [data, setData] = useState();
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:4000/company_approve/dashboard_data"
+        );
+
+        const filteredData = response.data.result.filter(
+          (item) => item.status === true
+        );
+        console.log(filteredData);
+
+        setData(filteredData);
+        console.log();
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const handlePrevious = () => {
+    if (count === 0) {
+      setCount(data.length - 1);
+    } else {
+      setCount((count) => count - 1);
+    }
+  };
+  const handleNext = () => {
+    if (count === data.length - 1) {
+      setCount(0);
+    } else {
+      setCount((count) => count + 1);
+    }
+  };
+
   return (
     <section className="">
+      <div className="md:flex md:justify-between  hidden text-blue-800 ">
+        <button className="flex items-center" onClick={handlePrevious}>
+          {" "}
+          <GrPrevious />
+          Previous
+        </button>
+        <button className="flex items-center" onClick={handleNext}>
+          {" "}
+          Next <GrNext />
+        </button>
+      </div>
       <div className="flex  mr-2 md:mr-0 mb-3  items-center w-full justify-end">
         <span className="flex justify-end w-full text-blue-800 text-lg md:hidden">
           {" "}
@@ -37,35 +87,45 @@ function Wealth() {
             <GrNext />
           </span>
         </div>
-        <span className="hidden md:flex justify-end items-center mr-10 w-full text-blue-800 text-lg">
-          {" "}
-          Next <GrNext />
-        </span>
-
-       
       </div>
       <div className="w-full h-full bg-gradient-to-br pt-5 pr-8 pl-8">
         <div className="flex flex-col">
           <span className="font-bold text-3xl">
-            {companies_data[0].Company_name}
+            {data && data[count].company_name}
           </span>
           <span className="mt-2">
             <span className="font-bold">Sector :</span>{" "}
-            {companies_data[0].Sector}
+            {data && data[count].sector}
           </span>
           <span className="mt-2 font-semibold text-xl">About</span>
-          <span className="mt-2">{companies_data[0].About}</span>
+          <span className="mt-2 font-semibold ">Product Discription</span>
+          <span className="mt-2">
+            {" "}
+            {data && data[count].previous_fundraising_rounds_discription}
+          </span>
+          <span className="mt-2 font-semibold ">
+            Previous Fund Raising Round
+          </span>
+          <span className="mt-2">
+            {" "}
+            {data && data[count].product_discription}
+          </span>
+          <span className="mt-2 font-semibold ">Traction</span>
+          <span className="mt-2"> {data && data[count].traction}</span>
         </div>
-        <div className="flex gap-5 mt-9  ">
+        <div className="flex gap-x-5  mt-9 mb-5 ">
           {" "}
           {/* Wrap content on mobile */}
-          <div className={`h-auto flex flex-wrap 
+          <div
+            className={`h-auto flex flex-wrap 
                      
-                     md:w-full  gap-10`}>
+                     md:w-full  gap-10`}
+          >
             {" "}
             {/* Adjust grid columns for mobile */}
             <span>
-              <span className="font-bold">Mkt Cap :</span> xxxx
+              <span className="font-bold">Mkt Cap :</span>{" "}
+              {data && data[count].market_cap} Cr.
             </span>
             <span>
               <span className="font-bold">P/E Ratio : </span> xx.x
@@ -92,6 +152,11 @@ function Wealth() {
               </span>
             </div>
           </div>
+        </div>
+        <div className="flex justify-end mr-8">
+          <button className="text-blue-900 font-bold ">
+            view more
+          </button>
         </div>
         <div className="flex justify-center items-center text-center mt-5">
           <GoGraph size={300} color="green" />

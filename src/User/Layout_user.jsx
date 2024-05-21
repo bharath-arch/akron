@@ -11,11 +11,16 @@ import { RxHamburgerMenu } from "react-icons/rx";
 function Layout_user() {
   const path = useLocation();
   setBodyColor({ color: "white" });
-  const [selectLink, setSelectLink] = useState(path.pathname);
+  const [selectLink, setSelectLink] = useState();
   const [activesidebar, setActivesidebar] = useState(true);
-  console.log(path.pathname);
-  console.log(selectLink === "/user/wealth", "select link");
-  useEffect(() => {}, [path]);
+  // console.log(path.pathname);
+  // console.log(path.pathname === "/user/explore", "select link");
+  console.log(path.pathname.split('/')[2])
+  if (path.pathname) {
+    useEffect(() => {
+      setSelectLink(path.pathname.split('/')[2]);
+    }, [selectLink]);
+  }
 
   return (
     <div className="">
@@ -27,10 +32,9 @@ function Layout_user() {
         <div className=" ">
           <ul className=" font-semibold text-xl">
             <li
-              // onClick={() => setSelectLink("explore")}
-              className={`${
-                path.pathname === "/user/wealth" ? "text-blue-900 p-2" : "p-2"
-              }`}
+              onClick={() => setSelectLink("explore")}
+              
+              className={`${selectLink === "explore" ? "text-blue-900 p-2" : "p-2"}`}
             >
               {/* {selectLink} */}
               <Link to={"explore"}>Explore</Link>
@@ -118,19 +122,20 @@ function Layout_user() {
           </ul>
         </div>
         <div className="flex justify-center items-center gap-3">
-        {localStorage.getItem("email") && (
-          <span>
-            {" "}
-            <b className="text-xl">Welcome</b> {localStorage.getItem("email").split("@gmail.com")}
-          </span>
-        )}
-        <div className="h-10 w-10 border-1 rounded-full bg-red-600 items-center text-center">
-          <div className="relative">
-            <span className="absolute top-5 left-2 right-5">
-              <User_popup />
+          {localStorage.getItem("email") && (
+            <span>
+              {" "}
+              <b className="text-xl">Welcome</b>{" "}
+              {localStorage.getItem("email").split("@gmail.com")}
             </span>
+          )}
+          <div className="h-10 w-10 border-1 rounded-full bg-red-600 items-center text-center">
+            <div className="relative">
+              <span className="absolute top-5 left-2 right-5">
+                <User_popup />
+              </span>
+            </div>
           </div>
-        </div>
         </div>
         <div
           className="md:hidden flex"
