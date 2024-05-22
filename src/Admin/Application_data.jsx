@@ -13,24 +13,22 @@ function Application_data() {
 
   const [data, setData] = useState([]);
 
-  const { id } = useParams(); // Corrected extraction of id from useParams
+  const { id } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Include the parameter in the URL
         const response = await axios.post(
           `http://localhost:4000/company_data/${id}`
-        ); // Corrected parameter name
-        console.log(response.data);
+        );
         setData(response.data.result);
       } catch (error) {
         console.log(error);
       }
     };
     fetchData();
-  }, [id]); // Include 'id' in the dependency array
-
+  }, [id]);
+  console.log(data);
   const acceptCompany = async () => {
     try {
       const response = await axios.put(
@@ -118,19 +116,13 @@ function Application_data() {
                 <span>
                   <span className="font-bold">
                     EPS in{" "}
-                    {(() => {
-                      const keysOfEps = Object.keys(data.incomeExpenses[10]);
-                      const lastKey = keysOfEps[keysOfEps.length - 1];
-                      return lastKey;
-                    })()}{" "}
+                    {data.incomeExpenses[10] &&
+                      Object.keys(data.incomeExpenses[10])[0]}{" "}
                     :{" "}
                   </span>
-                  {(() => {
-                    const keysOfEps = Object.keys(data.incomeExpenses[10]);
-                    const lastKey = keysOfEps[keysOfEps.length - 1];
-                    return data.incomeExpenses[10][lastKey];
-                  })()}
+                  {data.incomeExpenses[10] && data.incomeExpenses[10].values[0]}
                 </span>
+
                 <span>
                   <span className="font-bold">Previous Valuation :</span> xx Cr.
                 </span>
@@ -194,40 +186,55 @@ function Application_data() {
               </span>
               <span className=" text-center font-bold">Earnings YOY </span>
               <div className="overflow-x-auto flex justify-center flex-col">
-                {data.incomeExpenses && data.incomeExpenses.length > 0 ? (
+                {data.incomeExpenses.incomeExpenses &&
+                data.incomeExpenses.incomeExpenses.length > 0 ? (
                   <table className="table-auto border-collapse border border-gray-400 ">
                     <thead>
                       <tr className="bg-gray-200">
-                        {/* Get the first object to determine column names */}
-                        {data.incomeExpenses[0] && (
-                          <>
-                            {Object.keys(data.incomeExpenses[0]).map(
-                              (column) => (
-                                <th
-                                  key={column}
-                                  className="p-3 text-center text-xs font-medium text-gray-700 uppercase border border-gray-400"
-                                >
-                                  {column}
-                                </th>
-                              )
-                            )}
-                          </>
+                        {/* Render an empty header for the first cell */}
+                        <th className="p-3 text-center text-xs font-medium text-gray-700 uppercase border border-gray-400"></th>
+                        {/* Render headers for each metric */}
+                        {data.incomeExpenses.incomeExpenses.map(
+                          (column, index) => (
+                            <th
+                              key={index}
+                              className="p-3 text-center text-xs font-medium text-gray-700 uppercase border border-gray-400"
+                            >
+                              {column.metric}
+                            </th>
+                          )
                         )}
                       </tr>
                     </thead>
                     <tbody>
-                      {data.incomeExpenses.map((row, rowIndex) => (
-                        <tr key={rowIndex} className="bg-white">
-                          {Object.values(row).map((value, columnIndex) => (
-                            <td
-                              key={columnIndex}
-                              className="p-3 text-center  text-sm text-gray-600 border border-gray-400"
-                            >
-                              {value}
+                      {data.incomeExpenses.incomeExpenses.length > 0 &&
+                        Array.from(
+                          {
+                            length:
+                              data.incomeExpenses.incomeExpenses[0].values
+                                .length,
+                          },
+                          (_, index) => index
+                        ).map((rowIndex) => (
+                          <tr key={rowIndex} className="bg-white">
+                            {/* Print the quarter in the left column */}
+                            <td className="p-3 text-center text-sm text-gray-600 border border-gray-400">
+                              {data.incomeExpenses.quaters[rowIndex + 1]}{" "}
+                              {/* Add +1 to skip the 'Column1' */}
                             </td>
-                          ))}
-                        </tr>
-                      ))}
+                            {/* Print the data for each metric */}
+                            {data.incomeExpenses.incomeExpenses.map(
+                              (column, colIndex) => (
+                                <td
+                                  key={colIndex}
+                                  className="p-3 text-center text-sm text-gray-600 border border-gray-400"
+                                >
+                                  {column.values[rowIndex]}
+                                </td>
+                              )
+                            )}
+                          </tr>
+                        ))}
                     </tbody>
                   </table>
                 ) : (
@@ -246,7 +253,7 @@ function Application_data() {
                       const pdfUrl = `http://localhost:4000/uploads/${data.isMatch.financials}`;
                       const link = document.createElement("a");
                       link.href = pdfUrl;
-                      link.download = data.isMatch.financials || "document.pdf"; // Use the fetched file name if available, otherwise fallback to a default name
+                      link.download = data.isMatch.financials || "document.pdf";
                       document.body.appendChild(link);
                       link.click();
                       document.body.removeChild(link);
