@@ -11,7 +11,7 @@ import amountUpdate from "./router/money.js"
 import verifyOtp from "./router/verifyOtp.js"
 import approveCompanyRouter from './router/company_approve.js'
 import adminLogin from './router/adminLogin.js'
-import companyDataRouter from './router/python/python_value.js'
+import companyDataRouter from './router/company_Data.js'
 import kycApprovalRouer from './router/kyc_approval.js'
 
 

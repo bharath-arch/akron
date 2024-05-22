@@ -32,6 +32,7 @@ function Founder_form() {
     pitch: "",
     financials: "",
     amount_expected_to_raise: "",
+    excel:"",
   });
   const handleChangeEvent = (e) => {
     if (e.target.name === "pitch") {
@@ -45,6 +46,14 @@ function Founder_form() {
 
   const handleChangeEventFile = e =>{
     if (e.target.name === "financials") {
+      console.log(e.target.name);
+      console.log(e.target.files[0] );
+      setFormdata({ ...formdata, [e.target.name]: e.target.files[0] });
+    } 
+  }
+
+  const handleChangeExcel = e =>{
+    if (e.target.name === "excel") {
       console.log(e.target.name);
       console.log(e.target.files[0] );
       setFormdata({ ...formdata, [e.target.name]: e.target.files[0] });
@@ -331,6 +340,16 @@ function Founder_form() {
             onChange={handleChangeEvent}
             className=" border-2 border-dashed rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
             placeholder=" Upload your Pitch"
+          />
+           <label htmlFor="" className="font-semibold text-xl">
+            Excel Data
+          </label>
+          <input
+            type="file"
+            name="excel"
+            onChange={handleChangeExcel}
+            className=" border-2 border-dashed rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
+            placeholder=" Excel Data"
           />
           <label htmlFor="" className="font-semibold text-xl">
             Upload your Financials

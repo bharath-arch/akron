@@ -27,11 +27,15 @@ const upload = multer({
     const allowedVideoFormats = ['video/mp4', 'video/mpeg', 'video/avi'];
     // Define allowed PDF formats for "financials" field
     const allowedPdfFormats = ['application/pdf'];
+    const allowedExcelFormats = ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel'];
 
     // Check the fieldname and its respective allowed formats
     if (file.fieldname === 'pitch' && allowedVideoFormats.includes(file.mimetype)) {
       cb(null, true); // Accept the file
     } else if (file.fieldname === 'financials' && allowedPdfFormats.includes(file.mimetype)) {
+      cb(null, true); // Accept the file
+    }
+    else if (file.fieldname === 'excel' && allowedExcelFormats.includes(file.mimetype)) {
       cb(null, true); // Accept the file
     } else {
       // Reject the file if it doesn't match any allowed format for the respective field
@@ -51,6 +55,7 @@ const upload = multer({
 const cpUpload = upload.fields([
   { name: "pitch", maxCount: 1 },
   { name: "financials", maxCount: 1 },
+  {name: "excel", maxCount: 1},
 ]);
 
 router.post("/register", cpUpload, async (req, res) => {
@@ -68,6 +73,7 @@ router.post("/register", cpUpload, async (req, res) => {
       if (req.files) {
         newUser.pitch = req.files.pitch?.[0]?.filename; // Handle potential undefined value
         newUser.financials = req.files.financials?.[0]?.filename;
+        newUser.excel = req.files.excel?.[0]?.filename;
       }
 
       const savedUser = await newUser.save();

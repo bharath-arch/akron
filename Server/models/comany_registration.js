@@ -23,7 +23,8 @@ const companyRegistraion = new mongoose.Schema(
     pitch: { type: String },
     financials: { type: String },
     amount_expected_to_raise: { type: Number },
-    status : {type:Boolean,default:null},
+    excel: { type: String },
+    status: { type: Boolean, default: null },
   },
   {
     timestamps: true,
