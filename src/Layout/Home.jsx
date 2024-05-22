@@ -14,7 +14,7 @@ function Home() {
         </h1>
         <p className='md:text-4xl mt-2 text-sm'>Your platform for exclusive opportunities</p>
         
-        <Link to={"/Login"}><button className='md:p-3 p-1 bg-blue-800 rounded-lg text-white text-sm md:text-xl md:bg-blue-800 md:text-white md:rounded-lg mt-5'>Get Started</button></Link>
+        <Link to={"/Login"}><button className='md:p-3 p-1 bg-blue-800 rounded-lg text-white text-sm md:text-xl md:bg-blue-800 md:text-white md:rounded-lg mt-5 hover:bg-blue-700 transition-transform duration-300 ease-in-out transform hover:scale-95 '>Get Started</button></Link>
       </div>
       <div className=" ml-5 mt-5 md:flex-1 md:h-svh  md:mt-48 mr-5  ">
         <Sideimage/>

@@ -16,7 +16,7 @@ function Startup() {
             startup
           </p>
           <Link to={"founder_form"}>
-            <button className="md:p-3 p-1 bg-blue-800 rounded-lg text-white text-sm md:text-xl md:bg-blue-800 md:text-white md:rounded-lg mt-5">
+            <button className="md:p-3 p-1 bg-blue-800 rounded-lg text-white text-sm md:text-xl  md:text-white md:rounded-lg mt-5 hover:bg-blue-700 transition-transform duration-300 ease-in-out transform hover:scale-95 ">
               Apply now
             </button>
           </Link>

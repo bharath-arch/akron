@@ -374,7 +374,7 @@ function Founder_form() {
           />
           <div className="flex justify-center mt-3 mb-3">
             <button
-              className=" p-2 rounded-md w-24 bg-blue-600 border-none text-white hover:bg-blue-700  "
+              className=" p-2 rounded-md w-24 bg-blue-600 border-none text-white hover:bg-blue-700 transition-transform duration-300 ease-in-out transform hover:scale-95 "
               onClick={handleSubmit}
             >
               Submit

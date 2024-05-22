@@ -61,10 +61,10 @@ function Portfolio() {
               <span className=" mt- font-semibold text-xl mb-2">Company1</span>
               <span>Invested Amount : <span>10000 &#8377;</span></span>
               <div className="mt-2">
-                <button class="px-3 py-2 text-xl rounded-md text-white w-[8rem] bg-red-700 font-arima hover:bg-red-800">
+                <button class="px-3 py-2 text-xl rounded-md text-white w-[8rem] bg-red-700 font-arima hover:bg-red-800 transition-transform duration-300 ease-in-out transform hover:scale-95 ">
                   Sell
                 </button>
-                <button class="px-3 ml-2 py-2 text-xl rounded-md text-white w-[8rem] bg-blue-700 font-arima hover:bg-blue-800">
+                <button class="px-3 ml-2 py-2 text-xl rounded-md text-white w-[8rem] bg-blue-700 font-arima hover:bg-blue-700 transition-transform duration-300 ease-in-out transform hover:scale-95 ">
                   View More
                 </button>
               </div>

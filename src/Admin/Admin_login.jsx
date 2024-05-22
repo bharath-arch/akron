@@ -89,7 +89,7 @@ function Admin_login() {
                  {/* <Link to={"/admin_dashboard"}> */}
                   <button 
                     onClick={handleSubmit}
-                    className="mt-3 text-center border-2 rounded-lg w-[22rem] p-2 font-arima bg-blue-600 text-white text-xl items-center"
+                    className="mt-3 text-center border-2 rounded-lg w-[22rem] p-2 font-arima bg-blue-600 text-white text-xl items-center hover:bg-blue-700 transition-transform duration-300 ease-in-out transform hover:scale-95 "
                   >
                     Continue
                   </button>

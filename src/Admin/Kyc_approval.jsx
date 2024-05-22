@@ -162,6 +162,7 @@ function Kyc_approval() {
                   variant="outlined"
                   color="error"
                   onClick={rejectRequest}
+                  
                 >
                   Reject
                 </Button>

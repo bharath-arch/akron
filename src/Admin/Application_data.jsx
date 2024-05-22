@@ -12,6 +12,11 @@ function Application_data() {
   const navigate = useNavigate();
 
   const [data, setData] = useState([]);
+  const [view, setView] = useState(false);
+
+  const handleClick = () => {
+    setView(!view);
+  };
 
   const { id } = useParams();
 
@@ -184,63 +189,75 @@ function Application_data() {
                 <span className="font-bold">Reqested Amount :</span>{" "}
                 {data.isMatch.amount_expected_to_raise} Cr.
               </span>
-              <span className=" text-center font-bold">Earnings YOY </span>
-              <div className="overflow-x-auto flex justify-center flex-col">
-                {data.incomeExpenses.incomeExpenses &&
-                data.incomeExpenses.incomeExpenses.length > 0 ? (
-                  <table className="table-auto border-collapse border border-gray-400 ">
-                    <thead>
-                      <tr className="bg-gray-200">
-                        {/* Render an empty header for the first cell */}
-                        <th className="p-3 text-center text-xs font-medium text-gray-700 uppercase border border-gray-400"></th>
-                        {/* Render headers for each metric */}
-                        {data.incomeExpenses.incomeExpenses.map(
-                          (column, index) => (
-                            <th
-                              key={index}
-                              className="p-3 text-center text-xs font-medium text-gray-700 uppercase border border-gray-400"
-                            >
-                              {column.metric}
-                            </th>
-                          )
-                        )}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {data.incomeExpenses.incomeExpenses.length > 0 &&
-                        Array.from(
-                          {
-                            length:
-                              data.incomeExpenses.incomeExpenses[0].values
-                                .length,
-                          },
-                          (_, index) => index
-                        ).map((rowIndex) => (
-                          <tr key={rowIndex} className="bg-white">
-                            {/* Print the quarter in the left column */}
-                            <td className="p-3 text-center text-sm text-gray-600 border border-gray-400">
-                              {data.incomeExpenses.quaters[rowIndex + 1]}{" "}
-                              {/* Add +1 to skip the 'Column1' */}
-                            </td>
-                            {/* Print the data for each metric */}
+              {view && (
+                <>
+                  <span className=" text-center font-bold">Earnings YOY </span>
+                  <div className="overflow-x-auto flex justify-center flex-col">
+                    {data.incomeExpenses.incomeExpenses &&
+                    data.incomeExpenses.incomeExpenses.length > 0 ? (
+                      <table className="table-auto border-collapse border border-gray-400 ">
+                        <thead>
+                          <tr className="bg-gray-200">
+                            {/* Render an empty header for the first cell */}
+                            <th className="p-3 text-center text-xs font-medium text-gray-700 uppercase border border-gray-400"></th>
+                            {/* Render headers for each metric */}
                             {data.incomeExpenses.incomeExpenses.map(
-                              (column, colIndex) => (
-                                <td
-                                  key={colIndex}
-                                  className="p-3 text-center text-sm text-gray-600 border border-gray-400"
+                              (column, index) => (
+                                <th
+                                  key={index}
+                                  className="p-3 text-center text-xs font-medium text-gray-700 uppercase border border-gray-400"
                                 >
-                                  {column.values[rowIndex]}
-                                </td>
+                                  {column.metric}
+                                </th>
                               )
                             )}
                           </tr>
-                        ))}
-                    </tbody>
-                  </table>
-                ) : (
-                  <span className="text-gray-600">No data available</span>
-                )}
-              </div>
+                        </thead>
+                        <tbody>
+                          {data.incomeExpenses.incomeExpenses.length > 0 &&
+                            Array.from(
+                              {
+                                length:
+                                  data.incomeExpenses.incomeExpenses[0].values
+                                    .length,
+                              },
+                              (_, index) => index
+                            ).map((rowIndex) => (
+                              <tr key={rowIndex} className="bg-white">
+                                {/* Print the quarter in the left column */}
+                                <td className="p-3 text-center text-sm text-gray-600 border border-gray-400">
+                                  {data.incomeExpenses.quaters[rowIndex + 1]}{" "}
+                                  {/* Add +1 to skip the 'Column1' */}
+                                </td>
+                                {/* Print the data for each metric */}
+                                {data.incomeExpenses.incomeExpenses.map(
+                                  (column, colIndex) => (
+                                    <td
+                                      key={colIndex}
+                                      className="p-3 text-center text-sm text-gray-600 border border-gray-400"
+                                    >
+                                      {column.values[rowIndex]}
+                                    </td>
+                                  )
+                                )}
+                              </tr>
+                            ))}
+                        </tbody>
+                      </table>
+                    ) : (
+                      <span className="text-gray-600">No data available</span>
+                    )}
+                  </div>
+                </>
+              )}
+              <span
+                className={`text-2xl font-semibold flex justify-end cursor-pointer text-blue-700 rounded-md  ${
+                  view ? "text-xl" : ""
+                }`}
+                onClick={handleClick}
+              >
+                {view ? "view less" : "view more"}
+              </span>
 
               <div className="flex">
                 <span className="font-bold ">Financial Report </span>
@@ -269,13 +286,14 @@ function Application_data() {
               {data.isMatch.status === null ? (
                 <>
                   <button
-                    className="px-3 py-2 text-xl rounded-md text-white w-[8rem] bg-blue-700 font-arima hover:bg-blue-800"
+                    className="px-3 py-2 text-xl rounded-md text-white w-[8rem] bg-blue-700 font-arima hover:bg-blue-800 transition-transform duration-300 ease-in-out transform hover:scale-95"
                     onClick={acceptCompany}
                   >
                     Accept
                   </button>
+
                   <button
-                    className="px-3 ml-2 py-2 text-xl rounded-md text-white w-[8rem] bg-red-700 font-arima hover:bg-red-800"
+                    className="px-3 ml-2 py-2 text-xl rounded-md text-white w-[8rem] bg-red-700 font-arima hover:bg-red-800 transition-transform duration-300 ease-in-out transform hover:scale-95"
                     onClick={rejectCompany}
                   >
                     Reject

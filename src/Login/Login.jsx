@@ -29,6 +29,7 @@ function Login() {
             <form action="#">
               <input
                 name="email"
+                required
                 value={formdata.email}
                 placeholder="Enter email"
                 type="text"
@@ -51,7 +52,7 @@ function Login() {
               <Link to={"/verification"}>
                 {" "}
                 <div className="flex justify-center items-center  ">
-                  <button className="mt-3 text-center border-2 rounded-lg w-[100%] p-2 font-arima bg-blue-600 text-white text-xl items-center">
+                  <button className="mt-3 text-center border-2 rounded-lg w-[100%] p-2 font-arima bg-blue-600 text-white text-xl items-center hover:bg-blue-700 transition-transform duration-300 ease-in-out transform hover:scale-95 ">
                     Continue
                   </button>
                 </div>

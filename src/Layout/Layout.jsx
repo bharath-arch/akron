@@ -69,7 +69,7 @@ function Layout() {
             <Link to={"/Login"}>
               {" "}
               <button
-                className={`md:p-3  md:text-xl md:bg-blue-800 md:text-white md:rounded-lg`}
+                className={`md:p-3  md:text-xl md:bg-blue-800 md:text-white md:rounded-lg hover:bg-blue-700 transition-transform duration-300 ease-in-out transform hover:scale-95 `}
               >
                 Get Started
               </button>
