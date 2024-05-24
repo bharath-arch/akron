@@ -1,26 +1,44 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
-// import Logo from "../assets/logo.png";
 import setBodyColor from "../setBodyColor";
-import { CiCircleChevDown } from "react-icons/ci";
-import { CiCircleChevUp } from "react-icons/ci";
+
 import User_popup from "../Wallet/User_popup/User_popup";
 import { RxHamburgerMenu } from "react-icons/rx";
+import axios from "axios";
 
 function Layout_user() {
   const path = useLocation();
   setBodyColor({ color: "white" });
   const [selectLink, setSelectLink] = useState();
   const [activesidebar, setActivesidebar] = useState(true);
-  // console.log(path.pathname);
-  // console.log(path.pathname === "/user/explore", "select link");
+  const [data,setData] = useState()
+  
   console.log(path.pathname.split('/')[2])
   if (path.pathname) {
     useEffect(() => {
       setSelectLink(path.pathname.split('/')[2]);
-    }, [selectLink]);
+    }, [selectLink , path.pathname]);
   }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:4000/company_approve/dashboard_data"
+        );
+        // console.log(response.data);
+        const setfilterData = response.data.result.filter(
+          (item) => item.status === true
+        );
+        setData(setfilterData);
+      } catch (error) {
+       
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [data]);
 
   return (
     <div className="">
@@ -51,7 +69,7 @@ function Layout_user() {
                 selectLink === "wealth" ? "text-blue-900 p-2" : "p-2"
               }`}
             >
-              <Link to={"wealth"}>Wealth</Link>
+              <Link to={`wealth`}>Wealth</Link>
             </li>
             <li
               onClick={() => setSelectLink("square")}

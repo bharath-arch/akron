@@ -27,7 +27,7 @@ function User_popup() {
   const options = ['kyc', 'profile', 'Logout'];
 
   const toggleDropdown = () => setIsOpen(!isOpen);
-
+  const handleInputBlur =()=> setIsOpen(false);
   return (
     <div className=" h-auto w-16">
     <div className="dropdown">
@@ -35,7 +35,7 @@ function User_popup() {
         {isOpen ? <CiCircleChevUp size={25} /> : <CiCircleChevDown size={25} />}
       </button>
       {isOpen && (
-        <ul className="">
+        <ul className=""  onBlur={handleInputBlur}>
           {options.map((option) => (
             <li key={option} className=''>
               {option === 'Logout' ? (

@@ -9,7 +9,6 @@ function Wealth() {
   const [exceldata, setExceldata] = useState(null);
   const [count, setCount] = useState(0);
   const [view, setView] = useState(false);
-  const [showGraph, setShowGraph] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,15 +44,7 @@ function Wealth() {
     functionCall();
   }, [data, count]);
 
-  useEffect(() => {
-    if (exceldata) {
-      const timer = setTimeout(() => {
-        setShowGraph(true);
-      }, 1000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [exceldata]);
+ 
 
   const handleClick = () => {
     setView(!view);
@@ -132,7 +123,6 @@ function Wealth() {
             <span>
               <span className="font-bold">Previous Valuation :</span> xx Cr.
             </span>
-            <span className="font-bold">Earnings YOY :</span>
             <div className="flex mt-2 md:mt-0">
               <span className="font-bold">Financial Report</span>
               <span className="ml-2">
@@ -155,7 +145,7 @@ function Wealth() {
           </div>
         </div>
 
-        {showGraph && (
+        {exceldata && (
           <div className="flex justify-center items-center text-center mt-20">
             <Graph data={exceldata} />
           </div>

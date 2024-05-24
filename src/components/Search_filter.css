@@ -1,0 +1,22 @@
+select {
+  /* Hide default dropdown arrow */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  /* Add custom icon as background image */
+  background-image: url("./assets/filter.svg");
+  background-repeat: no-repeat;
+  background-position: calc(100% - 5px) center; /* Adjust icon position */
+  /* Other styles */
+  padding: 0.75rem; /* Adjust padding as needed */
+  border-radius: 0.5rem; /* Adjust border-radius as needed */
+  border: 1px solid #ccc; /* Add border styles */
+  background-color: #f5f5f5; /* Add background color */
+  /* Add focus styles */
+  outline: none;
+  /* Example focus style */
+}
+select:hover{
+    box-shadow: 0 0 0 2px #a0d8ff; 
+    
+}

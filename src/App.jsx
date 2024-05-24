@@ -62,7 +62,9 @@ function App() {
         <Route path="/manage_user"  element={<Manage_user/>}></Route>
         {/* <Route path="/Application_data/admin_dashboard" element={<Admin_dashboard />}></Route> */}
         <Route path="/manage_user/kyc/:id" element={<Kyc_approval/>}></Route>
-        <Route path="/:id" element={<Application_data />}></Route>
+        <Route path="/:id" element={<Application_data />}> </Route>
+       
+        
        
 
         <Route path="/user" element={<Layout_user />}>

@@ -1,13 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
-import { IoFilter } from "react-icons/io5";
-import { MdSort } from "react-icons/md";
+
+import Search_filter from "../components/Search_filter";
 
 function Square() {
   const [data, setData] = useState([]);
-  const [error, setError] = useState(null);
 
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -25,34 +25,9 @@ function Square() {
   }, []);
 
   return (
-    <div className="">
-      <section className="search-bar">
-        <div className="gap-2 w-full md:flex">
-          <div className="flex gap-2 items-center my-3 ">
-            <input
-              type="text"
-              placeholder="Filter"
-              className="w-auto px-3 py-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
-            <IoFilter size={25} className="-ml-9 mt-1" />
-          </div>
-          <div className="flex gap-2 items-center my-3">
-            <input
-              type="text"
-              placeholder="Sort By"
-              className="w-auto px-3 py-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
-            <MdSort size={25} className="-ml-9" />
-          </div>
-          <div className="flex gap-2 items-center">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="w-[30rem] px-3 py-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
-            <AiOutlineSearch size={25} className="-ml-10 mt-1" />
-          </div>
-        </div>
+    <>
+      <section>
+      <Search_filter />
       </section>
 
       {data &&
@@ -85,7 +60,7 @@ function Square() {
             )}
           </section>
         ))}
-    </div>
+    </>
   );
 }
 
