@@ -1,39 +1,91 @@
 import React, { useEffect, useState } from "react";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import { MdPictureAsPdf } from "react-icons/md";
-import { GoGraph } from "react-icons/go";
 import axios from "axios";
+import Graph from "../components/Graph";
 
 function Wealth() {
-  const [data, setData] = useState();
-  const [exceldata, setExceldata] = useState();
+  const [data, setData] = useState([]);
+  const [exceldata, setExceldata] = useState(null);
   const [count, setCount] = useState(0);
   const [view, setView] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
           "http://localhost:4000/company_approve/dashboard_data"
         );
-
         const filteredData = response.data.result.filter(
           (item) => item.status === true
         );
-        // console.log(filteredData);
-
         setData(filteredData);
-        console.log();
       } catch (error) {
         console.log(error);
       }
     };
     fetchData();
   }, []);
+  
+  useEffect(() => {
+    const functionCall = async () => {
+      if (data.length > 0) {
+        const id = data[count]._id;
+        try {
+          const response = await axios.post(
+            `http://localhost:4000/company_data/${id}`
+          );
+          setExceldata(response.data.result);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    };
+    functionCall();
+  }, [data, count]);
+  
 
+  let arr = [];
+  let arr1 = [];
+  let arr2 = [];
+  if (exceldata) {
+    exceldata?.incomeExpenses.incomeExpenses[0]["values"].forEach((item) => {
+      arr.push(item);
+    });
+
+    exceldata?.incomeExpenses.quaters.forEach((item) => {
+      if (item !== "Column1") {
+        arr1.push(item);
+      }
+    });
+
+    if (arr.length === arr1.length) {
+      for (let i = 0; i < arr.length; i++) {
+        arr2.push({ sales: arr[i], name: arr1[i] });
+      }
+      console.log(arr2);
+    } else {
+      console.log("array lengths do not match");
+    }
+  }
 
   const handleClick = async () => {
-    const id = data[count]._id;
+    // const id = data[count]._id;
     setView(!view);
+    // try {
+    //   const response = await axios.post(
+    //     `http://localhost:4000/company_data/${id}`
+    //   );
+    //   setExceldata(response.data.result);
+    // } catch (error) {
+    //   console.log(error);
+    // }
+  };
+
+  const handlePrevious = async () => {
+    setCount(count === 0 ? data.length - 1 : count - 1);
+    const id = data[count]._id;
+    // setView(!view);
     try {
       const response = await axios.post(
         `http://localhost:4000/company_data/${id}`
@@ -44,46 +96,36 @@ function Wealth() {
     }
   };
 
- // Make sure you have a condition to check if exceldata and its properties exist before accessing them
-
-
-
-  const handlePrevious = () => {
-    if (count === 0) {
-      setCount(data.length - 1);
-    } else {
-      setCount((count) => count - 1);
+  const handleNext = async () => {
+    setCount(count === data.length - 1 ? 0 : count + 1);
+    const id = data[count]._id;
+    // setView(!view);
+    try {
+      const response = await axios.post(
+        `http://localhost:4000/company_data/${id}`
+      );
+      setExceldata(response.data.result);
+    } catch (error) {
+      console.log(error);
     }
   };
-  const handleNext = () => {
-    if (count === data.length - 1) {
-      setCount(0);
-    } else {
-      setCount((count) => count + 1);
-    }
-  };
-console.log(exceldata)
+
   return (
     <section className="">
-      <div className="md:flex md:justify-between  hidden text-blue-800 ">
+      <div className="md:flex md:justify-between hidden text-blue-800 ">
         <button className="flex items-center" onClick={handlePrevious}>
-          {" "}
           <GrPrevious />
           Previous
         </button>
         <button className="flex items-center" onClick={handleNext}>
-          {" "}
           Next <GrNext />
         </button>
       </div>
-      <div className="flex  mr-2 md:mr-0 mb-3  items-center w-full justify-end">
+      <div className="flex mr-2 md:mr-0 mb-3 items-center w-full justify-end">
         <span className="flex justify-end w-full text-blue-800 text-lg md:hidden">
-          {" "}
           Next
         </span>
         <div className="left-7/12 md:hidden">
-          {" "}
-          {/* Centered on mobile */}
           <span>
             <GrNext />
           </span>
@@ -92,44 +134,34 @@ console.log(exceldata)
       <div className="w-full h-full bg-gradient-to-br pt-5 pr-8 pl-8">
         <div className="flex flex-col">
           <span className="font-bold text-3xl">
-            {data && data[count].company_name}
+            {data && data[count]?.company_name}
           </span>
           <span className="mt-2">
             <span className="font-bold">Sector :</span>{" "}
-            {data && data[count].sector}
+            {data && data[count]?.sector}
           </span>
           <span className="mt-2 font-semibold text-xl">About</span>
-          <span className="mt-2 font-semibold ">Product Discription</span>
+          <span className="mt-2 font-semibold ">Product Description</span>
           <span className="mt-2">
-            {" "}
-            {data && data[count].previous_fundraising_rounds_discription}
+            {data && data[count]?.previous_fundraising_rounds_description}
           </span>
           <span className="mt-2 font-semibold ">
             Previous Fund Raising Round
           </span>
           <span className="mt-2">
-            {" "}
-            {data && data[count].product_discription}
+            {data && data[count]?.product_description}
           </span>
           <span className="mt-2 font-semibold ">Traction</span>
-          <span className="mt-2"> {data && data[count].traction}</span>
+          <span className="mt-2"> {data && data[count]?.traction}</span>
         </div>
-        <div className="flex gap-x-5  mt-9 mb-5 ">
-          {" "}
-          {/* Wrap content on mobile */}
-          <div
-            className={`h-auto flex flex-wrap 
-                     
-                     md:w-full  gap-10`}
-          >
-            {" "}
-            {/* Adjust grid columns for mobile */}
+        <div className="flex gap-x-5 mt-9 mb-5">
+          <div className="h-auto flex flex-wrap md:w-full gap-10">
             <span>
               <span className="font-bold">Mkt Cap :</span>{" "}
-              {data && data[count].market_cap} Cr.
+              {data && data[count]?.market_cap} Cr.
             </span>
             <span>
-              <span className="font-bold">P/E Ratio : </span> xx.x
+              <span className="font-bold">P/E Ratio :</span> xx.x
             </span>
             <span>
               <span className="font-bold">Industry P/E :</span> xx.x
@@ -145,9 +177,7 @@ console.log(exceldata)
             </span>
             <span className="font-bold">Earnings YOY :</span>
             <div className="flex mt-2 md:mt-0">
-              {" "}
-              {/* Move together on mobile */}
-              <span className="font-bold">Financial Report </span>
+              <span className="font-bold">Financial Report</span>
               <span className="ml-2">
                 <MdPictureAsPdf
                   className="cursor-pointer"
@@ -157,7 +187,7 @@ console.log(exceldata)
                     const link = document.createElement("a");
                     link.href = pdfUrl;
                     link.download =
-                      (data && data[count].financials) || "document.pdf";
+                      (data && data[count]?.financials) || "document.pdf";
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
@@ -167,72 +197,65 @@ console.log(exceldata)
             </div>
           </div>
         </div>
+        {exceldata && (
+          <div className="flex justify-center items-center text-center   mt-20">
+            <Graph data={arr2} />
+          </div>
+        )}
         {view && (
-          <div className="overflow-x-auto flex justify-center flex-col">
+          <div className="overflow-x-auto flex justify-center flex-col ">
             {exceldata?.incomeExpenses.incomeExpenses &&
-                exceldata.incomeExpenses.incomeExpenses.length > 0 ? (
-                  <table className="table-auto border-collapse border border-gray-400 ">
-                    <thead>
-                      <tr className="bg-gray-200">
-                        {/* Render an empty header for the first cell */}
-                        <th className="p-3 text-center text-xs font-medium text-gray-700 uppercase border border-gray-400"></th>
-                        {/* Render headers for each metric */}
+            exceldata.incomeExpenses.incomeExpenses.length > 0 ? (
+              <table className="table-auto border-collapse border border-gray-400">
+                <thead>
+                  <tr className="bg-gray-200">
+                    <th className="p-3 text-center text-xs font-medium text-gray-700 uppercase border border-gray-400"></th>
+                    {exceldata.incomeExpenses.incomeExpenses.map(
+                      (column, index) => (
+                        <th
+                          key={index}
+                          className="p-3 text-center text-xs font-medium text-gray-700 uppercase border border-gray-400"
+                        >
+                          {column.metric}
+                        </th>
+                      )
+                    )}
+                  </tr>
+                </thead>
+                <tbody>
+                  {exceldata.incomeExpenses.incomeExpenses[0].values.map(
+                    (value, rowIndex) => (
+                      <tr key={rowIndex} className="bg-white">
+                        <td className="p-3 text-center text-sm text-gray-600 border border-gray-400">
+                          {exceldata.incomeExpenses.quaters[rowIndex + 1]}
+                        </td>
                         {exceldata.incomeExpenses.incomeExpenses.map(
-                          (column, index) => (
-                            <th
-                              key={index}
-                              className="p-3 text-center text-xs font-medium text-gray-700 uppercase border border-gray-400"
+                          (column, colIndex) => (
+                            <td
+                              key={colIndex}
+                              className="p-3 text-center text-sm text-gray-600 border border-gray-400"
                             >
-                              {column.metric}
-                            </th>
+                              {column.values[rowIndex]}
+                            </td>
                           )
                         )}
                       </tr>
-                    </thead>
-                    <tbody>
-                      {exceldata.incomeExpenses.incomeExpenses.length > 0 &&
-                        Array.from(
-                          {
-                            length:
-                            exceldata.incomeExpenses.incomeExpenses[0].values
-                                .length,
-                          },
-                          (_, index) => index
-                        ).map((rowIndex) => (
-                          <tr key={rowIndex} className="bg-white">
-                            {/* Print the quarter in the left column */}
-                            <td className="p-3 text-center text-sm text-gray-600 border border-gray-400">
-                              {exceldata.incomeExpenses.quaters[rowIndex + 1]}{" "}
-                              {/* Add +1 to skip the 'Column1' */}
-                            </td>
-                            {/* Print the data for each metric */}
-                            {exceldata.incomeExpenses.incomeExpenses.map(
-                              (column, colIndex) => (
-                                <td
-                                  key={colIndex}
-                                  className="p-3 text-center text-sm text-gray-600 border border-gray-400"
-                                >
-                                  {column.values[rowIndex]}
-                                </td>
-                              )
-                            )}
-                          </tr>
-                        ))}
-                    </tbody>
-                  </table>
+                    )
+                  )}
+                </tbody>
+              </table>
             ) : (
               <span className="text-gray-600">No data available</span>
             )}
           </div>
         )}
-
         <div className="flex justify-end mr-8">
-          <button className="text-blue-900 font-bold " onClick={handleClick}>
+          <button
+            className="text-blue-900 font-bold mb-20"
+            onClick={handleClick}
+          >
             {view ? "view less" : "view more"}
           </button>
-        </div>
-        <div className="flex justify-center items-center text-center mt-5">
-          <GoGraph size={300} color="green" />
         </div>
       </div>
     </section>

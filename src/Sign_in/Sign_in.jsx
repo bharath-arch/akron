@@ -56,7 +56,7 @@ function Sign_in() {
           <div className="mt-9 font-bold text-3xl">Sign In</div>
           <div className="mt-10 text-left ml-9 mr-6">
             <p className="text-[0.75rem] font-serif font-light mb-2">Email</p>
-            <form>
+            <form  onSubmit={handleSubmit}>
               <input
                 type="text"
                 name="email"
@@ -77,7 +77,7 @@ function Sign_in() {
               </p>
               <div className="flex justify-center items-center  ">
                 <button
-                  onClick={handleSubmit}
+                 
                   className="mt-3 text-center border-2 rounded-lg w-[22rem] p-2 font-arima bg-blue-600 text-white text-xl items-center hover:bg-blue-700 transition-transform duration-300 ease-in-out transform hover:scale-95 "
                 >
                   {loading ? <p>loading...</p> : "Continue"}
