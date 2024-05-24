@@ -21,6 +21,8 @@ function Kyc_approval() {
     } catch (err) {
       console.log(err);
     }
+    navigate("/manage_user")
+
   };
   const rejectRequest = async () => {
     try {
@@ -31,6 +33,8 @@ function Kyc_approval() {
     } catch (err) {
       console.log(err);
     }
+    navigate("/manage_user")
+
   };
 
   useEffect(() => {

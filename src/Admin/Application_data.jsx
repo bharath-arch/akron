@@ -50,6 +50,7 @@ function Application_data() {
     } catch (err) {
       console.log(err);
     }
+    navigate("/admin_dashboard");
   };
   const rejectCompany = async () => {
     try {
@@ -60,6 +61,7 @@ function Application_data() {
     } catch (err) {
       console.log(err);
     }
+    navigate("/admin_dashboard");
   };
 
   return (
@@ -75,14 +77,13 @@ function Application_data() {
                   </span>
                 </div>
                 <div className="flex gap-5 items-center text-center ">
-                  <Link to="/admin_dashboard">
-                    <span
-                      className="font-semibold text-xl"
-                      onClick={() => navigate("/admin_dashboard")}
-                    >
-                      Admin Dashboard
-                    </span>
-                  </Link>
+                  <span
+                    className="font-semibold text-xl"
+                    onClick={() => navigate("/admin_dashboard")}
+                  >
+                    Admin Dashboard
+                  </span>
+
                   <span className="text-xl">Logout</span>
                 </div>
               </div>
