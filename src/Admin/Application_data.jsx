@@ -3,20 +3,27 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import setBodyColor from "../setBodyColor";
 import axios from "axios";
 import { MdPictureAsPdf } from "react-icons/md";
-import { GoGraph } from "react-icons/go";
 import Spinner from "./Spinner";
+import Graph from "../components/Graph";
 
 function Application_data() {
-  setBodyColor({ color: "lightgray" });
-
   const navigate = useNavigate();
-
+  const [showGraph, setShowGraph] = useState(false);
   const [data, setData] = useState([]);
   const [view, setView] = useState(false);
 
   const handleClick = () => {
     setView(!view);
   };
+  useEffect(() => {
+    if (data) {
+      const timer = setTimeout(() => {
+        setShowGraph(true);
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [data]);
 
   const { id } = useParams();
 
@@ -279,9 +286,11 @@ function Application_data() {
                 </span>
               </div>
             </div>
-            <div className="flex justify-center items-center text-center mt-5">
-              <GoGraph size={300} color="green" />
-            </div>
+            {showGraph && (
+              <div className="flex justify-center items-center text-center mt-20">
+                <Graph data={data} />
+              </div>
+            )}
             <div className="flex justify-end pb-5">
               {data.isMatch.status === null ? (
                 <>

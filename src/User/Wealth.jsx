@@ -9,6 +9,7 @@ function Wealth() {
   const [exceldata, setExceldata] = useState(null);
   const [count, setCount] = useState(0);
   const [view, setView] = useState(false);
+  const [showGraph, setShowGraph] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,7 +27,7 @@ function Wealth() {
     };
     fetchData();
   }, []);
-  
+
   useEffect(() => {
     const functionCall = async () => {
       if (data.length > 0) {
@@ -43,76 +44,32 @@ function Wealth() {
     };
     functionCall();
   }, [data, count]);
-  
 
-  let arr = [];
-  let arr1 = [];
-  let arr2 = [];
-  if (exceldata) {
-    exceldata?.incomeExpenses.incomeExpenses[0]["values"].forEach((item) => {
-      arr.push(item);
-    });
+  useEffect(() => {
+    if (exceldata) {
+      const timer = setTimeout(() => {
+        setShowGraph(true);
+      }, 1000);
 
-    exceldata?.incomeExpenses.quaters.forEach((item) => {
-      if (item !== "Column1") {
-        arr1.push(item);
-      }
-    });
-
-    if (arr.length === arr1.length) {
-      for (let i = 0; i < arr.length; i++) {
-        arr2.push({ sales: arr[i], name: arr1[i] });
-      }
-      console.log(arr2);
-    } else {
-      console.log("array lengths do not match");
+      return () => clearTimeout(timer);
     }
-  }
+  }, [exceldata]);
 
-  const handleClick = async () => {
-    // const id = data[count]._id;
+  const handleClick = () => {
     setView(!view);
-    // try {
-    //   const response = await axios.post(
-    //     `http://localhost:4000/company_data/${id}`
-    //   );
-    //   setExceldata(response.data.result);
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 
-  const handlePrevious = async () => {
+  const handlePrevious = () => {
     setCount(count === 0 ? data.length - 1 : count - 1);
-    const id = data[count]._id;
-    // setView(!view);
-    try {
-      const response = await axios.post(
-        `http://localhost:4000/company_data/${id}`
-      );
-      setExceldata(response.data.result);
-    } catch (error) {
-      console.log(error);
-    }
   };
 
-  const handleNext = async () => {
+  const handleNext = () => {
     setCount(count === data.length - 1 ? 0 : count + 1);
-    const id = data[count]._id;
-    // setView(!view);
-    try {
-      const response = await axios.post(
-        `http://localhost:4000/company_data/${id}`
-      );
-      setExceldata(response.data.result);
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   return (
     <section className="">
-      <div className="md:flex md:justify-between hidden text-blue-800 ">
+      <div className="md:flex md:justify-between hidden text-blue-800">
         <button className="flex items-center" onClick={handlePrevious}>
           <GrPrevious />
           Previous
@@ -197,13 +154,15 @@ function Wealth() {
             </div>
           </div>
         </div>
-        {exceldata && (
-          <div className="flex justify-center items-center text-center   mt-20">
-            <Graph data={arr2} />
+
+        {showGraph && (
+          <div className="flex justify-center items-center text-center mt-20">
+            <Graph data={exceldata} />
           </div>
         )}
+
         {view && (
-          <div className="overflow-x-auto flex justify-center flex-col ">
+          <div className="overflow-x-auto flex justify-center flex-col">
             {exceldata?.incomeExpenses.incomeExpenses &&
             exceldata.incomeExpenses.incomeExpenses.length > 0 ? (
               <table className="table-auto border-collapse border border-gray-400">
