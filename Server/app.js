@@ -13,7 +13,7 @@ import approveCompanyRouter from './router/company_approve.js'
 import adminLogin from './router/adminLogin.js'
 import companyDataRouter from './router/company_Data.js'
 import kycApprovalRouer from './router/kyc_approval.js'
-
+import userProfile from './router/userProfile.js'
 
 
 const app = express()
@@ -23,7 +23,7 @@ dotenv.config()
 
 app.use(express.json())
 app.use(express.static('uploads'))
-
+app.use('/profile',userProfile)
 app.use('/kyc_approval',kycApprovalRouer)
 app.use('/register',userRouter)
 app.use('/kyc',kycRouter)
