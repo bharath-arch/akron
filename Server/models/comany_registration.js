@@ -25,6 +25,7 @@ const companyRegistraion = new mongoose.Schema(
     amount_expected_to_raise: { type: Number },
     excel: { type: String },
     status: { type: Boolean, default: null },
+    lots: { type: Number, default: null },
   },
   {
     timestamps: true,

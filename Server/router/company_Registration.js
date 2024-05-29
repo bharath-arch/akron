@@ -4,8 +4,8 @@ import { Registraion } from "../models/comany_registration.js";
 import fs from "fs";
 import path from "path";
 const router = express.Router();
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -16,46 +16,53 @@ const storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     cb(null, `${Date.now()}-${file.originalname}`); // Create unique filenames
-
   },
 });
 
-const upload = multer({ 
+const upload = multer({
   storage: storage,
   fileFilter: function (req, file, cb) {
     // Define allowed video formats for "pitch" field
-    const allowedVideoFormats = ['video/mp4', 'video/mpeg', 'video/avi'];
+    const allowedVideoFormats = ["video/mp4", "video/mpeg", "video/avi"];
     // Define allowed PDF formats for "financials" field
-    const allowedPdfFormats = ['application/pdf'];
-    const allowedExcelFormats = ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel'];
+    const allowedPdfFormats = ["application/pdf"];
+    const allowedExcelFormats = [
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "application/vnd.ms-excel",
+    ];
 
     // Check the fieldname and its respective allowed formats
-    if (file.fieldname === 'pitch' && allowedVideoFormats.includes(file.mimetype)) {
+    if (
+      file.fieldname === "pitch" &&
+      allowedVideoFormats.includes(file.mimetype)
+    ) {
       cb(null, true); // Accept the file
-    } else if (file.fieldname === 'financials' && allowedPdfFormats.includes(file.mimetype)) {
+    } else if (
+      file.fieldname === "financials" &&
+      allowedPdfFormats.includes(file.mimetype)
+    ) {
       cb(null, true); // Accept the file
-    }
-    else if (file.fieldname === 'excel' && allowedExcelFormats.includes(file.mimetype)) {
+    } else if (
+      file.fieldname === "excel" &&
+      allowedExcelFormats.includes(file.mimetype)
+    ) {
       cb(null, true); // Accept the file
     } else {
       // Reject the file if it doesn't match any allowed format for the respective field
-      cb(new Error('Unsupported file format.'));
+      cb(new Error("Unsupported file format."));
     }
   },
   // Add error handling for multer
-  onError: function(err, next) {
-    console.error('Multer error:', err);
+  onError: function (err, next) {
+    console.error("Multer error:", err);
     next(err);
-  }
+  },
 });
-
-
-
 
 const cpUpload = upload.fields([
   { name: "pitch", maxCount: 1 },
   { name: "financials", maxCount: 1 },
-  {name: "excel", maxCount: 1},
+  { name: "excel", maxCount: 1 },
 ]);
 
 router.post("/register", cpUpload, async (req, res) => {
@@ -63,11 +70,13 @@ router.post("/register", cpUpload, async (req, res) => {
     const existingUser = await Registraion.findOne({ pan: req.body.pan });
     console.log(existingUser);
 
+    let lots = req.body.amount_expected_to_raise * 1000;
+
     if (existingUser) {
       console.log("User already exists");
       return res.json({ message: "User already exists" });
     } else {
-      const newUser = new Registraion({ ...req.body });
+      const newUser = new Registraion({ ...req.body , lots });
 
       // Check if any files were uploaded
       if (req.files) {

@@ -1,12 +1,23 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 
 function Add_money({ handleclosetogglebutton }) {
+  const [money, setMoney] = useState(0);
   const inputRef = useRef(null);
 
-  useEffect(()=>{
+  const handle2000 = () => {
+    setMoney((pre) => pre + 2000);
+  };
+  const handle4000 = () => {
+    setMoney((pre) => pre + 4000);
+  };
+  const handle6000 = () => {
+    setMoney((pre) => pre + 6000);
+  };
+
+  useEffect(() => {
     inputRef.current.focus();
-  },[inputRef])
+  }, [inputRef]);
   return (
     <div className="  w-96 h-96 border-2 p-3 bg-white">
       <div className="relative mb-3">
@@ -25,14 +36,22 @@ function Add_money({ handleclosetogglebutton }) {
         <input
           ref={inputRef}
           type="text"
-          placeholder="Minimum Amount &#8377;200"
-          className="  mb-2  w-[98%] px-1 py-1  border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500 bg-gray-300"
+          placeholder={"Minimum Amount ₹200"}
+          value={money === 0 ? "" : `${money}`}
+          className="mb-2 w-[98%] px-1 py-1 border border-gray-300 focus:outline-none focus:ring-1 text-black focus:ring-blue-500 bg-gray-300"
         />
       </div>
-      <div className="flex ">
-        <span className="mr-5">+ &#8377;2000 </span>
-        <span className="mr-5"> + &#8377;4000</span>
-        <span className="mr-5">+ &#8377;6000</span>
+      <div className="flex gap-3">
+        <span className=" cursor-pointer focus:scale-75" onClick={handle2000}>
+          + &#8377;2000{" "}
+        </span>
+        <span className=" cursor-pointer focus:scale-75" onClick={handle4000}>
+          {" "}
+          + &#8377;4000
+        </span>
+        <span className=" cursor-pointer focus:scale-75" onClick={handle6000}>
+          + &#8377;6000
+        </span>
       </div>
       <div className="flex justify-center mt-2">
         <div className="w-[22rem] h-30 border-2 p-3 ">

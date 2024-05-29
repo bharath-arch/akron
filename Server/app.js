@@ -14,7 +14,7 @@ import adminLogin from './router/adminLogin.js'
 import companyDataRouter from './router/company_Data.js'
 import kycApprovalRouer from './router/kyc_approval.js'
 import userProfile from './router/userProfile.js'
-
+import LotsData from './router/LotsData.js'
 
 const app = express()
 
@@ -22,7 +22,11 @@ const app = express()
 dotenv.config()
 
 app.use(express.json())
+
+
 app.use(express.static('uploads'))
+
+app.use('/LotsData',LotsData)
 app.use('/profile',userProfile)
 app.use('/kyc_approval',kycApprovalRouer)
 app.use('/register',userRouter)

@@ -9,6 +9,7 @@ function Wealth() {
   const [exceldata, setExceldata] = useState(null);
   const [count, setCount] = useState(0);
   const [view, setView] = useState(false);
+  const [lots, setLots] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,6 +28,39 @@ function Wealth() {
     fetchData();
   }, []);
 
+  const positivelotshandle = () => {
+    if (lots >= data[count].lots) {
+      setLots(data[count].lots);
+    } else {
+      setLots((pre) => pre + 1);
+    }
+  };
+
+  const negativelotshandle = () => {
+    if (lots <= 1) {
+      setLots(1);
+    } else {
+      setLots((pre) => pre - 1);
+    }
+  };
+
+  const handleLotsize = async () => {
+    const id = data[count]?._id;
+    const email = localStorage.getItem("email");
+    const companyName = data[count].company_name;
+
+    try {
+      const response = await axios.post("http://localhost:4000/LotsData/", {
+        id,
+        email,
+        lots,
+        companyName,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     const functionCall = async () => {
       if (data.length > 0) {
@@ -43,8 +77,6 @@ function Wealth() {
     };
     functionCall();
   }, [data, count]);
-
- 
 
   const handleClick = () => {
     setView(!view);
@@ -79,11 +111,34 @@ function Wealth() {
           </span>
         </div>
       </div>
+
       <div className="w-full h-full bg-gradient-to-br pt-5 pr-8 pl-8">
         <div className="flex flex-col">
-          <span className="font-bold text-3xl">
-            {data && data[count]?.company_name}
-          </span>
+          <div className="flex justify-between">
+            <span className="font-bold text-3xl">
+              {data && data[count]?.company_name}
+            </span>
+            <div className="flex gap-2 text-center items-center">
+              <span
+                className="p-2 border cursor-pointer"
+                onClick={positivelotshandle}
+              >
+                +
+              </span>
+              <button
+                className="p-2 cursor-pointer bg-blue-700 text-white rounded-md px-6 text-xl hover:scale-95 "
+                onClick={handleLotsize}
+              >
+                Buy {lots} lots
+              </button>
+              <span
+                className="p-2 border cursor-pointer"
+                onClick={negativelotshandle}
+              >
+                -
+              </span>
+            </div>
+          </div>
           <span className="mt-2">
             <span className="font-bold">Sector :</span>{" "}
             {data && data[count]?.sector}
@@ -122,6 +177,14 @@ function Wealth() {
             </span>
             <span>
               <span className="font-bold">Previous Valuation :</span> xx Cr.
+            </span>
+            <span>
+              <span className="font-bold">Target Amount :</span>{" "}
+              {data[count]?.amount_expected_to_raise} Cr.
+            </span>
+            <span>
+              <span className="font-bold">Lot Size:</span> {data[count]?.lots}{" "}
+              Lots
             </span>
             <div className="flex mt-2 md:mt-0">
               <span className="font-bold">Financial Report</span>
