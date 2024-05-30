@@ -159,13 +159,13 @@ function Wealth() {
           <span className="mt-2 font-semibold text-xl">About</span>
           <span className="mt-2 font-semibold ">Product Description</span>
           <span className="mt-2">
-            {data && data[count]?.previous_fundraising_rounds_description}
+            {data && data[count]?.product_discription}
           </span>
           <span className="mt-2 font-semibold ">
             Previous Fund Raising Round
           </span>
           <span className="mt-2">
-            {data && data[count]?.product_description}
+            {data && data[count]?.previous_fundraising_rounds_discription}
           </span>
           <span className="mt-2 font-semibold ">Traction</span>
           <span className="mt-2"> {data && data[count]?.traction}</span>

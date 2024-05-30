@@ -38,7 +38,7 @@ function Layout_user() {
       }
     };
     fetchData();
-  }, [data]);
+  }, []);
 
   return (
     <div className="">
