@@ -6,6 +6,7 @@ import path from "path";
 const router = express.Router();
 import { dirname } from "path";
 import { fileURLToPath } from "url";
+import mongoose from "mongoose";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -67,7 +68,11 @@ const cpUpload = upload.fields([
 
 router.post("/register", cpUpload, async (req, res) => {
   try {
-    const existingUser = await Registraion.findOne({ pan: req.body.pan });
+    //email added in findOne 5/30/2024 8:21 PM
+    const existingUser = await Registraion.findOne({
+      pan: req.body.pan,
+      email: req.body.email,
+    });
     console.log(existingUser);
 
     let lots = req.body.amount_expected_to_raise * 1000;
@@ -76,7 +81,7 @@ router.post("/register", cpUpload, async (req, res) => {
       console.log("User already exists");
       return res.json({ message: "User already exists" });
     } else {
-      const newUser = new Registraion({ ...req.body , lots });
+      const newUser = new Registraion({ ...req.body, lots });
 
       // Check if any files were uploaded
       if (req.files) {
@@ -94,6 +99,31 @@ router.post("/register", cpUpload, async (req, res) => {
   } catch (error) {
     console.error("Error creating user:", error);
     return res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
+router.put("/updateLots", async (req, res) => {
+  try {
+    const companyId = req.body.id;
+    const email = req.body.email;
+    const companyName = req.body.companyName;
+    const lots = req.body.lots;
+
+    console.log(email);
+    const isMatch = await Registraion.findOne({ _id: companyId, email: email });
+    const newLots = isMatch.lots - lots;
+    if (isMatch) {
+      try {
+        const updateLots = await Registraion.findOneAndUpdate(
+          { _id: companyId, email: email },
+          { lots: newLots }
+        );
+      } catch {}
+    }
+    console.log(isMatch, "000");
+    return res.status(200).json({ message: "sucess" });
+  } catch (err) {
+    console.log(err);
   }
 });
 

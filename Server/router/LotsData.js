@@ -10,13 +10,13 @@ router.put("/", async (req, res) => {
     const email = req.body.email;
     const companyName = req.body.companyName;
     const lots = req.body.lots;
-    console.log(companyId,companyName,email,lots);
+    // console.log(companyId,companyName,email,lots);
     // Check if a document with the same companyId and email already exists
     const isMatch = await Userlots.findOne({
       companyId: companyId,
       email: email,
     });
-    console.log(isMatch);
+    // console.log(isMatch);
 
     if (isMatch) {
       console.log("already exist");
@@ -35,7 +35,7 @@ router.put("/", async (req, res) => {
       });
     }
   } catch (error) {
-    console.error(error, "---");
+    // console.error(error, "---");
     res.status(500).json({ message: "Server error" });
   }
 });

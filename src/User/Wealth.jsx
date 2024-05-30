@@ -57,6 +57,16 @@ function Wealth() {
         companyName,
       });
 
+      const updateLots = await axios.put(
+        "http://localhost:4000/company_registration/updateLots",
+        {
+          id,
+          email,
+          lots,
+          companyName,
+        }
+      );
+
       console.log(response);
     } catch (err) {
       console.log(err);
@@ -123,10 +133,11 @@ function Wealth() {
             <div className="flex gap-2 text-center items-center">
               <span
                 className="p-2 border cursor-pointer"
-                onClick={positivelotshandle}
+                onClick={negativelotshandle}
               >
-                +
+                &minus;
               </span>
+
               <button
                 className="p-2 cursor-pointer bg-blue-700 text-white rounded-md px-6 text-xl hover:scale-95 "
                 onClick={handleLotsize}
@@ -135,9 +146,9 @@ function Wealth() {
               </button>
               <span
                 className="p-2 border cursor-pointer"
-                onClick={negativelotshandle}
+                onClick={positivelotshandle}
               >
-                -
+                &#43;
               </span>
             </div>
           </div>
