@@ -42,14 +42,14 @@ function Add_money({ handleclosetogglebutton }) {
         />
       </div>
       <div className="flex gap-3">
-        <span className=" cursor-pointer focus:scale-75" onClick={handle2000}>
+        <span className=" cursor-pointer hover:scale-75 transition duration-3000 ease-in-out select-none" onClick={handle2000}>
           + &#8377;2000{" "}
         </span>
-        <span className=" cursor-pointer focus:scale-75" onClick={handle4000}>
+        <span className=" cursor-pointer hover:scale-75 transition duration-3000 ease-in-out select-none" onClick={handle4000}>
           {" "}
           + &#8377;4000
         </span>
-        <span className=" cursor-pointer focus:scale-75" onClick={handle6000}>
+        <span className=" cursor-pointer hover:scale-75 transition duration-3000 ease-in-out select-none" onClick={handle6000}>
           + &#8377;6000
         </span>
       </div>

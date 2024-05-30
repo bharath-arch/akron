@@ -27,10 +27,10 @@ function Withdraw_money({ withdrawclosetogglebutton }) {
           className="  mb-2  w-[98%] px-1 py-1  border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500 bg-gray-300"
         />
       </div>
-      <div className="flex ">
-        <span className="mr-5">+ &#8377;2000</span>
-        <span className="mr-5">+ &#8377;4000</span>
-        <span className="mr-5">+ &#8377;6000</span>
+      <div className="flex  gap-3 ">
+        <span className="cursor-pointer hover:scale-75 transition duration-3000 ease-in-out select-none">+ &#8377;2000</span>
+        <span className="cursor-pointer hover:scale-75  transition duration-3000 ease-in-out select-none">+ &#8377;4000</span>
+        <span className="cursor-pointer hover:scale-75 transition duration-3000 ease-in-out select-none">+ &#8377;6000</span>
       </div>
       <div className="flex justify-center mt-2">
         <div className="w-[22rem] h-30 border-2 p-3 ">

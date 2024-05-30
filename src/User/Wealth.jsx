@@ -132,7 +132,7 @@ function Wealth() {
             </span>
             <div className="flex gap-2 text-center items-center">
               <span
-                className="p-2 border cursor-pointer"
+                className="p-2 border cursor-pointer select-none"
                 onClick={negativelotshandle}
               >
                 &minus;
@@ -145,7 +145,7 @@ function Wealth() {
                 Buy {lots} lots
               </button>
               <span
-                className="p-2 border cursor-pointer"
+                className="p-2 border cursor-pointer select-none"
                 onClick={positivelotshandle}
               >
                 &#43;
