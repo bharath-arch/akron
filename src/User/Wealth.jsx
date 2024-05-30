@@ -50,12 +50,14 @@ function Wealth() {
     const companyName = data[count].company_name;
 
     try {
-      const response = await axios.post("http://localhost:4000/LotsData/", {
+      const response = await axios.put("http://localhost:4000/LotsData/", {
         id,
         email,
         lots,
         companyName,
       });
+
+      console.log(response);
     } catch (err) {
       console.log(err);
     }
