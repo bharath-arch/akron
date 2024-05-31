@@ -1,11 +1,14 @@
 import mongoose from "mongoose";
 
+const money = mongoose.Schema(
+  {
+    money: { type: Number },
 
-const money = mongoose.Schema({
-    money: {type: Number},
-    id: {type: Number},
-},{
+    email: { type: String },
+  },
+  {
     timestamps: true,
-})
+  }
+);
 
-export const Money = mongoose.model("money",money)
+export const Money = mongoose.model("money", money);

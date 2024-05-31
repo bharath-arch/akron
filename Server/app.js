@@ -15,6 +15,7 @@ import companyDataRouter from './router/company_Data.js'
 import kycApprovalRouer from './router/kyc_approval.js'
 import userProfile from './router/userProfile.js'
 import LotsData from './router/LotsData.js'
+import addWithdrawmoney from './router/addWithdrawmoney.js'
 
 const app = express()
 
@@ -37,6 +38,7 @@ app.use('/company_approve',approveCompanyRouter)
 app.use('/admin_login',adminLogin)
 app.use('/company_data',companyDataRouter)
 app.use('/uploads',express.static('uploads'))
+app.use('/addWithdrawmoney',addWithdrawmoney)
 
 app.get('/test',(req,res)=>{
     res.json({message :"Server working!"})

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MdOutlineFiberNew } from "react-icons/md";
 import { GoAlertFill } from "react-icons/go";
 import { TbMoneybag } from "react-icons/tb";
@@ -6,10 +6,12 @@ import { BsFillPeopleFill } from "react-icons/bs";
 import { FaWallet } from "react-icons/fa";
 import Add_money from "../Wallet/Add_money";
 import Withdraw_money from "../Wallet/Withdraw_money.jsx";
+import axios from "axios";
 
 function Explore() {
   const [toggle, setActivetoggle] = useState(false);
   const [withdrawtoggle, withdrawsetActivetoggle] = useState(false);
+  const [walletdata, setwalletData] = useState();
   const handletogglebutton = () => {
     setActivetoggle(!toggle);
   };
@@ -22,6 +24,22 @@ function Explore() {
   const withdrawtogglebutton = () => {
     withdrawsetActivetoggle(!withdrawtoggle);
   };
+  const email = localStorage.getItem("email");
+  useEffect(() => {
+    const fetchWalletData = async () => {
+      const response = await axios.get(
+        "http://localhost:4000/addWithdrawmoney/",
+        {
+          params: { email },
+        }
+      );
+     
+      setwalletData(response.data.result);
+    };
+    fetchWalletData();
+  }, [walletdata]);
+
+  
   return (
     <div className="ml-6 mr-6">
       <section>
@@ -62,7 +80,7 @@ function Explore() {
 
             <div className="flex  pl-20 pr-20 items-center ">
               <span className="flex gap-2 font-semibold text-xl">
-                Funds <span className="text-blue-700">&#8377;0</span>{" "}
+                Funds <span className="text-blue-700">&#8377;{walletdata?.money ?  walletdata?.money : '0'}</span>{" "}
               </span>
               <div className="flex w-full justify-end">
                 <button
