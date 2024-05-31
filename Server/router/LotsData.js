@@ -5,38 +5,49 @@ const router = express.Router();
 
 router.put("/", async (req, res) => {
   try {
-    // const { lots, companyName } = req.body;
     const companyId = req.body.id;
     const email = req.body.email;
     const companyName = req.body.companyName;
     const lots = req.body.lots;
-    // console.log(companyId,companyName,email,lots);
+
     // Check if a document with the same companyId and email already exists
     const isMatch = await Userlots.findOne({
       companyId: companyId,
       email: email,
     });
-    // console.log(isMatch);
 
     if (isMatch) {
-      console.log("already exist");
-      const updateLots = await Userlots.findOneAndUpdate(
+      const newLots = isMatch.lots + lots;
+      await Userlots.findOneAndUpdate(
         { companyId: companyId, email: email },
-        { lots: lots }
+        { lots: newLots }
       );
-      return res.status(201).json({ message: "Updated" });
+      return res.status(200).json({ message: "Updated" });
     } else {
       console.log("Creating...");
-      const newLots = new Userlots({ companyId, companyName, email, lots });
-      await newLots.save();
+      const newLotEntry = new Userlots({ companyId, companyName, email, lots });
+      await newLotEntry.save();
       return res.status(201).json({
         message: "New lot entry created successfully",
-        result: newLots,
+        result: newLotEntry,
       });
     }
   } catch (error) {
-    // console.error(error, "---");
-    res.status(500).json({ message: "Server error" });
+    console.error(error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+});
+
+router.get("/getLotData", async (req, res) => {
+  try {
+    const email = req.query.email;
+    const isMatch = await Userlots.find({ email: email });
+    if (isMatch) {
+      return res.status(200).json({ message: "sucess", result: isMatch });
+    }
+  } catch (err) {
+    console.error(error);
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 });
 

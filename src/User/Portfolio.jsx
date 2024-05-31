@@ -1,80 +1,83 @@
-import React from "react";
-import { AiOutlineSearch } from "react-icons/ai";
-import { IoFilter } from "react-icons/io5";
-import { MdSort } from "react-icons/md";
-import axios from 'axios'
+import React, { useEffect, useRef, useState } from "react";
+import Search_filter from "../components/Search_filter";
+import MiniPortfolio from './components/miniPortfolio'
+
+import axios from "axios";
 
 function Portfolio() {
-  // const [data, setData] = useState([]);
-  // const [error, setError] = useState(null);
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         "http://localhost:4000/company_approve/dashboard_data"
-  //       );
-  //       console.log(response.data);
-  //       setData(response.data.result);
-  //     } catch (error) {
-  //       setError(error);
-  //       console.log(error);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
-  return (
-    <div className="">
-      <section className="search-bar">
-        <div className=" gap-2 w-full md:flex ">
-          <div className="flex gap-2 items-center my-3 ">
-            <input
-              type="text"
-              placeholder="Filter"
-              className="w-auto px-3  py-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
-            <IoFilter size={25} className="-ml-9 mt-1" />
-          </div>
-          <div className="flex gap-2 items-center my-3">
-            {" "}
-            <input
-              type="text"
-              placeholder="Sort By"
-              className="w-auto px-3 py-2 border border-gray-300  focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
-            <MdSort size={25} className=" -ml-9" />{" "}
-          </div>
+  const [data, setData] = useState();
 
-          <div className="flex gap-2 items-center">
-            <input
-              type="text"
-              placeholder="Search..."
-              className={`w-[30rem] px-3 py-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500`}
-            />
-            <AiOutlineSearch size={25} className="-ml-10 mt-1" />
-          </div>
-        </div>
+
+  const [error, setError] = useState(null);
+  const [toggle, setActivetoggle] = useState(false);
+  const email = localStorage.getItem("email");
+
+  
+  const handletogglebutton = ()=>{
+    setActivetoggle(true);
+  }
+
+  const handleclosetogglebutton =()=>{
+    setActivetoggle(false);
+  }
+  useEffect(() => {
+    const fetchLotData = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:4000/LotsData/getLotData",
+          {
+            params: { email },
+          }
+        );
+        setData(response.data.result);
+      } catch (error) {
+        setError(error);
+        console.log(error);
+      }
+    };
+    fetchLotData();
+  }, [email]);
+
+  console.log(data);
+
+  return (
+    <div className="container mx-auto p-4">
+
+      <section className="mb-6">
+        <Search_filter />
       </section>
+     
+
       <section className="mt-6">
-        <div className="flex items-center h-[120px] w-[95%] bg-gradient-to-br from-gray-300 to-gray-100">
-          <div className="p-3 ">
-            <div className="flex flex-col ">
-              <span className=" mt- font-semibold text-xl mb-2">Company1</span>
-              <span>Invested Amount : <span>10000 &#8377;</span></span>
-              <div className="mt-2">
-                <button class="px-3 py-2 text-xl rounded-md text-white w-[8rem] bg-red-700 font-arima hover:bg-red-800 transition-transform duration-300 ease-in-out transform hover:scale-95 ">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {data?.map((item, index) => (
+            <div key={index} className="bg-white p-4 rounded-lg shadow-md">
+              <span className="font-semibold text-xl mb-2 block truncate">
+                {item.companyName}
+              </span>
+              <span className="block mb-1 truncate">
+                Invested Amount: <span>{item.lots * 10000} &#8377;</span>
+              </span>
+              <span className="block mb-2 truncate">
+                Lot size: <span>{item.lots} </span>
+              </span>
+              <div className="mt-2 flex justify-between">
+                <button className="px-3 py-1 text-xl rounded-md text-white bg-red-700 font-arima hover:bg-red-800 transition-transform duration-300 ease-in-out transform hover:scale-95" onClick={handletogglebutton}>
                   Sell
                 </button>
-                <button class="px-3 ml-2 py-2 text-xl rounded-md text-white w-[8rem] bg-blue-700 font-arima hover:bg-blue-700 transition-transform duration-300 ease-in-out transform hover:scale-95 ">
+                <button className="px-3 py-1 text-xl rounded-md text-white bg-blue-700 font-arima hover:bg-blue-800 transition-transform duration-300 ease-in-out transform hover:scale-95">
                   View More
                 </button>
               </div>
             </div>
-          </div>
+          ))}
         </div>
       </section>
+      {error && <p className="text-red-500 mt-4">{error.message}</p>}
+      {toggle && (<MiniPortfolio handleclosetogglebutton ={handleclosetogglebutton}/>)}
       
     </div>
   );
 }
 
-export default Portfolio
+export default Portfolio;
