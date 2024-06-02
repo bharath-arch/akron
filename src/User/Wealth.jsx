@@ -3,6 +3,7 @@ import { GrNext, GrPrevious } from "react-icons/gr";
 import { MdPictureAsPdf } from "react-icons/md";
 import axios from "axios";
 import Graph from "../components/Graph";
+import toast, { Toaster } from "react-hot-toast";
 
 function Wealth() {
   const [data, setData] = useState([]);
@@ -56,18 +57,10 @@ function Wealth() {
         lots,
         companyName,
       });
-
-      const updateLots = await axios.put(
-        "http://localhost:4000/company_registration/updateLots",
-        {
-          id,
-          email,
-          lots,
-          companyName,
-        }
-      );
-
-      console.log(response);
+      setLots(1);
+      if (response.data.message !== "Updated") {
+        toast.error("insufficent Money!");
+      }
     } catch (err) {
       console.log(err);
     }
@@ -104,6 +97,7 @@ function Wealth() {
 
   return (
     <section className="">
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="md:flex md:justify-between hidden text-blue-800">
         <button className="flex items-center" onClick={handlePrevious}>
           <GrPrevious />

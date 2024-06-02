@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { AiOutlineSearch } from "react-icons/ai";
-import { IoFilter } from "react-icons/io5";
-import { MdSort } from "react-icons/md";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Search_filter from "../components/Search_filter";

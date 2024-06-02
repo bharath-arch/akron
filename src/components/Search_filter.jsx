@@ -5,7 +5,8 @@ import "./Search_filter.css";
 function SearchFilter() {
   const [selectedValue, setSelectedValue] = useState("");
   const [filter, setFilter] = useState(true);
-  const companySectors  = [
+  const companySectors = [
+    "Select",
     "Technology",
     "Healthcare",
     "Finance",
@@ -20,7 +21,7 @@ function SearchFilter() {
     "Construction",
     "Agriculture",
     "Utilities",
-    "Education"
+    "Education",
   ];
 
   // Create a ref for the input field
@@ -46,7 +47,7 @@ function SearchFilter() {
           value={selectedValue}
           onChange={handleSelectChange}
         >
-          {companySectors .map((item, i) => (
+          {companySectors.map((item, i) => (
             <option value={item} key={i}>
               {item}
             </option>
@@ -54,24 +55,23 @@ function SearchFilter() {
         </select>
       </div>
       <form className="">
-        <div className="relative">
+        <div className="flex items-center ">
           <input
             ref={inputRef}
             type="search"
             id="default-search"
-            className="block p-3 w-96 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none"
+            className="block p-3 w-96 text-sm text-gray-900 border border-gray-300 rounded-s-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none"
             placeholder="Search Mockups, Logos..."
             required
             onClick={handleInputClick}
             onBlur={handleInputBlur}
           />
-          {/* Use the filter state to toggle visibility of the filter icon */}
-          {filter && (
+          <button>
             <CiSearch
-              className="absolute right-2.5 top-2.5 text-gray-500 hover:text-gray-700 cursor-pointer transition-transform duration-300 ease-in-out transform hover:scale-110"
-              size={25}
+              className={`bg-blue-500 text-white  font-semibold rounded-e-lg border ring-blue-500 border-blue-500`}
+              size={46}
             />
-          )}
+          </button>
         </div>
       </form>
     </section>

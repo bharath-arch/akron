@@ -1,25 +1,27 @@
 import React, { useEffect, useRef, useState } from "react";
 import Search_filter from "../components/Search_filter";
-import MiniPortfolio from './components/miniPortfolio'
+import MiniPortfolio from "./components/miniPortfolio";
 
 import axios from "axios";
 
 function Portfolio() {
   const [data, setData] = useState();
-
-
+  const [selectedLots, setSelectedLots] = useState(null); // Add state for selected lots
   const [error, setError] = useState(null);
   const [toggle, setActivetoggle] = useState(false);
   const email = localStorage.getItem("email");
 
-  
-  const handletogglebutton = ()=>{
+  const handletogglebutton = (lots) => {
     setActivetoggle(true);
-  }
+    setSelectedLots(lots); // Set selected lots
+    console.log(lots);
+  };
 
-  const handleclosetogglebutton =()=>{
+  const handleclosetogglebutton = () => {
     setActivetoggle(false);
-  }
+    setSelectedLots(null); // Reset selected lots when closing the toggle
+  };
+
   useEffect(() => {
     const fetchLotData = async () => {
       try {
@@ -42,16 +44,15 @@ function Portfolio() {
 
   return (
     <div className="container mx-auto p-4">
-
       <section className="mb-6">
         <Search_filter />
       </section>
-     
 
       <section className="mt-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {data?.map((item, index) => (
             <div key={index} className="bg-white p-4 rounded-lg shadow-md">
+              {console.log(index)}
               <span className="font-semibold text-xl mb-2 block truncate">
                 {item.companyName}
               </span>
@@ -62,7 +63,10 @@ function Portfolio() {
                 Lot size: <span>{item.lots} </span>
               </span>
               <div className="mt-2 flex justify-between">
-                <button className="px-3 py-1 text-xl rounded-md text-white bg-red-700 font-arima hover:bg-red-800 transition-transform duration-300 ease-in-out transform hover:scale-95" onClick={handletogglebutton}>
+                <button
+                  className="px-3 py-1 text-xl rounded-md text-white bg-red-700 font-arima hover:bg-red-800 transition-transform duration-300 ease-in-out transform hover:scale-95"
+                  onClick={() => handletogglebutton(item.lots)} // Pass lots value to the function
+                >
                   Sell
                 </button>
                 <button className="px-3 py-1 text-xl rounded-md text-white bg-blue-700 font-arima hover:bg-blue-800 transition-transform duration-300 ease-in-out transform hover:scale-95">
@@ -72,10 +76,16 @@ function Portfolio() {
             </div>
           ))}
         </div>
+        <div className="flex justify-center">
+          {error && <p className="text-red-500 mt-4">{error.message}</p>}
+          {toggle && (
+            <MiniPortfolio
+              handleclosetogglebutton={handleclosetogglebutton}
+              selectedLots={selectedLots} // Pass selected lots to MiniPortfolio
+            />
+          )}
+        </div>
       </section>
-      {error && <p className="text-red-500 mt-4">{error.message}</p>}
-      {toggle && (<MiniPortfolio handleclosetogglebutton ={handleclosetogglebutton}/>)}
-      
     </div>
   );
 }
