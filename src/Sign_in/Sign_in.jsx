@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import setBodyColor from "../setBodyColor";
 import { FcGoogle } from "react-icons/fc";
 import axios from "axios";
@@ -15,7 +15,6 @@ function Sign_in() {
 
   const handleChangeEvent = (e) => {
     setFormdata({ ...formdata, [e.target.name]: e.target.value });
-   
   };
 
   function validateEmail(email) {
@@ -31,7 +30,10 @@ function Sign_in() {
       setInvalidEmail(false);
       try {
         setLoading(true);
-        const response = await axios.post("http://localhost:4000/register/", formdata);
+        const response = await axios.post(
+          "http://localhost:4000/register/",
+          formdata
+        );
         localStorage.setItem("email", response.data.email);
         localStorage.setItem("token", response.data.token);
         console.log(response.data.token);
@@ -42,7 +44,8 @@ function Sign_in() {
       }
     }
   };
-
+  const { usertype } = useParams();
+  console.log(usertype);
   return (
     <div className="m-4">
       <div className="">
@@ -56,7 +59,7 @@ function Sign_in() {
           <div className="mt-9 font-bold text-3xl">Sign In</div>
           <div className="mt-10 text-left ml-9 mr-6">
             <p className="text-[0.75rem] font-serif font-light mb-2">Email</p>
-            <form  onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
               <input
                 type="text"
                 name="email"
@@ -68,7 +71,9 @@ function Sign_in() {
                 placeholder="Enter your Email "
               />
               {invalidEmail && (
-                <p className="text-red-500 text-[0.75rem] ml-2 mt-1">Invalid email address</p>
+                <p className="text-red-500 text-[0.75rem] ml-2 mt-1">
+                  Invalid email address
+                </p>
               )}
               <p className="text-[0.75rem] mr-4 font-serif font-light mt-2">
                 By clicking Continue, you agree to our{" "}
@@ -76,10 +81,7 @@ function Sign_in() {
                 <span className="text-blue-800">Privacy Policy</span> Continue
               </p>
               <div className="flex justify-center items-center  ">
-                <button
-                 
-                  className="mt-3 text-center border-2 rounded-lg w-[22rem] p-2 font-arima bg-blue-600 text-white text-xl items-center hover:bg-blue-700 transition-transform duration-300 ease-in-out transform hover:scale-95 "
-                >
+                <button className="mt-3 text-center border-2 rounded-lg w-[22rem] p-2 font-arima bg-blue-600 text-white text-xl items-center hover:bg-blue-700 transition-transform duration-300 ease-in-out transform hover:scale-95 ">
                   {loading ? <p>loading...</p> : "Continue"}
                 </button>
               </div>
@@ -98,11 +100,10 @@ function Sign_in() {
             </div>
             <div className="text-center items-center text-[0.75rem] mr-4 font-serif font-light mt-2">
               <p>
-                <span> have an account ? </span>{" "}
-                <span className="text-blue-800">Login instead</span>
-              </p>
-              <p>
-                <span className="text-blue-800">Sign up as Founder</span>
+                <span> Don’t have an account ? </span>{" "}
+                <Link to={"/startup/founder_form"}>
+                  <span className="text-blue-800">Sign up as Founder</span>
+                </Link>
               </p>
             </div>
           </div>

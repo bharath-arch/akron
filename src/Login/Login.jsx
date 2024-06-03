@@ -45,6 +45,8 @@ function Sign_in() {
     }
   };
 
+  const founder = 'founder'
+  const user = 'user'
   return (
     <div className="m-4">
       <div className="">
@@ -100,15 +102,15 @@ function Sign_in() {
             <div className="text-center items-center text-[0.75rem] mr-4 font-serif font-light mt-2">
               <p>
                 <span>Don’t have an account ? </span>{" "}
-                <Link to="sign_in">
+                <Link to={`login_in/${user}`}>
                   {" "}
                   <span className="text-blue-800">Sign in instead</span>
                 </Link>
               </p>
               <p>
-                <Link to="sign_in">
+                <Link to={`login_in/${founder}`}>
                   {" "}
-                  <span className="text-blue-800">Signup as Founder</span>
+                  <span className="text-blue-800">Login as Founder</span>
                 </Link>
               </p>
             </div>

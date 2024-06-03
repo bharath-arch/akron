@@ -51,7 +51,7 @@ function App() {
         <Route path="/Login" element={<Login />} />
         <Route path="/verification" element={<Verification />} />
         <Route path="/sign_in" element={<Sign_in />} />
-        <Route path="/Login/sign_in" element={<Sign_in />} />
+        <Route path="/Login/login_in/:usertype" element={<Sign_in />} />
         <Route path="/user/profile" element={<Profile />} />
         <Route path="/user/kyc" element={<Kyc />}></Route>
         <Route path="/startup/founder_form" element={<Founder_form />}></Route>
