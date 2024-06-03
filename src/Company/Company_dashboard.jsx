@@ -1,6 +1,9 @@
 import React from "react";
+import setBodyColor from "../setBodyColor";
 
 function Company_dashboard() {
+
+  setBodyColor({ color: "white" });
   return (
     <div>
       {" "}

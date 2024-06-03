@@ -3,10 +3,10 @@ import multer from "multer";
 import { Registraion } from "../models/comany_registration.js";
 import fs from "fs";
 import path from "path";
-const router = express.Router();
 import { dirname } from "path";
 import { fileURLToPath } from "url";
-import mongoose from "mongoose";
+
+const router = express.Router();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

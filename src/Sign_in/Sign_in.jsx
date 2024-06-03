@@ -21,7 +21,8 @@ function Sign_in() {
     const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return pattern.test(email);
   }
-
+  const { usertype } = useParams();
+  console.log(usertype);
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formdata.email === "" || !validateEmail(formdata.email)) {
@@ -31,11 +32,12 @@ function Sign_in() {
       try {
         setLoading(true);
         const response = await axios.post(
-          "http://localhost:4000/register/userSignIn",
-          formdata
+          "http://localhost:4000/register/SignIn",
+          {...formdata , usertype}
         );
         localStorage.setItem("email", response.data.email);
         localStorage.setItem("token", response.data.token);
+        localStorage.setItem("usertype", usertype);
         // console.log(response.data.token);
         navigate("/verification");
         setLoading(false);
@@ -44,8 +46,7 @@ function Sign_in() {
       }
     }
   };
-  const { usertype } = useParams();
-  console.log(usertype);
+  
   return (
     <div className="m-4">
       <div className="">

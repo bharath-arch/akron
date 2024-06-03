@@ -16,7 +16,7 @@ function Verification() {
   });
 
   const otpInputs = useRef([]);
-
+const usertype = localStorage.getItem('usertype')
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -29,7 +29,15 @@ function Verification() {
       console.log(response_data.message); // Logging the response message
       
       if (response_data && response_data.message === 'user created') {
-        navigate("/user");
+        if(usertype === 'user'){
+          navigate("/user");
+          // localStorage.removeItem("usertype");
+        }
+        else{
+          navigate('/Company_dashboard')
+          // localStorage.removeItem("usertype");
+        }
+       
       } else {
         toast.error(response_data.message); // Displaying error message from response_data
       }
