@@ -31,12 +31,12 @@ function Sign_in() {
       try {
         setLoading(true);
         const response = await axios.post(
-          "http://localhost:4000/register/",
+          "http://localhost:4000/register/userSignIn",
           formdata
         );
         localStorage.setItem("email", response.data.email);
         localStorage.setItem("token", response.data.token);
-        console.log(response.data.token);
+        // console.log(response.data.token);
         navigate("/verification");
         setLoading(false);
       } catch (error) {
