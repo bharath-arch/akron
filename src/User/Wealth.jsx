@@ -59,7 +59,7 @@ function Wealth() {
       });
       setLots(1);
       if (response.data.message !== "Updated") {
-        toast.error("insufficent Money!");
+        toast.error("insufficient Money!");
       }
     } catch (err) {
       console.log(err);
@@ -96,7 +96,7 @@ function Wealth() {
   };
 
   return (
-    <section className="">
+    <section className="container mx-auto p-5">
       <Toaster position="top-center" reverseOrder={false} />
       <div className="md:flex md:justify-between hidden text-blue-800">
         <button className="flex items-center" onClick={handlePrevious}>
@@ -107,7 +107,15 @@ function Wealth() {
           Next <GrNext />
         </button>
       </div>
-      <div className="flex mr-2 md:mr-0 mb-3 items-center w-full justify-end">
+      <div className="flex mr-2 md:mr-0 mb-3 items-center w-full justify-between">
+        <span className="flex justify-end w-full text-blue-800 text-lg md:hidden">
+          Previous
+        </span>
+        <div className="left-7/12 md:hidden">
+          <span>
+            <GrPrevious />
+          </span>
+        </div>
         <span className="flex justify-end w-full text-blue-800 text-lg md:hidden">
           Next
         </span>

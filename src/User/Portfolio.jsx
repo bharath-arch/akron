@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Search_filter from "../components/Search_filter";
 import MiniPortfolio from "./components/miniPortfolio";
-
 import axios from "axios";
 
 function Portfolio() {
@@ -11,10 +10,10 @@ function Portfolio() {
   const [toggle, setActivetoggle] = useState(false);
   const email = localStorage.getItem("email");
 
-  const handletogglebutton = (lots) => {
+  const handletogglebutton = (lots, companyId, companyName) => {
     setActivetoggle(true);
-    setSelectedLots(lots); // Set selected lots
-    console.log(lots);
+    setSelectedLots({ lots, companyId, companyName }); // Set selected lots
+    console.log(lots, companyId, companyName);
   };
 
   const handleclosetogglebutton = () => {
@@ -65,7 +64,13 @@ function Portfolio() {
               <div className="mt-2 flex justify-between">
                 <button
                   className="px-3 py-1 text-xl rounded-md text-white bg-red-700 font-arima hover:bg-red-800 transition-transform duration-300 ease-in-out transform hover:scale-95"
-                  onClick={() => handletogglebutton(item.lots)} // Pass lots value to the function
+                  onClick={() =>
+                    handletogglebutton(
+                      item.lots,
+                      item.companyId,
+                      item.companyName
+                    )
+                  } // Pass lots value to the function
                 >
                   Sell
                 </button>

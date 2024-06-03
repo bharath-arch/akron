@@ -1,18 +1,52 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import setBodyColor from "../setBodyColor";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
-// import Helmet from 'react-helmet';
-function Login() {
+import axios from "axios";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
+
+function Sign_in() {
   setBodyColor({ color: "lightgray" });
-  const [formdata, setFormdata] = useState({ email: "", });
-  const handlechange = (e) => {
-  setFormdata({ ...formdata, [e.target.name]: e.target.value });
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const [formdata, setFormdata] = useState({ email: "" });
+  const [invalidEmail, setInvalidEmail] = useState(false);
+
+  const handleChangeEvent = (e) => {
+    setFormdata({ ...formdata, [e.target.name]: e.target.value });
   };
-  console.log(formdata);
+
+  function validateEmail(email) {
+    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return pattern.test(email);
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (formdata.email === "" || !validateEmail(formdata.email)) {
+      setInvalidEmail(true);
+    } else {
+      setInvalidEmail(false);
+      try {
+        setLoading(true);
+        const response = await axios.post(
+          "http://localhost:4000/register/",
+          formdata
+        );
+        localStorage.setItem("email", response.data.email);
+        localStorage.setItem("token", response.data.token);
+        console.log(response.data.token);
+        navigate("/verification");
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
   return (
     <div className="m-4">
-      {/* <Helmet bodyAttributes={{style: 'background-color : #fff'}}/> */}
       <div className="">
         <span className="font-bold text-4xl bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">
           Akron
@@ -21,42 +55,35 @@ function Login() {
 
       <div className="flex justify-center text-center items-center mt-[2rem]">
         <div className="bg-slate-50 h-[32rem] w-[25rem] rounded-[39px] ">
-          <div className="mt-9 font-bold text-3xl">Get Started</div>
+          <div className="mt-9 font-bold text-3xl">Get Started </div>
           <div className="mt-10 text-left ml-9 mr-6">
-            <p className="text-[0.75rem] font-serif font-light mb-2">
-              Email or Mobile number
-            </p>
-            <form action="#">
+            <p className="text-[0.75rem] font-serif font-light mb-2">Email</p>
+            <form onSubmit={handleSubmit}>
               <input
+                type="text"
                 name="email"
-                required
                 value={formdata.email}
-                placeholder="Enter email"
-                type="text"
-                onChange={handlechange}
-                className=" border-2 rounded-lg w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                onChange={handleChangeEvent}
+                className={`border-2 rounded-lg w-[100%] p-2 border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500 ${
+                  invalidEmail && "border-red-500"
+                }`}
+                placeholder="Enter your Email "
               />
-              {/* <input
-                name="password"
-                value={formdata.email}
-                placeholder="Enter password"
-                type="text"
-                onChange={handlechange}
-                className=" border-2 rounded-lg w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
-              /> */}
+              {invalidEmail && (
+                <p className="text-red-500 text-[0.75rem] ml-2 mt-1">
+                  Invalid email address
+                </p>
+              )}
               <p className="text-[0.75rem] mr-4 font-serif font-light mt-2">
                 By clicking Continue, you agree to our{" "}
                 <span className="text-blue-800">Terms & Conditions</span> and{" "}
                 <span className="text-blue-800">Privacy Policy</span> Continue
               </p>
-              <Link to={"/verification"}>
-                {" "}
-                <div className="flex justify-center items-center  ">
-                  <button className="mt-3 text-center border-2 rounded-lg w-[100%] p-2 font-arima bg-blue-600 text-white text-xl items-center hover:bg-blue-700 transition-transform duration-300 ease-in-out transform hover:scale-95 ">
-                    Continue
-                  </button>
-                </div>
-              </Link>
+              <div className="flex justify-center items-center  ">
+                <button className="mt-3 text-center border-2 rounded-lg w-[22rem] p-2 font-arima bg-blue-600 text-white text-xl items-center hover:bg-blue-700 transition-transform duration-300 ease-in-out transform hover:scale-95 ">
+                  {loading ? <p>loading...</p> : "Continue"}
+                </button>
+              </div>
             </form>
 
             <div className="flex py-5 items-center">
@@ -70,12 +97,12 @@ function Login() {
               </span>
               <span className="mr-16 font-arima">Continue with Google</span>
             </div>
-            <div className="text-center items-center text-[0.75rem] mr-4 font-serif font-light  mt-2">
+            <div className="text-center items-center text-[0.75rem] mr-4 font-serif font-light mt-2">
               <p>
                 <span>Don’t have an account ? </span>{" "}
                 <Link to="sign_in">
                   {" "}
-                  <span className="text-blue-800">Sign up instead</span>
+                  <span className="text-blue-800">Sign in instead</span>
                 </Link>
               </p>
               <p>
@@ -92,4 +119,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Sign_in;

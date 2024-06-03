@@ -12,13 +12,13 @@ function Layout_user() {
   setBodyColor({ color: "white" });
   const [selectLink, setSelectLink] = useState();
   const [activesidebar, setActivesidebar] = useState(true);
-  const [data,setData] = useState()
-  
-  console.log(path.pathname.split('/')[2])
+  const [data, setData] = useState();
+
+  console.log(path.pathname.split("/")[2]);
   if (path.pathname) {
     useEffect(() => {
-      setSelectLink(path.pathname.split('/')[2]);
-    }, [selectLink , path.pathname]);
+      setSelectLink(path.pathname.split("/")[2]);
+    }, [selectLink, path.pathname]);
   }
 
   useEffect(() => {
@@ -33,7 +33,6 @@ function Layout_user() {
         );
         setData(setfilterData);
       } catch (error) {
-       
         console.log(error);
       }
     };
@@ -51,8 +50,9 @@ function Layout_user() {
           <ul className=" font-semibold text-xl">
             <li
               onClick={() => setSelectLink("explore")}
-              
-              className={`${selectLink === "explore" ? "text-blue-900 p-2" : "p-2"}`}
+              className={`${
+                selectLink === "explore" ? "text-blue-900 p-2" : "p-2"
+              }`}
             >
               {/* {selectLink} */}
               <Link to={"explore"}>Explore</Link>
@@ -147,12 +147,13 @@ function Layout_user() {
               {localStorage.getItem("email").split("@gmail.com")}
             </span>
           )}
-          <div className="h-10 w-10 border-1 rounded-full bg-red-600 items-center text-center">
-            <div className="relative">
-              <span className="absolute top-5 left-2 right-5">
-                <User_popup />
-              </span>
-            </div>
+          <div className="flex items-center relative">
+            <span className="rounded-full text-2xl p-2 bg-orange-600 flex items-center text-center">
+              {localStorage.getItem("email").split("")[0].toUpperCase()}
+            </span>
+            
+            <User_popup />
+          
           </div>
         </div>
         <div

@@ -5,7 +5,9 @@ import Search_filter from "../components/Search_filter";
 
 function Id() {
   const [data, setData] = useState([]);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -24,42 +26,35 @@ function Id() {
     };
     fetchData();
   }, []);
+
   console.log(data);
+
   return (
-    <>
-      <section>
+    <div className="container mx-auto p-4 sm:p-6 lg:p-8">
+      <section className="mb-6">
         <Search_filter />
       </section>
+
+      {error && <p className="text-red-500">{error.message}</p>}
+
       {data && (
-        <section className="flex flex-wrap gap-5 mt-9 w-full ">
-          {data.map((data, index) => (
+        <section className="flex flex-wrap gap-5 mt-9 w-full">
+          {data.map((item, index) => (
             <div
               key={index}
-              className={` sm:mb-0 sm:mr-0 
-                      bg-gray-200 p-5  mr-4   shadow-md rounded-md  cursor-pointer`}
+              className="bg-gradient-to-br from-gray-300 to-gray-100  p-5 shadow-md rounded-md cursor-pointer transform hover:scale-105 transition-transform duration-300"
+              onClick={() => navigate("/user/wealth")}
             >
-              {/* <span>{data._id}</span> */}
-
-              <span
-                className="flex justify-center text-center flex-col"
-                onClick={() => navigate("/user/wealth")}
-              >
-                <b>{data.company_name}</b>
-                {data.sector}
-              </span>
+              <div className="text-center">
+                <span className="block font-semibold text-2xl">{item.company_name}</span>
+                <span className="block text-lg text-gray-700">{item.sector}</span>
+              </div>
             </div>
           ))}
         </section>
       )}
-    </>
+    </div>
   );
 }
 
 export default Id;
-
-
-
-
-
-
-

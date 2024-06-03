@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { FaRegEdit } from "react-icons/fa";
 import setBodyColor from "../setBodyColor";
-import "./style.css";
 import InputBox from "./components/InputBox";
 
 function Profile() {
@@ -92,7 +91,7 @@ function Profile() {
             <img
               src={`http://localhost:4000/uploads/${data?.avatar}`}
               alt="photo"
-              className=""
+              className="w-36 h-28"
             />
           </div>
           <div className="h-[30rem] w-[30rem] flex flex-col gap-3 pl-10">
