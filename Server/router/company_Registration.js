@@ -76,12 +76,13 @@ router.post("/register", cpUpload, async (req, res) => {
     console.log(existingUser);
 
     let lots = req.body.amount_expected_to_raise * 1000;
+    let lotsOriginal =  req.body.amount_expected_to_raise * 1000;
 
     if (existingUser) {
       console.log("User already exists");
       return res.json({ message: "User already exists" });
     } else {
-      const newUser = new Registraion({ ...req.body, lots });
+      const newUser = new Registraion({ ...req.body, lots , lotsOriginal });
 
       // Check if any files were uploaded
       if (req.files) {

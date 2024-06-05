@@ -17,6 +17,7 @@ import userProfile from './router/userProfile.js'
 import LotsData from './router/LotsData.js'
 import addWithdrawmoney from './router/addWithdrawmoney.js'
 import squareData from './router/square.js'
+import companyDashbord from './router/companyDashbord.js'
 
 const app = express()
 
@@ -27,7 +28,7 @@ app.use(express.json())
 
 
 app.use(express.static('uploads'))
-
+app.use('/companyDashbord',companyDashbord)
 app.use('/LotsData',LotsData)
 app.use('/profile',userProfile)
 app.use('/kyc_approval',kycApprovalRouer)
@@ -41,6 +42,7 @@ app.use('/company_data',companyDataRouter)
 app.use('/uploads',express.static('uploads'))
 app.use('/addWithdrawmoney',addWithdrawmoney)
 app.use('/square',squareData)
+
 
 app.get('/test',(req,res)=>{
     res.json({message :"Server working!"})

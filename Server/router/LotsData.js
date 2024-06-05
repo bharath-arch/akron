@@ -1,6 +1,7 @@
 import express from "express";
 import { Userlots } from "../models/lotsUser.js";
 import { Money } from "../models/wallet.js";
+import { Registraion } from "../models/comany_registration.js";
 
 const router = express.Router();
 
@@ -17,7 +18,13 @@ router.put("/", async (req, res) => {
       email: email,
     });
     const moneyData = await Money.findOne({ email: email });
-    console.log(moneyData.money);
+    const companylotsData = await Registraion.findOne({
+      email: email,
+      _id: companyId,
+    });
+    console.log(companylotsData.lots);
+    const newlotsEntryCD = companylotsData.lots - lots;
+    console.log(newlotsEntryCD);
 
     if (moneyData.money >= price) {
       let newMoney = moneyData.money - price;
@@ -28,6 +35,10 @@ router.put("/", async (req, res) => {
           { lots: newLots }
         );
         await Money.findOneAndUpdate({ email: email }, { money: newMoney });
+        await Registraion.findOneAndUpdate(
+          { email: email, _id: companyId },
+          { lots: newlotsEntryCD }
+        );
         return res.status(200).json({ message: "Updated" });
       } else {
         console.log("Creating...");
@@ -43,22 +54,23 @@ router.put("/", async (req, res) => {
           });
           await newLotEntry.save();
           await Money.findOneAndUpdate({ email: email }, { money: newMoney });
+          await Registraion.findOneAndUpdate(
+            { email: email, _id: companyId },
+            { lots: newlotsEntryCD }
+          );
         } else {
           return res.status(201).json({
             message: "insufficent Money",
-           
           });
         }
 
         return res.status(201).json({
           message: "New lot entry created successfully",
-          result: newLotEntry,
         });
       }
     } else {
       return res.status(201).json({
         message: "insufficent Money",
-       
       });
     }
   } catch (error) {

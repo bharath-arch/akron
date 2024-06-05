@@ -26,6 +26,7 @@ const companyRegistraion = new mongoose.Schema(
     excel: { type: String },
     status: { type: Boolean, default: null },
     lots: { type: Number, default: null },
+    lotsOriginal: { type: Number, default: null },
   },
   {
     timestamps: true,
