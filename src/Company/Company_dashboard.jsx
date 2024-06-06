@@ -4,8 +4,6 @@ import axios from "axios";
 import PiChartLocal from "../components/PiChartLocal.jsx";
 import { useNavigate } from "react-router-dom";
 import { RiCustomerService2Line } from "react-icons/ri";
-import { handleLogout } from '../logOut.js';
-
 
 function Company_dashboard() {
   const navigate = useNavigate();
@@ -31,7 +29,10 @@ function Company_dashboard() {
   }, []);
 
   const handleClick = () => {
-    handleLogout(); // Call the function when clicked
+    localStorage.removeItem("email");
+    localStorage.removeItem("usertype");
+    localStorage.removeItem("token");
+    navigate("/Login");
   };
 
   if (!email) {

@@ -2,6 +2,7 @@ import express from "express";
 import { Userlots } from "../models/lotsUser.js";
 import { Money } from "../models/wallet.js";
 import { Registraion } from "../models/comany_registration.js";
+import { profileSquare } from "../models/square.js";
 
 const router = express.Router();
 
@@ -11,7 +12,7 @@ router.put("/", async (req, res) => {
     const email = req.body.email;
     const companyName = req.body.companyName;
     const lots = req.body.lots;
-    const price = lots * 10000;
+    const price = req.body.price;
     // Check if a document with the same companyId and email already exists
     const isMatch = await Userlots.findOne({
       companyId: companyId,
@@ -29,10 +30,11 @@ router.put("/", async (req, res) => {
     if (moneyData.money >= price) {
       let newMoney = moneyData.money - price;
       if (isMatch) {
+        const newPrice = isMatch.amountInvested + price;
         const newLots = isMatch.lots + lots;
         await Userlots.findOneAndUpdate(
           { companyId: companyId, email: email },
-          { lots: newLots }
+          { lots: newLots, amountInvested: newPrice }
         );
         await Money.findOneAndUpdate({ email: email }, { money: newMoney });
         await Registraion.findOneAndUpdate(
@@ -51,6 +53,7 @@ router.put("/", async (req, res) => {
             companyName,
             email,
             lots,
+            price,
           });
           await newLotEntry.save();
           await Money.findOneAndUpdate({ email: email }, { money: newMoney });
@@ -88,8 +91,50 @@ router.get("/getLotData", async (req, res) => {
     }
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: "Server error", error: error.message });
+    res.status(500).json({ message: "Server error", error: err.message });
   }
+});
+
+router.put("/squareLots", async (req, res) => {
+  try {
+    const companyId = req.body.companyId;
+    const price = req.body.amount;
+    const lots = req.body.lots;
+    const companyName = req.body.companyName;
+    const sellEmail = req.body.sellEmail;
+    const email = req.body.email;
+
+    const sellEmailMatch = await Userlots.findOne({
+      email: sellEmail,
+      companyId: companyId,
+    });
+    const isMatch = await Userlots.findOne({
+      companyId: companyId,
+      email: email,
+    });
+    const moneyData = await Money.findOne({ email: email });
+    const sellUserMoney = await Money.findOneAndUpdate({ email: sellEmail });
+
+    if(moneyData.money >= price){
+      let newMoney = moneyData.money - price;
+      if(isMatch){
+        // const newPrice = isMatch.amountInvested + price;
+        const newLots = isMatch.lots + lots;
+       await Userlots.findOneAndUpdate(
+          { companyId: companyId, email: email },
+          { lots: newLots, amountInvested: newMoney }
+        );
+        await Money.findOneAndUpdate({ email: email }, { money: newMoney });
+      }
+    }
+    // return res.json()
+
+  }
+  catch(err){
+    console.log(err)
+  }
+    
+   
 });
 
 export default router;

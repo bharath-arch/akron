@@ -49,6 +49,7 @@ function Wealth() {
     const id = data[count]?._id;
     const email = localStorage.getItem("email");
     const companyName = data[count].company_name;
+    const price = lots * 10000;
 
     try {
       const response = await axios.put("http://localhost:4000/LotsData/", {
@@ -56,6 +57,7 @@ function Wealth() {
         email,
         lots,
         companyName,
+        price,
       });
       setLots(1);
       if (response.data.message !== "Updated") {

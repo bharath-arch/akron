@@ -56,7 +56,7 @@ function Portfolio() {
                 {item.companyName}
               </span>
               <span className="block mb-1 truncate">
-                Invested Amount: <span>{item.lots * 10000} &#8377;</span>
+                Invested Amount: <span>{item.amountInvested} &#8377;</span>
               </span>
               <span className="block mb-2 truncate">
                 Lot size: <span>{item.lots} </span>
