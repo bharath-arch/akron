@@ -50,6 +50,7 @@ function Wealth() {
     const email = localStorage.getItem("email");
     const companyName = data[count].company_name;
     const price = lots * 10000;
+    // console.log(price)
 
     try {
       const response = await axios.put("http://localhost:4000/LotsData/", {
