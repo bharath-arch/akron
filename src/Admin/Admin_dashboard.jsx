@@ -42,6 +42,7 @@ function Admin_dashboard() {
             </span>
           </div>
           <div className=" flex gap-5 items-center text-center ">
+          <Link to={'/withdrawInvestment'}><span className="font-semibold text-xl text-red-500">Withdraw requests</span></Link>
             <Link to={'/manage_user'}><span className="font-semibold text-xl">Manage User’s</span></Link>
             <span className="text-xl">Logout</span>
           </div>

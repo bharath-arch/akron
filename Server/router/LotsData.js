@@ -136,10 +136,13 @@ router.put("/squareLots", async (req, res) => {
           companyId: companyId,
           email: sellEmail,
         });
-        await Userlots.findOneAndUpdate(
-          { companyId: companyId, email: sellEmail },
-          { lots: sellerLots }
-        );
+        const sellEmailUpdatedamountInvested =
+        sellEmailMatch.amountInvested - lots * 10000;
+      console.log(sellEmailUpdatedamountInvested);
+      await Userlots.findOneAndUpdate(
+        { companyId: companyId, email: sellEmail },
+        { lots: sellerLots, amountInvested: sellEmailUpdatedamountInvested }
+      );
         await Money.findOneAndUpdate(
           { email: sellEmail },
           { money: newSellerMoney }
@@ -167,6 +170,7 @@ router.put("/squareLots", async (req, res) => {
           //update sellUser Data
           const sellEmailUpdatedamountInvested =
             sellEmailMatch.amountInvested - lots * 10000;
+          console.log(sellEmailUpdatedamountInvested);
           await Userlots.findOneAndUpdate(
             { companyId: companyId, email: sellEmail },
             { lots: sellerLots, amountInvested: sellEmailUpdatedamountInvested }

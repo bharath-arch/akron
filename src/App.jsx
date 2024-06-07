@@ -30,6 +30,7 @@ import Application_data from "./Admin/Application_data";
 import Admin_login from "./Admin/Admin_login";
 import Manage_user from './Admin/Manage_user';
 import Kyc_approval from './Admin/Kyc_approval';
+import WithdrawInvestmentAmount from "./Admin/WithdrawInvestmentAmount";
 
 
 function App() {
@@ -60,6 +61,7 @@ function App() {
         <Route path="/admin_dashboard" element={<Admin_dashboard />}></Route>
         <Route path="/Admin_login"  element={<Admin_login />}></Route>
         <Route path="/manage_user"  element={<Manage_user/>}></Route>
+        <Route path="/withdrawInvestment"  element={<WithdrawInvestmentAmount/>}></Route>
         {/* <Route path="/Application_data/admin_dashboard" element={<Admin_dashboard />}></Route> */}
         <Route path="/manage_user/kyc/:id" element={<Kyc_approval/>}></Route>
         <Route path="/:id" element={<Application_data />}> </Route>

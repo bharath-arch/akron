@@ -48,39 +48,46 @@ function Portfolio() {
       </section>
 
       <section className="mt-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {data?.map((item, index) => (
-            <div key={index} className="bg-white p-4 rounded-lg shadow-md">
-              {console.log(index)}
-              <span className="font-semibold text-xl mb-2 block truncate">
-                {item.companyName}
-              </span>
-              <span className="block mb-1 truncate">
-                Invested Amount: <span>{item.amountInvested} &#8377;</span>
-              </span>
-              <span className="block mb-2 truncate">
-                Lot size: <span>{item.lots} </span>
-              </span>
-              <div className="mt-2 flex justify-between">
-                <button
-                  className="px-3 py-1 text-xl rounded-md text-white bg-red-700 font-arima hover:bg-red-800 transition-transform duration-300 ease-in-out transform hover:scale-95"
-                  onClick={() =>
-                    handletogglebutton(
-                      item.lots,
-                      item.companyId,
-                      item.companyName
-                    )
-                  } // Pass lots value to the function
-                >
-                  Sell
-                </button>
-                <button className="px-3 py-1 text-xl rounded-md text-white bg-blue-700 font-arima hover:bg-blue-800 transition-transform duration-300 ease-in-out transform hover:scale-95">
-                  View More
-                </button>
+        {data && data.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {data?.map((item, index) => (
+              <div key={index} className="bg-white p-4 rounded-lg shadow-md">
+                {console.log(index)}
+                <span className="font-semibold text-xl mb-2 block truncate">
+                  {item.companyName}
+                </span>
+                <span className="block mb-1 truncate">
+                  Invested Amount: <span>{item.amountInvested} &#8377;</span>
+                </span>
+                <span className="block mb-2 truncate">
+                  Lot size: <span>{item.lots} </span>
+                </span>
+                <div className="mt-2 flex justify-between">
+                  <button
+                    className="px-3 py-1 text-xl rounded-md text-white bg-red-700 font-arima hover:bg-red-800 transition-transform duration-300 ease-in-out transform hover:scale-95"
+                    onClick={() =>
+                      handletogglebutton(
+                        item.lots,
+                        item.companyId,
+                        item.companyName
+                      )
+                    } // Pass lots value to the function
+                  >
+                    Sell
+                  </button>
+                  <button className="px-3 py-1 text-xl rounded-md text-white bg-blue-700 font-arima hover:bg-blue-800 transition-transform duration-300 ease-in-out transform hover:scale-95">
+                    View More
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <>
+            {" "}
+            <p className="text-gray-500 text-center">No data available</p>
+          </>
+        )}
         <div className="flex justify-center">
           {error && <p className="text-red-500 mt-4">{error.message}</p>}
           {toggle && (

@@ -130,6 +130,7 @@ function Wealth() {
       </div>
 
       <div className="w-full h-full bg-gradient-to-br pt-5 pr-8 pl-8">
+        <p className="font-semibold ">Investment Amount - {lots * 10000}</p>
         <div className="flex flex-col">
           <div className="flex justify-between">
             <span className="font-bold text-3xl">
