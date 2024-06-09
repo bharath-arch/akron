@@ -5,8 +5,8 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   const email = req.query.email;
-  console.log(email);
-  console.log("CompanyDashboard");
+  // console.log(email);
+  // console.log("CompanyDashboard");
   try {
     const company = await Registraion.findOne({ email: email });
     if (company) {

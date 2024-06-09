@@ -9,6 +9,8 @@ function Company_dashboard() {
   const navigate = useNavigate();
   setBodyColor({ color: "white" });
   const email = localStorage.getItem("email");
+  const [error, setError] = useState(null);
+  const [statusInfo, setStatus] = useState(null);
 
   const [data, setData] = useState(null); // Initialize data state with null
   useEffect(() => {
@@ -20,13 +22,19 @@ function Company_dashboard() {
             params: { email },
           }
         );
+        const checkRequestStatus = await axios.get(
+          "http://localhost:4000/companyWithdrawMoney/status",
+          { params: { email } }
+        );
+        setStatus(checkRequestStatus.data.result);
         setData(response.data.result);
       } catch (error) {
+        setError(error);
         console.error("Error fetching data:", error);
       }
     };
     callCompany();
-  }, []);
+  }, [data, statusInfo]);
 
   const handleClick = () => {
     localStorage.removeItem("email");
@@ -41,17 +49,32 @@ function Company_dashboard() {
     }, [email]);
   }
   // Wait until data is fetched and available
+
   if (!data) {
     return <div>Loading...</div>;
   }
 
-  const handleWithdraw = () => {
-    console.log("handleWithdraw");
+  const handleWithdraw = async (amount, companyId) => {
+    try {
+      const withdrawAmount = amount * 10000;
+      const email = localStorage.getItem("email");
+      const response = await axios.put(
+        "http://localhost:4000/companyWithdrawMoney",
+        { companyId, email, amount: withdrawAmount }
+      );
+      setData(response.data.result);
+    } catch (error) {
+      setError(error);
+      console.log(error);
+    }
   };
-
-  let raiserAmount = data?.lotsOriginal - data?.lots;
-  let toCrcal = data?.amount_expected_to_raise * 10000000;
+  // let raiserAmount = 10;
+  // let toCrcal = 10;
+  // let totalPercent = (raiserAmount / toCrcal) * 100;
+  let raiserAmount = (data?.lotsOriginal - data?.lots) * 10000;
+  let toCrcal = data?.amount_expected_to_raise * 10000000; // expected amount
   let totalPercent = (raiserAmount / toCrcal) * 100;
+
   let rawgrapData = [
     { name: "Total Amount", value: toCrcal },
     { name: "Raised Amount", value: raiserAmount },
@@ -87,7 +110,7 @@ function Company_dashboard() {
           </div>
         </div>
       </div>
-      {data.status === null ? (
+      {data?.status === null ? (
         <section className="flex gap-2 flex-col pt-10 pl-16">
           <span className="text-3xl font-semibold">Dashboard</span>
           <span className="text-xl ">
@@ -96,7 +119,7 @@ function Company_dashboard() {
             will notify you soon.
           </span>
         </section>
-      ) : data.status === true ? (
+      ) : data?.status === true ? (
         <>
           <section className="flex gap-2 flex-col pt-10 pl-16">
             <span className="text-3xl font-semibold">Dashboard</span>
@@ -106,7 +129,13 @@ function Company_dashboard() {
             </span>
           </section>
           <div className="flex gap-2 flex-col pt-10 pl-16">
-            <span>Raised Amount : {raiserAmount * 10000}</span>
+            <span>
+              Raised Amount :{" "}
+              {raiserAmount.toLocaleString("en-IN", {
+                style: "currency",
+                currency: "INR",
+              })}
+            </span>
             <span>Achived : {totalPercent} %</span>
           </div>
           <div className="">
@@ -130,15 +159,46 @@ function Company_dashboard() {
         {" "}
         {toCrcal === raiserAmount ? (
           <>
-            <button
-              className="px-3 ml-2 py-2 text-xl rounded-md text-white w-[8rem] bg-red-700 font-arima hover:bg-red-800 transition-transform duration-300 ease-in-out transform hover:scale-95"
-              onClick={handleWithdraw}
-            >
-              Withdraw
-            </button>
+            {statusInfo?.status === "null" ? (
+              <>
+                {" "}
+                <button
+                  className="px-3 ml-2 py-2 text-xl rounded-md text-white w-[8rem] bg-red-700 font-arima hover:bg-red-800 transition-transform duration-300 ease-in-out transform hover:scale-95"
+                  onClick={() =>
+                    handleWithdraw(data?.amount_expected_to_raise, data?._id)
+                  }
+                >
+                  Withdraw
+                </button>
+              </>
+            ) : statusInfo?.status === "pending" ? (
+              <p className="px-3 ml-2 py-2 text-xl text-yellow-700 font-arima">
+                Request Pending...
+              </p>
+            ) : statusInfo?.status === "true" ? (
+              <p className="px-3 ml-2 py-2 text-xl text-green-700 font-arima">
+                Request Accepted
+              </p>
+            ) : statusInfo?.status === "false" ? (
+              <p className="px-3 ml-2 py-2 text-xl text-red-700 font-arima">
+                Request Rejected
+              </p>
+            ) : (
+              <>
+                {" "}
+                <button
+                  className="px-3 ml-2 py-2 text-xl rounded-md text-white w-[8rem] bg-red-700 font-arima hover:bg-red-800 transition-transform duration-300 ease-in-out transform hover:scale-95"
+                  onClick={() =>
+                    handleWithdraw(data?.amount_expected_to_raise, data?._id)
+                  }
+                >
+                  Withdraw
+                </button>
+              </>
+            )}
           </>
         ) : (
-          <p className="text-red-600">Cannot Withdraw untill Target achived</p>
+          <p className="text-red-600">Cannot Withdraw until Target achieved</p>
         )}
       </section>
     </div>

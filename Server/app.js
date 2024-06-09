@@ -17,6 +17,7 @@ import LotsData from "./router/LotsData.js";
 import addWithdrawmoney from "./router/addWithdrawmoney.js";
 import squareData from "./router/square.js";
 import companyDashbord from "./router/companyDashbord.js";
+import companyWithdraw from "./router/companyWithdraw.js"
 import cors from "cors";
 
 const app = express();
@@ -27,6 +28,7 @@ dotenv.config();
 app.use(express.json());
 
 app.use(express.static("uploads"));
+app.use('/companyWithdrawMoney',companyWithdraw)
 app.use("/companyDashbord", companyDashbord);
 app.use("/LotsData", LotsData);
 app.use("/profile", userProfile);
