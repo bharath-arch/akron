@@ -25,7 +25,7 @@ function Admin_dashboard() {
       }
     };
     fetchData();
-  }, []);
+  }, [data]);
 
   useEffect(() => {
     // Use navigate within useEffect

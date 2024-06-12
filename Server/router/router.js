@@ -80,7 +80,7 @@ router.post("/newUser", async (req, res) => {
     if (!req.body.email) {
       return res.status(400).json({ message: "mail is required" });
     }
-    return res.status(409).json({ message: "mail is existing" }).end();
+    return res.status(201).json({ message: "mail is existing" }).end();
   } else {
     const otp = generateOTP(6);
     if (!req.body.email) {

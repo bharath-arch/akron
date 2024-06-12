@@ -5,6 +5,8 @@ import { FcGoogle } from "react-icons/fc";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 function Sign_in() {
   setBodyColor({ color: "lightgray" });
@@ -34,21 +36,52 @@ function Sign_in() {
           "http://localhost:4000/register/newUser",
           formdata
         );
+
+        console.log(response.data.message);
         localStorage.setItem("email", response.data.email);
         localStorage.setItem("token", response.data.token);
         console.log(response.data.token);
-        navigate("/verification");
-        setLoading(false);
+        if (response.data.message == "mail is existing") {
+          toast("user found please login", {
+            duration: 4000,
+            position: "top-center",
+
+            // Styling
+            style: {},
+            className: "",
+
+            // Custom Icon
+            icon: "👏",
+
+            // Change colors of success/error/loading icon
+            iconTheme: {
+              primary: "#000",
+              secondary: "#fff",
+            },
+
+            // Aria
+            ariaProps: {
+              role: "status",
+              "aria-live": "polite",
+            },
+          });
+          setLoading(false);
+        } else {
+          navigate("/verification");
+          setLoading(false);
+        }
       } catch (error) {
         console.error(error);
       }
     }
   };
 
-  const founder = 'founder'
-  const user = 'user'
+  const founder = "founder";
+  const user = "user";
   return (
     <div className="m-4">
+      <Toaster position="top-center" reverseOrder={false} />
+
       <div className="">
         <span className="font-bold text-4xl bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">
           Akron

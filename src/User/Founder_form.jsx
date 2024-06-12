@@ -9,6 +9,7 @@ import setBodyColor from "../setBodyColor";
 function Founder_form() {
   // const navigate = useNavigate();
   setBodyColor({ color: "white" });
+  const navigate = useNavigate();
 
   const [formdata, setFormdata] = useState({
     name: "",
@@ -32,33 +33,32 @@ function Founder_form() {
     pitch: "",
     financials: "",
     amount_expected_to_raise: "",
-    excel:"",
+    excel: "",
   });
   const handleChangeEvent = (e) => {
     if (e.target.name === "pitch") {
       console.log(e.target.name);
       setFormdata({ ...formdata, [e.target.name]: e.target.files[0] });
-    }
-    else {
+    } else {
       setFormdata({ ...formdata, [e.target.name]: e.target.value });
     }
   };
 
-  const handleChangeEventFile = e =>{
+  const handleChangeEventFile = (e) => {
     if (e.target.name === "financials") {
       console.log(e.target.name);
-      console.log(e.target.files[0] );
+      console.log(e.target.files[0]);
       setFormdata({ ...formdata, [e.target.name]: e.target.files[0] });
-    } 
-  }
+    }
+  };
 
-  const handleChangeExcel = e =>{
+  const handleChangeExcel = (e) => {
     if (e.target.name === "excel") {
       console.log(e.target.name);
-      console.log(e.target.files[0] );
+      console.log(e.target.files[0]);
       setFormdata({ ...formdata, [e.target.name]: e.target.files[0] });
-    } 
-  }
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -94,6 +94,10 @@ function Founder_form() {
       data === "User already exists"
         ? toast.error(data)
         : toast.success("We will notify you soon");
+
+      setTimeout(() => {
+        navigate("/startup");
+      }, 2000);
     } catch (error) {
       console.log(error);
     }
@@ -109,7 +113,7 @@ function Founder_form() {
               Akorn
             </span>
           </div>
-          <span className="text-xl cursor-pointer">Logout</span>
+          <span className="text-xl cursor-pointer "onClick={()=>{navigate('/')}}>Go to Home</span>
         </div>
       </div>
       <section className="pl-16 pt-10 pr-16">
@@ -341,7 +345,7 @@ function Founder_form() {
             className=" border-2 border-dashed rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
             placeholder=" Upload your Pitch"
           />
-           <label htmlFor="" className="font-semibold text-xl">
+          <label htmlFor="" className="font-semibold text-xl">
             Excel Data
           </label>
           <input

@@ -118,7 +118,7 @@ function Partnership() {
               <img
                 src={data.images}
                 alt="image"
-                className="float-right mr-[5.5rem] w-[40%]"
+                className="float-right  w-[50%] h-[50%]"
               />
               <div className="flex flex-col ">
                 <span key={index} className="mt-3">

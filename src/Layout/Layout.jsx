@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import setBodyColor from "../setBodyColor";
 import { RxHamburgerMenu } from "react-icons/rx";
 
@@ -9,6 +9,7 @@ function Layout() {
   const [isOpen, setActivetoogle] = useState(false);
   const navtoggle = () => setActivetoogle(!isOpen);
   setBodyColor({ color: "white" });
+  const navigate = useNavigate()
   return (
     <div className="">
       <div className="flex items-center justify-between mt-5 mr-5 ml-5 md:flex md:justify-between md:text-center md:items-center md:ml-8 md:mr-8 md:mt-3">
@@ -64,7 +65,7 @@ function Layout() {
         <div className="">
           <div className="hidden  md:flex md:gap-4 md:items-center ">
             <p className=" md:items-center md:p-2 md:text-xl">
-              <Link to={"/sign_in"}>Sign In</Link>
+              <Link to={"Login/login_in/user"}>Sign In</Link>
             </p>
             <Link to={"/Login"}>
               {" "}
