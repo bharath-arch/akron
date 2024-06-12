@@ -30,7 +30,7 @@ const usertype = localStorage.getItem('usertype')
       
       if (response_data && response_data.message === 'user created') {
         if(usertype === 'user'){
-          navigate("/user");
+          navigate("/user/explore");
           // localStorage.removeItem("usertype");
         }
         else{

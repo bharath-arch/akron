@@ -63,6 +63,18 @@ function Application_data() {
     }
     navigate("/admin_dashboard");
   };
+  const adminEmail = localStorage.getItem("adminEmail");
+  const handlelogout = () => {
+    localStorage.removeItem("adminEmail");
+
+    navigate("/Login");
+  };
+
+  if (!adminEmail) {
+    useEffect(() => {
+      navigate("/admin_login");
+    }, [adminEmail]);
+  }
 
   return (
     <div>
@@ -84,7 +96,7 @@ function Application_data() {
                     Admin Dashboard
                   </span>
 
-                  <span className="text-xl">Logout</span>
+                  <span className="text-xl" onClick={handlelogout}>Logout</span>
                 </div>
               </div>
             </div>

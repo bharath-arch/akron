@@ -32,6 +32,9 @@ function Add_money({ handleclosetogglebutton }) {
       toast.success(`Successfully added amount ${money}!`);
       setMoney(0);
     }
+    setTimeout(() => {
+      handleclosetogglebutton();
+    }, 100);
   };
   const handleChange = (e) => {
     const moneyAmount = parseInt(e.target.value) || 0;
@@ -55,7 +58,7 @@ function Add_money({ handleclosetogglebutton }) {
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
-      <div className="  w-96 h-96 border-2 p-3 bg-white">
+      <div className="  w-96 h-96 border-2 p-3 bg-white z-50">
         <div className="relative mb-3">
           <span
             onClick={handleclosetogglebutton}
@@ -103,7 +106,9 @@ function Add_money({ handleclosetogglebutton }) {
           <div className="w-[22rem] h-30 border-2 p-3 ">
             <div className="flex justify-between mb-1">
               <span className=" text-gray-400">Current Balance</span>
-              <span className="text-gray-400">&#8377;{walletdata?.money ? walletdata?.money : "0"}</span>
+              <span className="text-gray-400">
+                &#8377;{walletdata?.money ? walletdata?.money : "0"}
+              </span>
             </div>
             <div className="flex mb-1 justify-between">
               <span className="text-gray-400 ">New Deposit</span>
@@ -112,13 +117,15 @@ function Add_money({ handleclosetogglebutton }) {
             <hr className=" border-gray-300" />
             <div className="flex mt-1 justify-between">
               <span className="text-gray-400">New Balance</span>
-              <span className="text-gray-400">&#8377;{walletdata?.money ? walletdata?.money + money : money}</span>
+              <span className="text-gray-400">
+                &#8377;{walletdata?.money ? walletdata?.money + money : money}
+              </span>
             </div>
           </div>
         </div>
-        <div className="relative">
+        <div className="flex mt-20  justify-end">
           <button
-            className="absolute top-[5.75rem] left-[16rem] border bg-blue-600 hover:bg-blue-700 text-white px-8 py-1 font-arima rounded-lg "
+            className=" border bg-blue-600 hover:bg-blue-700 text-white px-8 py-1 font-arima rounded-lg "
             onClick={walletAmount}
           >
             pay

@@ -7,11 +7,42 @@ import { FaWallet } from "react-icons/fa";
 import Add_money from "../Wallet/Add_money";
 import Withdraw_money from "../Wallet/Withdraw_money.jsx";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Explore() {
   const [toggle, setActivetoggle] = useState(false);
   const [withdrawtoggle, withdrawsetActivetoggle] = useState(false);
   const [walletdata, setwalletData] = useState();
+  const [data, setData] = useState([]);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  const[color,setColor] = useState('black')
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setColor((prevColor) => prevColor === 'black' ? 'red' : 'black');
+    }, 500);
+    return () => clearInterval(interval);
+  }, []);
+  console.log(color)
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:4000/company_approve/dashboard_data"
+        );
+        console.log(response.data);
+        const setfilterData = response.data.result.filter(
+          (item) => item.status === true
+        );
+        setData(setfilterData);
+      } catch (error) {
+        setError(error);
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
   const handletogglebutton = () => {
     setActivetoggle(!toggle);
   };
@@ -33,65 +64,66 @@ function Explore() {
           params: { email },
         }
       );
-     
+
       setwalletData(response.data.result);
     };
     fetchWalletData();
   }, [walletdata]);
 
-  
   return (
     <div className="ml-6 mr-6">
       <section>
-        <div className="">
+        <div className="md:flex  ">
           <span className="text-3xl font-bold mb-5">What's hot</span>
         </div>
-        <div className="flex ">
-          <div className="w-28 flex justify-center flex-col text-center items-center">
-            <MdOutlineFiberNew size={50} color="red" className="" />
+        <div className="md:flex gap-5 ">
+          <div className="flex md:flex-col items-center">
+            <MdOutlineFiberNew size={40} color="red" className="" />
+            <span className="text-[12px] text-center">New Age investments</span>
           </div>
-          <div className=" w-28 flex justify-center flex-col text-center items-center">
-            {" "}
-            <GoAlertFill size={50} className="" />
+          <div className="flex md:flex-col  items-center">
+            <GoAlertFill size={40} className="" />
+            <samp className="text-[12px] text-center">
+              Avoid these mistakes!
+            </samp>
           </div>
-
-          <div className="w-28 flex justify-center flex-col text-center items-center">
-            <TbMoneybag size={50} className="" />
+          <div className="flex md:flex-col  items-center">
+            <TbMoneybag size={40} className="" />
+            <span className="text-[12px] text-center">
+              Start with Rs 10,000
+            </span>
           </div>
-
-          <div className=" w-28  flex justify-center flex-col text-center items-center">
-            <BsFillPeopleFill size={50} className="" />
+          <div className="flex md:flex-col  items-center">
+            <BsFillPeopleFill size={40} className="" />
+            <span className="text-[12px] text-center">Why Us?</span>
           </div>
-        </div>
-        <div className="flex justify-center items-center text-center w-[28.5rem]">
-          <span className="w-28 text-[12px]">New Age investments</span>
-          <samp className="w-28 text-[12px]">Avoid these mistakes!</samp>
-          <span className="w-28 text-[12px]">Start with Rs 5,000</span>
-          <span className="w-28 text-[12px]"> Why Us?</span>
         </div>
       </section>
-      <section>
-        <div className="bg-gray-400 h-[120px] w-[95%] mt-6 bg-gradient-to-tr from-gray-400 to-gray-200">
-          <div className="p-3 flex-row">
+      <section className="flex flex-col">
+        <div className="bg-gray-400 h-auto w-[95%] mt-6 bg-gradient-to-tr from-gray-400 rounded-md to-gray-200">
+          <div className="p-3">
             <div className="flex">
               <FaWallet size={30} />
-              <p className="ml-3 font-semibold text-xl">Wallet</p>
+              <span className="ml-3 font-semibold text-xl">Wallet</span>
             </div>
 
-            <div className="flex  pl-20 pr-20 items-center ">
+            <div className=" md:flex md:items-center md:justify-between md:mt-0 mt-2">
               <span className="flex gap-2 font-semibold text-xl">
-                Funds <span className="text-blue-700">&#8377;{walletdata?.money ?  walletdata?.money : '0'}</span>{" "}
+                Funds{" "}
+                <span className="text-blue-700">
+                  &#8377;{walletdata?.money ? walletdata?.money : "0"}
+                </span>{" "}
               </span>
-              <div className="flex w-full justify-end">
+              <div className=" md:mt-0 mt-2 ">
                 <button
                   onClick={handletogglebutton}
-                  className=" p-3 text-xl rounded-md text-white bg-blue-700 font-arima items-end"
+                  className=" p-3 md:text-xl  text-sm rounded-md text-white bg-blue-700 font-arima items-end"
                 >
                   Add Money
                 </button>
                 <button
                   onClick={withdrawtogglebutton}
-                  className=" p-3 text-xl rounded-md ml-4 text-white bg-red-500 font-arima items-end "
+                  className="p-3 md:text-xl  text-sm rounded-md ml-4 text-white bg-red-500 font-arima items-end "
                 >
                   Withdraw
                 </button>
@@ -118,11 +150,41 @@ function Explore() {
         )}
       </section>
       <section>
-        <div className="bg-gray-400 h-[220px] w-[95%] mt-6 bg-gradient-to-b from-gray-300 to-gray-200 p-5">
+        <div className="bg-gray-400 h-[220px] w-[95%] mt-6 bg-gradient-to-b rounded-md from-gray-300 to-gray-200 p-5">
           <div className="flex justify-between">
-            <span> Live Opportunities </span>
-            <span>View All</span>
+            <span className={`text-${color}-500 font-semibold text-xl`}>
+              {" "}
+              Live Opportunities{" "}
+            </span>
+            <span
+              onClick={() => navigate("/user/wealth")}
+              className="cursor-pointer hover:scale-95 hover:font-semibold hover:text-blue-500"
+            >
+              View All
+            </span>
           </div>
+          {error && <p className="text-red-500">{error.message}</p>}
+
+          {data && (
+            <section className="flex flex-wrap gap-5 mt-9 w-full z-0">
+              {data.map((item, index) => (
+                <div
+                  key={index}
+                  className="bg-gradient-to-br from-gray-300 to-gray-100  p-5 shadow-md rounded-md cursor-pointer transform hover:scale-105 transition-transform duration-300"
+                  onClick={() => navigate("/user/wealth")}
+                >
+                  <div className="text-center">
+                    <span className="block font-semibold text-2xl">
+                      {item.company_name}
+                    </span>
+                    <span className="block text-lg text-gray-700">
+                      {item.sector}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </section>
+          )}
         </div>
       </section>
     </div>

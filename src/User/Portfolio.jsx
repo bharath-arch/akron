@@ -42,10 +42,10 @@ function Portfolio() {
   console.log(data);
 
   return (
-    <div className="container mx-auto p-4">
-      <section className="mb-6">
-        <Search_filter />
-      </section>
+    <div className="container mx-auto p-4 sm:p-6 lg:p-8">
+    <section className="mb-6">
+      <Search_filter />
+    </section>
 
       <section className="mt-6">
         {data && data.length > 0 ? (
@@ -75,9 +75,9 @@ function Portfolio() {
                   >
                     Sell
                   </button>
-                  <button className="px-3 py-1 text-xl rounded-md text-white bg-blue-700 font-arima hover:bg-blue-800 transition-transform duration-300 ease-in-out transform hover:scale-95">
+                  {/* <button className="px-3 py-1 text-xl rounded-md text-white bg-blue-700 font-arima hover:bg-blue-800 transition-transform duration-300 ease-in-out transform hover:scale-95">
                     View More
-                  </button>
+                  </button> */}
                 </div>
               </div>
             ))}

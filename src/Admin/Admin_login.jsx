@@ -20,11 +20,11 @@ function Admin_login() {
 
   const handleChangeEvent = (e) => {
     setFormdata({ ...formdata, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-  
+    };
+    
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      
     try {
       const response = await axios.post(
         "http://localhost:4000/admin_login/",
@@ -34,6 +34,7 @@ function Admin_login() {
 
       if(response.data && response.data.result === 'sucess'){
         navigate('/admin_dashboard')
+        localStorage.setItem('adminEmail',formdata.email)
       }
       else{
         toast.error(response.data.result)

@@ -19,7 +19,7 @@ function Square() {
       }
     };
     fetchData();
-  }, []);
+  }, [data]);
 
   const handleBuy = async (companyId, amount, lots, companyName, sellEmail) => {
     console.log(companyId, amount, lots, companyName, sellEmail);

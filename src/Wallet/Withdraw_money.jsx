@@ -34,6 +34,7 @@ function Withdraw_money({ withdrawclosetogglebutton }) {
         toast.success(`Successfully Withdrawed amount ${money}!`);
         setMoney(0);
       }
+      withdrawclosetogglebutton()
     } catch (err) {
       console.log(err);
     }
@@ -129,12 +130,12 @@ function Withdraw_money({ withdrawclosetogglebutton }) {
             </div>
           </div>
         </div>
-        <div className="relative">
+        <div className="flex mt-20  justify-end">
           <button
-            className="absolute top-[5.75rem] left-[16rem] border bg-red-600 hover:bg-red-700 text-white px-8 py-1 font-arima rounded-lg "
+            className=" border bg-red-600 hover:bg-red-700 text-white px-8 py-1 font-arima rounded-lg "
             onClick={walletAmount}
           >
-            pay
+            Withdraw
           </button>
         </div>
       </div>

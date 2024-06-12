@@ -10,6 +10,18 @@ function Kyc_approval() {
   const [data, setData] = useState(null);
   const { id } = useParams();
   const navigate = useNavigate();
+  const adminEmail = localStorage.getItem("adminEmail");
+  const handlelogout = () => {
+    localStorage.removeItem("adminEmail");
+
+    navigate("/admin_login");
+  };
+
+  if (!adminEmail) {
+    useEffect(() => {
+      navigate("/Login");
+    }, [adminEmail]);
+  }
   setBodyColor({ color: "white" });
 
   const acceptRequest = async () => {
@@ -75,7 +87,7 @@ function Kyc_approval() {
                 >
                   Admin Dashboard
                 </span>
-                <span className="text-xl">Logout</span>
+                <span className="text-xl"onClick={handlelogout}>Logout</span>
               </div>
             </div>
           </div>

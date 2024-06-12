@@ -76,12 +76,12 @@ function Company_dashboard() {
   let totalPercent = (raiserAmount / toCrcal) * 100;
 
   let rawgrapData = [
-    { name: "Total Amount", value: toCrcal },
+    { name: " Amount needed", value: toCrcal - raiserAmount },
     { name: "Raised Amount", value: raiserAmount },
   ];
   let percentageGraphData = [
-    { name: "Total Amount", value: 100 },
-    { name: "Raised Amount", value: totalPercent },
+    { name: "Amount needed percentage", value: 100 - totalPercent },
+    { name: "Raised Amount percentage", value: totalPercent },
   ];
 
   return (

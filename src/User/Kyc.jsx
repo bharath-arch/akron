@@ -85,7 +85,7 @@ function Kyc() {
       console.log("api called");
       const data = await response.data.message;
       console.log(data); // Handle response data (e.g., success message)
-      data === "User already exists" ? toast.error(data) : navigate("/user");
+      data === "User already exists" ? toast.error(data) : navigate("/user/explore");
     } catch (error) {
       console.log(error);
     }

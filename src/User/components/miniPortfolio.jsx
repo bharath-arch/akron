@@ -13,6 +13,8 @@ const [formdata , setFormdata] = useState({
 
 const posttosquare = async ()=>{
   const response  = await axios.post( "http://localhost:4000/square", {formdata , selectedLots} )
+  handleclosetogglebutton()
+
 }
 
   useEffect(() => {
@@ -34,7 +36,7 @@ const posttosquare = async ()=>{
           <IoCloseOutline size={23} className="hover:bg-red-600" />
         </span>
       </div>
-      <span className="font-semibold text-xl">Add Money</span>
+      <span className="font-semibold text-xl">Sell Lots</span>
       <div className="mt-2">
         <input
           ref={inputRef}

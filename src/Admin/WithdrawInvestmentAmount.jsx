@@ -6,6 +6,18 @@ function WithdrawInvestmentAmount() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
+  const adminEmail = localStorage.getItem("adminEmail");
+  const handlelogout = () => {
+    localStorage.removeItem("adminEmail");
+
+    navigate("/Login");
+  };
+
+  if (!adminEmail) {
+    useEffect(() => {
+      navigate("/admin_login");
+    }, [adminEmail]);
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,7 +66,9 @@ function WithdrawInvestmentAmount() {
                 Admin Dashboard
               </span>
             </Link>{" "}
-            <span className="text-xl">Logout</span>
+            <span className="text-xl" onClick={handlelogout}>
+              Logout
+            </span>
           </div>
         </div>
       </div>

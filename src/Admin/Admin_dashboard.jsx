@@ -32,6 +32,18 @@ function Admin_dashboard() {
     navigate("/admin_dashboard"); // Adjust this to the appropriate route
   }, [navigate]); // Add navigate to dependency array
 
+  const adminEmail = localStorage.getItem("adminEmail");
+  const handlelogout = () => {
+    localStorage.removeItem("adminEmail");
+
+    navigate("/Login");
+  };
+
+  if (!adminEmail) {
+    useEffect(() => {
+      navigate("/admin_login");
+    }, [adminEmail]);
+  }
   return (
     <div>
       <div className="">
@@ -42,9 +54,17 @@ function Admin_dashboard() {
             </span>
           </div>
           <div className=" flex gap-5 items-center text-center ">
-          <Link to={'/withdrawInvestment'}><span className="font-semibold text-xl text-red-500">Withdraw requests</span></Link>
-            <Link to={'/manage_user'}><span className="font-semibold text-xl">Manage User’s</span></Link>
-            <span className="text-xl">Logout</span>
+            <Link to={"/withdrawInvestment"}>
+              <span className="font-semibold text-xl text-red-500">
+                Withdraw requests
+              </span>
+            </Link>
+            <Link to={"/manage_user"}>
+              <span className="font-semibold text-xl">Manage User’s</span>
+            </Link>
+            <span className="text-xl" onClick={handlelogout}>
+              Logout
+            </span>
           </div>
         </div>
       </div>

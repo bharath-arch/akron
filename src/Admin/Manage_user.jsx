@@ -5,6 +5,18 @@ import { Link, useNavigate } from "react-router-dom";
 function Manage_user() {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
+  const adminEmail = localStorage.getItem("adminEmail");
+  const handlelogout = () => {
+    localStorage.removeItem("adminEmail");
+
+    navigate("/Login");
+  };
+
+  if (!adminEmail) {
+    useEffect(() => {
+      navigate("/admin_login");
+    }, [adminEmail]);
+  }
   useEffect(() => {
     const callServer = async () => {
       try {
@@ -36,7 +48,7 @@ function Manage_user() {
                 Admin Dashboard
               </span>
             </Link>
-            <span className="text-xl">Logout</span>
+            <span className="text-xl"onClick={handlelogout}>Logout</span>
           </div>
         </div>
       </div>

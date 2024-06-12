@@ -182,7 +182,7 @@ function Wealth() {
               <span className="font-bold">Mkt Cap :</span>{" "}
               {data && data[count]?.market_cap} Cr.
             </span>
-            <span>
+            {/* <span>
               <span className="font-bold">P/E Ratio :</span> xx.x
             </span>
             <span>
@@ -196,7 +196,7 @@ function Wealth() {
             </span>
             <span>
               <span className="font-bold">Previous Valuation :</span> xx Cr.
-            </span>
+            </span> */}
             <span>
               <span className="font-bold">Target Amount :</span>{" "}
               {data[count]?.amount_expected_to_raise} Cr.
