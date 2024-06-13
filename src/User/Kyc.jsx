@@ -11,7 +11,8 @@ function Kyc() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const localemail = localStorage.getItem("email");
+      const localemail = localStorage.getItem("userEmail");
+      console.log(localemail);
       console.log(localemail);
       if (localemail) {
         try {
@@ -27,7 +28,6 @@ function Kyc() {
           console.log(error);
         }
       } else {
-
         console.log("no data");
       }
     };
@@ -85,7 +85,9 @@ function Kyc() {
       console.log("api called");
       const data = await response.data.message;
       console.log(data); // Handle response data (e.g., success message)
-      data === "User already exists" ? toast.error(data) : navigate("/user/explore");
+      data === "User already exists"
+        ? toast.error(data)
+        : navigate("/user/explore");
     } catch (error) {
       console.log(error);
     }

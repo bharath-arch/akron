@@ -16,7 +16,7 @@ function Layout_user() {
   const [data, setData] = useState();
 
   useEffect(() => {
-    const localemail = localStorage.getItem('email');
+    const localemail = localStorage.getItem('userEmail');
     if (!localemail) {
       navigate("/Login");
     }
@@ -86,15 +86,16 @@ function Layout_user() {
           </ul>
         </div>
         <div className="flex justify-center items-center gap-3">
-          {localStorage.getItem("email") && (
+          {localStorage.getItem("userEmail") && (
             <span>
               <b className="text-xl">Welcome</b>{" "}
-              {localStorage.getItem("email").split("@gmail.com")}
+              {/*userEmail*/}
+              {localStorage.getItem("userEmail").split("@gmail.com")}
             </span>
           )}
           <div className="flex items-center relative">
             <span className="rounded-full text-2xl p-2 bg-orange-600 flex items-center text-center">
-              {localStorage.getItem("email") && localStorage.getItem("email").split("")[0].toUpperCase()}
+              {localStorage.getItem("userEmail") && localStorage.getItem("userEmail").split("")[0].toUpperCase()}
             </span>
             <User_popup />
           </div>

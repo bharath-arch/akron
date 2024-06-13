@@ -14,7 +14,7 @@ function Sign_in() {
   const navigate = useNavigate();
   const [formdata, setFormdata] = useState({ email: "" });
   const [invalidEmail, setInvalidEmail] = useState(false);
-
+  const usertype = localStorage.setItem('usertype','user')
   const handleChangeEvent = (e) => {
     setFormdata({ ...formdata, [e.target.name]: e.target.value });
   };
@@ -38,7 +38,8 @@ function Sign_in() {
         );
 
         console.log(response.data.message);
-        localStorage.setItem("email", response.data.email);
+        //userEmail
+        localStorage.setItem("userEmail", response.data.email);
         localStorage.setItem("token", response.data.token);
         console.log(response.data.token);
         if (response.data.message == "mail is existing") {

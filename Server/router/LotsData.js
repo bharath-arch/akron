@@ -13,19 +13,24 @@ router.put("/", async (req, res) => {
     const companyName = req.body.companyName;
     const lots = req.body.lots;
     const price = req.body.price;
+    console.log(lots)
+    console.log(companyId)
+    console.log(email)
     // Check if a document with the same companyId and email already exists
     const moneyData = await Money.findOne({ email: email });
+    console.log(moneyData)
     const isMatch = await Userlots.findOne({
       companyId: companyId,
       email: email,
     });
+    console.log(isMatch,'ooo')
     const companylotsData = await Registraion.findOne({
       email: email,
       _id: companyId,
     });
-    console.log(companylotsData.lots);
+    console.log(companylotsData,'ppp');
     const newlotsEntryCD = companylotsData.lots - lots;
-    console.log(newlotsEntryCD);
+    console.log("lll");
 
     if (moneyData.money > price) {
       let newMoney = moneyData.money - price;

@@ -8,7 +8,7 @@ import { RiCustomerService2Line } from "react-icons/ri";
 function Company_dashboard() {
   const navigate = useNavigate();
   setBodyColor({ color: "white" });
-  const email = localStorage.getItem("email");
+  const email = localStorage.getItem("founderEmail");
   const [error, setError] = useState(null);
   const [statusInfo, setStatus] = useState(null);
 
@@ -37,7 +37,7 @@ function Company_dashboard() {
   }, [data, statusInfo]);
 
   const handleClick = () => {
-    localStorage.removeItem("email");
+    localStorage.removeItem("founderEmail");
     localStorage.removeItem("usertype");
     localStorage.removeItem("token");
     navigate("/Login");
@@ -57,7 +57,7 @@ function Company_dashboard() {
   const handleWithdraw = async (amount, companyId) => {
     try {
       const withdrawAmount = amount * 10000;
-      const email = localStorage.getItem("email");
+      const email = localStorage.getItem("founderEmail");
       const response = await axios.put(
         "http://localhost:4000/companyWithdrawMoney",
         { companyId, email, amount: withdrawAmount }

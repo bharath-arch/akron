@@ -16,15 +16,33 @@ function Explore() {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const[color,setColor] = useState('black')
+  const [color, setColor] = useState("black");
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setColor((prevColor) => prevColor === 'black' ? 'red' : 'black');
+      setColor((prevColor) => (prevColor === "black" ? "red" : "black"));
     }, 500);
     return () => clearInterval(interval);
   }, []);
-  console.log(color)
+  // console.log(color);
+  //userEmail
+  const email = localStorage.getItem("userEmail");
+  console.log(email)
+  useEffect(() => {
+    const fetchWalletData = async () => {
+      const response = await axios.get(
+        "http://localhost:4000/addWithdrawmoney/",
+        {
+          params: { email },
+        }
+      );
+
+      setwalletData(response.data.result);
+    };
+    fetchWalletData();
+  }, [walletdata]);
+
+  console.log(walletdata)
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -55,20 +73,7 @@ function Explore() {
   const withdrawtogglebutton = () => {
     withdrawsetActivetoggle(!withdrawtoggle);
   };
-  const email = localStorage.getItem("email");
-  useEffect(() => {
-    const fetchWalletData = async () => {
-      const response = await axios.get(
-        "http://localhost:4000/addWithdrawmoney/",
-        {
-          params: { email },
-        }
-      );
-
-      setwalletData(response.data.result);
-    };
-    fetchWalletData();
-  }, [walletdata]);
+  
 
   return (
     <div className="ml-6 mr-6">
@@ -78,23 +83,46 @@ function Explore() {
         </div>
         <div className="md:flex gap-5 ">
           <div className="flex md:flex-col items-center">
-            <MdOutlineFiberNew size={40} color="red" className="" />
-            <span className="text-[12px] text-center">New Age investments</span>
-          </div>
-          <div className="flex md:flex-col  items-center">
-            <GoAlertFill size={40} className="" />
-            <samp className="text-[12px] text-center">
-              Avoid these mistakes!
-            </samp>
-          </div>
-          <div className="flex md:flex-col  items-center">
-            <TbMoneybag size={40} className="" />
+            <MdOutlineFiberNew
+              size={40}
+              color="red"
+              className=""
+              title="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam sapiente iure quo eius, vel explicabo inventore. Dicta omnis asperiores, quidem corrupti doloremque nobis fugiat?
+"
+            />
             <span className="text-[12px] text-center">
-              Start with Rs 10,000
+              New Age <br></br> investments
             </span>
           </div>
           <div className="flex md:flex-col  items-center">
-            <BsFillPeopleFill size={40} className="" />
+            <GoAlertFill
+              size={40}
+              className=""
+              title="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam sapiente iure quo eius, vel explicabo inventore. Dicta omnis asperiores, quidem corrupti doloremque nobis fugiat?
+"
+            />
+            <samp className="text-[12px] text-center">
+              Avoid these <br></br> mistakes!
+            </samp>
+          </div>
+          <div className="flex md:flex-col  items-center">
+            <TbMoneybag
+              size={40}
+              className=""
+              title="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam sapiente iure quo eius, vel explicabo inventore. Dicta omnis asperiores, quidem corrupti doloremque nobis fugiat?
+"
+            />
+            <span className="text-[12px] text-center">
+              Start with <br></br>Rs 10,000
+            </span>
+          </div>
+          <div className="flex md:flex-col  items-center">
+            <BsFillPeopleFill
+              size={40}
+              className=""
+              title="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam sapiente iure quo eius, vel explicabo inventore. Dicta omnis asperiores, quidem corrupti doloremque nobis fugiat?
+"
+            />
             <span className="text-[12px] text-center">Why Us?</span>
           </div>
         </div>

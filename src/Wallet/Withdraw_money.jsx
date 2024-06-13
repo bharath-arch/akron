@@ -7,7 +7,8 @@ function Withdraw_money({ withdrawclosetogglebutton }) {
   const inputRef = useRef(null);
   const [money, setMoney] = useState(0);
   const [walletdata, setwalletData] = useState();
-  const email = localStorage.getItem("email");
+  //userEmail
+  const email = localStorage.getItem("userEmail");
 
   useEffect(() => {
     const fetchWalletData = async () => {

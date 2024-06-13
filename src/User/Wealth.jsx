@@ -47,7 +47,8 @@ function Wealth() {
 
   const handleLotsize = async () => {
     const id = data[count]?._id;
-    const email = localStorage.getItem("email");
+    //userEmail
+    const email = localStorage.getItem("userEmail");
     const companyName = data[count].company_name;
     const price = lots * 10000;
     // console.log(price)

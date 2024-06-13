@@ -6,7 +6,8 @@ import { IoCloseOutline } from "react-icons/io5";
 function Add_money({ handleclosetogglebutton }) {
   const [money, setMoney] = useState(0);
   const inputRef = useRef(null);
-  const email = localStorage.getItem("email");
+  //userEmail
+  const email = localStorage.getItem("userEmail");
   const [walletdata, setwalletData] = useState();
 
   useEffect(() => {

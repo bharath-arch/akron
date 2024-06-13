@@ -24,7 +24,8 @@ function Square() {
   const handleBuy = async (companyId, amount, lots, companyName, sellEmail) => {
     console.log(companyId, amount, lots, companyName, sellEmail);
 
-    const email = localStorage.getItem("email");
+    //userEmail
+    const email = localStorage.getItem("userEmail");
 
     try {
       const response = await axios.put(

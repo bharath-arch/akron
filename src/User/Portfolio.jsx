@@ -8,7 +8,8 @@ function Portfolio() {
   const [selectedLots, setSelectedLots] = useState(null); // Add state for selected lots
   const [error, setError] = useState(null);
   const [toggle, setActivetoggle] = useState(false);
-  const email = localStorage.getItem("email");
+  //userEmail
+  const email = localStorage.getItem("userEmail");
 
   const handletogglebutton = (lots, companyId, companyName) => {
     setActivetoggle(true);

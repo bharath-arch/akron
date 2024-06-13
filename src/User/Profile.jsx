@@ -12,7 +12,8 @@ function Profile() {
   const [param, setParam] = useState("");
   const [formData, setFormData] = useState("");
 
-  const email = localStorage.getItem("email");
+  //userEmail
+  const email = localStorage.getItem("userEmail");
 
   // const address = data?.address
 
