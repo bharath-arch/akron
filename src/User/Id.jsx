@@ -28,30 +28,59 @@ function Id() {
   }, []);
 
   console.log(data);
+  const [search, setSearch] = useState("");
+  const [dropdown, setDropdown] = useState();
+
+
+  const searchContent = (searchValue) => {
+    setSearch(searchValue);
+  };
+  
+  const dropDownContent = (dropdownfromChild)=>{
+    setDropdown(dropdownfromChild)
+  }
+  // console.log(dropdown ,"0000");
 
   return (
     <div className="container mx-auto p-4 sm:p-6 lg:p-8">
       <section className="mb-6">
-        <Search_filter />
+        <Search_filter data={data} searchContents={searchContent} dropDown = {dropDownContent} />
       </section>
 
       {error && <p className="text-red-500">{error.message}</p>}
 
-      {data && (
+      {data && data.length >= 1 ? (
         <section className="flex flex-wrap gap-5 mt-9 w-full">
-          {data.map((item, index) => (
-            <div
-              key={index}
-              className="bg-gradient-to-br from-gray-300 to-gray-100  p-5 shadow-md rounded-md cursor-pointer transform hover:scale-105 transition-transform duration-300"
-              onClick={() => navigate("/user/wealth")}
-            >
-              <div className="text-center">
-                <span className="block font-semibold text-2xl">{item.company_name}</span>
-                <span className="block text-lg text-gray-700">{item.sector}</span>
+          {data
+            .filter((item) => {
+              return (
+                search.toLowerCase() === "" ? item :
+                item.company_name.toLowerCase().includes(search.toLowerCase())
+              );
+            }).filter((item)=>{
+              return(
+                dropdown.toLowerCase() === 'select' ? item : item.sector.toLowerCase().includes(dropdown.toLowerCase())
+              )
+            })
+            .map((item, index) => (
+              <div
+                key={index}
+                className="bg-gradient-to-br from-gray-300 to-gray-100  p-5 shadow-md rounded-md cursor-pointer transform hover:scale-105 transition-transform duration-300"
+                onClick={() => navigate("/user/wealth")}
+              >
+                <div className="text-center">
+                  <span className="block font-semibold text-2xl">
+                    {item.company_name}
+                  </span>
+                  <span className="block text-lg text-gray-700">
+                    {item.sector}
+                  </span>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </section>
+      ) : (
+        <p className="text-gray-500 text-center">No data available</p>
       )}
     </div>
   );

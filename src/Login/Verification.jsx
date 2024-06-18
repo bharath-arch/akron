@@ -32,6 +32,7 @@ const usertype = localStorage.getItem('usertype')
         if(usertype === 'user'){
           navigate("/user/explore");
           // localStorage.removeItem("usertype");
+          console.log("user")
         }
         else{
           navigate('/Company_dashboard')

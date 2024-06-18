@@ -2,11 +2,13 @@ import React, { useState, useRef } from "react";
 import { CiSearch } from "react-icons/ci";
 import "./Search_filter.css";
 
-function SearchFilter() {
+function SearchFilter({ data, searchContents , dropDown }) {
   const [selectedValue, setSelectedValue] = useState("");
   const [filter, setFilter] = useState(true);
   const companySectors = [
+    
     "Select",
+    "E-com",
     "Technology",
     "Healthcare",
     "Finance",
@@ -29,6 +31,19 @@ function SearchFilter() {
 
   const handleSelectChange = (event) => {
     setSelectedValue(event.target.value);
+  };
+  dropDown(selectedValue)
+  console.log(selectedValue)
+
+  const [search, setSearch] = useState("");
+
+  const searchSet = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const searchContent = (e) => {
+    e.preventDefault(); // Prevent default form submission
+    searchContents(search);
   };
 
   const handleInputClick = () => {
@@ -54,7 +69,7 @@ function SearchFilter() {
           ))}
         </select>
       </div>
-      <form className="">
+      <form onSubmit={searchContent} className="">
         <div className="flex items-center ">
           <input
             ref={inputRef}
@@ -65,8 +80,9 @@ function SearchFilter() {
             required
             onClick={handleInputClick}
             onBlur={handleInputBlur}
+            onChange={searchSet}
           />
-          <button>
+          <button type="submit"> {/* Use type="submit" for form submission */}
             <CiSearch
               className={`bg-blue-500 text-white  font-semibold rounded-e-lg border ring-blue-500 border-blue-500`}
               size={46}

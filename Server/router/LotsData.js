@@ -13,6 +13,7 @@ router.put("/", async (req, res) => {
     const companyName = req.body.companyName;
     const lots = req.body.lots;
     const price = req.body.price;
+    const companyEmail = req.body.companyEmail;
     console.log(lots)
     console.log(companyId)
     console.log(email)
@@ -25,9 +26,10 @@ router.put("/", async (req, res) => {
     });
     console.log(isMatch,'ooo')
     const companylotsData = await Registraion.findOne({
-      email: email,
+      email: companyEmail,
       _id: companyId,
     });
+    console.log(email);
     console.log(companylotsData,'ppp');
     const newlotsEntryCD = companylotsData.lots - lots;
     console.log("lll");
@@ -43,7 +45,7 @@ router.put("/", async (req, res) => {
         );
         await Money.findOneAndUpdate({ email: email }, { money: newMoney });
         await Registraion.findOneAndUpdate(
-          { email: email, _id: companyId },
+          { email: companyEmail, _id: companyId },
           { lots: newlotsEntryCD }
         );
         return res.status(200).json({ message: "Updated" });
@@ -63,7 +65,7 @@ router.put("/", async (req, res) => {
           await newLotEntry.save();
           await Money.findOneAndUpdate({ email: email }, { money: newMoney });
           await Registraion.findOneAndUpdate(
-            { email: email, _id: companyId },
+            { email: companyEmail, _id: companyId },
             { lots: newlotsEntryCD }
           );
         } else {

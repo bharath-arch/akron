@@ -5,7 +5,7 @@ import { CiMenuKebab } from "react-icons/ci";
 function User_popup() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  const [email, setEmail] = useState(localStorage.getItem("email"));
+  const [email, setEmail] = useState(localStorage.getItem("userEmail"));
   const options = ["kyc", "profile", "Logout"];
 
   const toggleDropdown = () => setIsOpen(!isOpen);

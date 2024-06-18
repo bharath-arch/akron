@@ -46,11 +46,21 @@ function Square() {
   };
 
   console.log(data);
+  const [search, setSearch] = useState("");
+  const [dropdown, setDropdown] = useState();
 
+
+  const searchContent = (searchValue) => {
+    setSearch(searchValue);
+  };
+  
+  const dropDownContent = (dropdownfromChild)=>{
+    setDropdown(dropdownfromChild)
+  }
   return (
     <div className="container mx-auto p-4 sm:p-6 lg:p-8">
       <section className="mb-6">
-        <Search_filter />
+      <Search_filter data={data} searchContents={searchContent} dropDown = {dropDownContent} />
       </section>
 
       {error && <p className="text-red-500">{error.message}</p>}
