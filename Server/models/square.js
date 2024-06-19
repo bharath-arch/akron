@@ -6,6 +6,7 @@ const square = mongoose.Schema(
     lots: { type: Number },
     amount: { type: Number },
     companyName: { type: String },
+    companySector:{ type: String },
     email: { type: String },
   },
   { timestamp: true }

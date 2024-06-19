@@ -51,6 +51,8 @@ function Portfolio() {
   const dropDownContent = (dropdownfromChild)=>{
     setDropdown(dropdownfromChild)
   }
+  console.log(data)
+  
   return (
     <div className="container mx-auto p-4 sm:p-6 lg:p-8">
     <section className="mb-6">
@@ -60,7 +62,12 @@ function Portfolio() {
       <section className="mt-6">
         {data && data.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {data?.map((item, index) => (
+            {data?.filter((item) => {
+              return (
+                search.toLowerCase() === "" ? item :
+                item.companyName.toLowerCase().includes(search.toLowerCase())
+              );
+            }).map((item, index) => (
               <div key={index} className="bg-white p-4 rounded-lg shadow-md">
                 {console.log(index)}
                 <span className="font-semibold text-xl mb-2 block truncate">

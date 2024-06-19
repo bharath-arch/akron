@@ -67,7 +67,12 @@ function Square() {
 
       {data && data.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {data.map((item, index) => (
+          {data.filter((item) => {
+              return (
+                search.toLowerCase() === "" ? item :
+                item.companyName.toLowerCase().includes(search.toLowerCase())
+              );
+            }).map((item, index) => (
             <div
               key={index}
               className="bg-white rounded-lg shadow-lg overflow-hidden"
