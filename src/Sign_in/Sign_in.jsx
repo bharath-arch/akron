@@ -3,8 +3,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import setBodyColor from "../setBodyColor";
 import { FcGoogle } from "react-icons/fc";
 import axios from "axios";
-import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 
 function Sign_in() {
   setBodyColor({ color: "lightgray" });
@@ -101,12 +101,24 @@ function Sign_in() {
               <span className="flex-shrink mx-4 text-gray-400">OR</span>
               <div className="flex-grow border-t border-gray-400"></div>
             </div>
-            <div className="flex justify-between border-2 p-2 rounded-lg text-center items-center">
+            <GoogleLogin
+              onSuccess={(credentialResponse) => {
+                const credentialResponseDecode = jwtDecode(
+                  credentialResponse.credential
+                );
+
+                console.log(credentialResponseDecode);
+              }}
+              onError={() => {
+                console.log("Login Failed");
+              }}
+            />
+            {/* <div className="flex justify-between border-2 p-2 rounded-lg text-center items-center">
               <span className="">
                 <FcGoogle size={26} />
               </span>
               <span className="mr-16 font-arima">Continue with Google</span>
-            </div>
+            </div> */}
             <div className="text-center items-center text-[0.75rem] mr-4 font-serif font-light mt-2">
               <p>
                 <span> Don’t have an account ? </span>{" "}

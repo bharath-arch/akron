@@ -5,9 +5,10 @@ import { FcGoogle } from "react-icons/fc";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-import { GoogleLogin } from "react-google-login";
 import { Toaster } from "react-hot-toast";
 import toast from "react-hot-toast";
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 
 function Sign_in() {
   setBodyColor({ color: "lightgray" });
@@ -77,17 +78,6 @@ function Sign_in() {
       }
     }
   };
-  //client_id":"","project_id":"akorn-427009
-  const clientId = "759184669054-05eu7icbpi1gmi7169d1prkht0m7ug2g.apps.googleusercontent.com"; // Replace with your client ID
-  const onSuccess = (response) => {
-    console.log("Login successful: ", response.profileObj);
-    // Handle successful login
-  };
-
-  const onFailure = (error) => {
-    console.log("Login failed: ", error);
-    // Handle failure
-  };
 
   const founder = "founder";
   const user = "user";
@@ -139,13 +129,18 @@ function Sign_in() {
               <span className="flex-shrink mx-4 text-gray-400">OR</span>
               <div className="flex-grow border-t border-gray-400"></div>
             </div>
-            
+
             <GoogleLogin
-              clientId={clientId}
-              buttonText="Login with Google"
-              onSuccess={onSuccess}
-              onFailure={onFailure}
-              cookiePolicy={"single_host_origin"}
+              onSuccess={(credentialResponse) => {
+                const credentialResponseDecode = jwtDecode(
+                  credentialResponse.credential
+                );
+
+                console.log(credentialResponseDecode);
+              }}
+              onError={() => {
+                console.log("Login Failed");
+              }}
             />
 
             <div className="text-center items-center text-[0.75rem] mr-4 font-serif font-light mt-2">
