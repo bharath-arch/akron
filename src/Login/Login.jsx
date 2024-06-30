@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import setBodyColor from "../setBodyColor";
-import { FcGoogle } from "react-icons/fc";
 import axios from "axios";
-import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
 import { Toaster } from "react-hot-toast";
 import toast from "react-hot-toast";
 import { GoogleLogin } from "@react-oauth/google";
@@ -14,6 +11,7 @@ function Sign_in() {
   setBodyColor({ color: "lightgray" });
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [gmail, setGmail] = useState("");
   const [formdata, setFormdata] = useState({ email: "" });
   const [invalidEmail, setInvalidEmail] = useState(false);
   const usertype = localStorage.setItem("usertype", "user");
@@ -26,6 +24,49 @@ function Sign_in() {
     return pattern.test(email);
   }
 
+  const handlegoogle = async (mail) => {
+    localStorage.setItem( "userEmail", mail );
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/register/googleLogin",
+        { email: mail, type: "user" } // Send email in the correct format
+      );
+      if (response.data.message === "Already email exist please Login") {
+        toast("user found please login", {
+          duration: 4000,
+          position: "top-center",
+
+          // Styling
+          style: {},
+          className: "",
+
+          // Custom Icon
+          icon: "👏",
+
+          // Change colors of success/error/loading icon
+          iconTheme: {
+            primary: "#000",
+            secondary: "#fff",
+          },
+
+          // Aria
+          ariaProps: {
+            role: "status",
+            "aria-live": "polite",
+          },
+        });
+      }
+      if (response.data.message === "sucess") {
+        navigate("/user/explore");
+      }
+      
+      console.log(response.data.message);
+      // Handle response as needed
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  //
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formdata.email === "" || !validateEmail(formdata.email)) {
@@ -129,19 +170,21 @@ function Sign_in() {
               <span className="flex-shrink mx-4 text-gray-400">OR</span>
               <div className="flex-grow border-t border-gray-400"></div>
             </div>
-
-            <GoogleLogin
-              onSuccess={(credentialResponse) => {
-                const credentialResponseDecode = jwtDecode(
-                  credentialResponse.credential
-                );
-
-                console.log(credentialResponseDecode);
-              }}
-              onError={() => {
-                console.log("Login Failed");
-              }}
-            />
+            <div className="flex justify-center place-items-center items-center">
+              {" "}
+              <GoogleLogin
+                onSuccess={(credentialResponse) => {
+                  const credentialResponseDecode = jwtDecode(
+                    credentialResponse.credential
+                  );
+                  const userEmail = credentialResponseDecode.email;
+                  handlegoogle(userEmail); // Pass userEmail to handlegoogle function
+                }}
+                onError={() => {
+                  console.log("Login Failed");
+                }}
+              />
+            </div>
 
             <div className="text-center items-center text-[0.75rem] mr-4 font-serif font-light mt-2">
               <p>

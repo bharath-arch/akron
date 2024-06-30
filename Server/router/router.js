@@ -7,24 +7,23 @@ import jwt from "jsonwebtoken";
 const router = express();
 
 router.post("/SignIn", async (req, res) => {
-
   const usertype = req.body.usertype;
-  if(usertype === 'user'){
-    console.log('user')
+  if (usertype === "user") {
+    console.log("user");
     const isMatch = await User.findOne({ email: req.body.email });
     console.log(isMatch);
-    
-    console.log(usertype)
-  
+
+    console.log(usertype);
+
     if (isMatch && isMatch.isVerified === true) {
       const otp = generateOTP(6);
-  
+
       if (!req.body.email) {
         return res.status(400).json({ message: "mail is required" });
       }
-  
+
       var token = jwt.sign({ email: req.body.email, otp: otp }, "shhhhh");
-  
+
       await sendMail({
         email: req.body.email,
         subject: `opt : ${otp}`,
@@ -38,23 +37,22 @@ router.post("/SignIn", async (req, res) => {
     } else {
       return res.status(409).json({ message: "Sign up" }).end();
     }
-  }
-  else{
-    console.log('founder')
+  } else {
+    console.log("founder");
     const isMatch = await Registraion.findOne({ email: req.body.email });
     console.log(isMatch);
-    
-    console.log(usertype)
-  
-    if (isMatch ) {
+
+    console.log(usertype);
+
+    if (isMatch) {
       const otp = generateOTP(6);
-  
+
       if (!req.body.email) {
         return res.status(400).json({ message: "mail is required" });
       }
-  
+
       var token = jwt.sign({ email: req.body.email, otp: otp }, "shhhhh");
-  
+
       await sendMail({
         email: req.body.email,
         subject: `opt : ${otp}`,
@@ -69,7 +67,6 @@ router.post("/SignIn", async (req, res) => {
       return res.status(409).json({ message: "Sign up" }).end();
     }
   }
-  
 });
 
 router.post("/newUser", async (req, res) => {
@@ -86,9 +83,9 @@ router.post("/newUser", async (req, res) => {
     if (!req.body.email) {
       return res.status(400).json({ message: "mail is required" });
     }
-   
+
     const newUser = new User({ email: email, role: "user", isVerified: true });
-    await newUser.save()
+    await newUser.save();
 
     var token = jwt.sign({ email: req.body.email, otp: otp }, "shhhhh");
 
@@ -104,6 +101,55 @@ router.post("/newUser", async (req, res) => {
     });
   }
 });
+
+router.post("/googleLogin", async (req, res) => {
+  try {
+    const { email, type } = req.body; // Access email from req.body
+    console.log(email);
+    const isMatch = await User.findOne({ email: req.body.email });
+    if (isMatch) {
+      return res.json({ message: "Already email exist please Login" });
+    } else {
+      const newUser = new User({ email: email, role: type, isVerified: true });
+      await newUser.save();
+      return res.json({ message: "sucess" });
+    }
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+router.post("/gSingIn", async (req, res) => {
+  console.log("ppp")
+  const usertype = req.body.usertype;
+  if (usertype === "user") {
+    const isMatch = await User.findOne({ email: req.body.email });
+    
+
+    if (isMatch && isMatch.isVerified === true) {
+      
+      return res.status(201).json({ message: "sucess" }).end();
+
+     
+    } else {
+      return res.status(201).json({ message: "Sign up" }).end();
+    }
+  } else {
+    const isMatch = await Registraion.findOne({ email: req.body.email });
+    console.log(isMatch);
+
+
+    if (isMatch) {
+
+      return res.status(201).json({ message: "sucess" }).end();
+
+
+    } else {
+      return res.status(201).json({ message: "Sign up" }).end();
+    }
+  }
+});
+
 
 export default router;
 

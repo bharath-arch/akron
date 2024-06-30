@@ -5,6 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import axios from "axios";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
+import toast, { Toaster } from "react-hot-toast";
 
 function Sign_in() {
   setBodyColor({ color: "lightgray" });
@@ -23,6 +24,37 @@ function Sign_in() {
   }
   const { usertype } = useParams();
   console.log(usertype);
+  const handlegoogle = async (email) => {
+    // console.log(mail)
+    if (usertype === "user") {
+      localStorage.setItem("userEmail", email);
+      // localStorage.setItem("token", response.data.token);
+      localStorage.setItem("usertype", usertype);
+      const response = await axios.post(
+        "http://localhost:4000/register/gSingIn",
+        { email, usertype }
+      );
+
+      if (response.data.message === "sucess") {
+        navigate("/user/explore");
+      }
+    }
+    if (usertype === "founder") {
+      localStorage.setItem("founderEmail", email);
+      // localStorage.setItem("token", response.data.token);
+      localStorage.setItem("usertype", usertype);
+    }
+    const response = await axios.post(
+      "http://localhost:4000/register/gSingIn",
+      { email, usertype }
+    );
+
+    if (response.data.message === "sucess") {
+      navigate("/Company_dashboard");
+    } else {
+      toast.error("user not found");
+    }
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formdata.email === "" || !validateEmail(formdata.email)) {
@@ -33,15 +65,14 @@ function Sign_in() {
         setLoading(true);
         const response = await axios.post(
           "http://localhost:4000/register/SignIn",
-          {...formdata , usertype}
+          { ...formdata, usertype }
         );
         // userEmail
-        if(usertype === 'user'){
+        if (usertype === "user") {
           localStorage.setItem("userEmail", response.data.email);
           localStorage.setItem("token", response.data.token);
           localStorage.setItem("usertype", usertype);
-        }
-        else{
+        } else {
           localStorage.setItem("founderEmail", response.data.email);
           localStorage.setItem("token", response.data.token);
           localStorage.setItem("usertype", usertype);
@@ -54,9 +85,11 @@ function Sign_in() {
       }
     }
   };
-  
+
   return (
     <div className="m-4">
+      <Toaster position="top-center" reverseOrder={false} />
+
       <div className="">
         <span className="font-bold text-4xl bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">
           Akron
@@ -101,18 +134,22 @@ function Sign_in() {
               <span className="flex-shrink mx-4 text-gray-400">OR</span>
               <div className="flex-grow border-t border-gray-400"></div>
             </div>
-            <GoogleLogin
-              onSuccess={(credentialResponse) => {
-                const credentialResponseDecode = jwtDecode(
-                  credentialResponse.credential
-                );
+            <div className="flex justify-center place-items-center items-center">
+              <GoogleLogin
+                onSuccess={(credentialResponse) => {
+                  const credentialResponseDecode = jwtDecode(
+                    credentialResponse.credential
+                  );
+                  const Email = credentialResponseDecode.email;
+                  console.log(Email);
+                  handlegoogle(Email); // Pass userEmail to handlegoogle function
+                }}
+                onError={() => {
+                  console.log("Login Failed");
+                }}
+              />
+            </div>
 
-                console.log(credentialResponseDecode);
-              }}
-              onError={() => {
-                console.log("Login Failed");
-              }}
-            />
             {/* <div className="flex justify-between border-2 p-2 rounded-lg text-center items-center">
               <span className="">
                 <FcGoogle size={26} />

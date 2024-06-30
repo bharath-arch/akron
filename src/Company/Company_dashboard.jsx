@@ -94,7 +94,7 @@ function Company_dashboard() {
             </span>
           </div>
           <div className="flex gap-5 items-center">
-            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=recipient@example.com">
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=bharathkumar100q@gmail.com&su=Complaints%20Here">
               <RiCustomerService2Line
                 size={20}
                 title="Customer Support"
