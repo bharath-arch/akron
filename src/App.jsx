@@ -31,6 +31,7 @@ import Admin_login from "./Admin/Admin_login";
 import Manage_user from './Admin/Manage_user';
 import Kyc_approval from './Admin/Kyc_approval';
 import WithdrawInvestmentAmount from "./Admin/WithdrawInvestmentAmount";
+import LayoutAdmin from './Admin/layoutAdmin'
 
 
 function App() {
@@ -58,8 +59,10 @@ function App() {
         <Route path="/startup/founder_form" element={<Founder_form />}></Route>
         <Route path="/founder_form" element={<Founder_form />}></Route>
         <Route path="/company_dashboard" element={<Company_dashboard />}></Route>
-        <Route path="/admin_dashboard" element={<Admin_dashboard />}></Route>
-        <Route path="/Admin_login"  element={<Admin_login />}></Route>
+
+        <Route path="/adminLogin"  element={<Admin_login />}></Route>
+        <Route path="/admin/layout" element={<LayoutAdmin />}></Route>
+        <Route path="/admindashboard" element={<Admin_dashboard />}></Route>
         <Route path="/manage_user"  element={<Manage_user/>}></Route>
         <Route path="/withdrawInvestment"  element={<WithdrawInvestmentAmount/>}></Route>
         {/* <Route path="/Application_data/admin_dashboard" element={<Admin_dashboard />}></Route> */}

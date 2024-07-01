@@ -6,9 +6,9 @@ function Manage_user() {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
   const adminEmail = localStorage.getItem("adminEmail");
-  const handlelogout = () => {
-    localStorage.removeItem("adminEmail");
 
+  const handleLogout = () => {
+    localStorage.removeItem("adminEmail");
     navigate("/Login");
   };
 
@@ -17,8 +17,9 @@ function Manage_user() {
       navigate("/admin_login");
     }, [adminEmail]);
   }
+
   useEffect(() => {
-    const callServer = async () => {
+    const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:4000/kyc_approval");
         setData(response.data.result);
@@ -26,77 +27,58 @@ function Manage_user() {
         console.log(err);
       }
     };
-    // Call the function here to avoid infinite loop
-    callServer();
-  }, []); // empty dependency array to ensure it runs only once
+    fetchData();
+  }, []);
 
   return (
-    <div>
-      <div className="">
-        <div className="flex justify-between text-center items-center ml-8 mr-8 mt-3">
-          <div className="">
-            <span className="font-bold text-4xl bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">
-              Akorn
-            </span>
-          </div>
-          <div className=" flex gap-5 items-center text-center ">
-            <Link to="/admin_dashboard">
-              <span
-                className="font-semibold text-xl"
-                onClick={() => navigate("/admin_dashboard")}
-              >
-                Admin Dashboard
-              </span>
-            </Link>
-            <span className="text-xl"onClick={handlelogout}>Logout</span>
-          </div>
+    <>
+      <div className="w-full  flex mt-16  justify-center max-w-4xl">
+        <div className="grid grid-cols-3 gap-8">
+          <DashboardSection
+            data={data}
+            status="pending"
+            title="Pending"
+            color="blue"
+          />
+          <DashboardSection
+            data={data}
+            status="false"
+            title="Rejected"
+            color="red"
+          />
+          <DashboardSection
+            data={data}
+            status="true"
+            title="Approved"
+            color="green"
+          />
         </div>
       </div>
-      <section className="flex gap-2 flex-col pt-10 pl-16">
-        <span className="text-2xl font-semibold mb-10">User Kyc</span>
-        <span className="text-xl font-semibold ">Pending</span>
-        {data.map((value, index) => (
-          <div key={index} className="mt-3">
-            {value.Status === "pending" ? (
-              <Link to={`/manage_user/kyc/${value._id}`}>
-                <span className="cursor-pointer">{value.email}</span>
-              </Link>
-            ) : (
-              ""
-            )}
-          </div>
-        ))}
-      </section>
-      <section className="flex gap-2 flex-col pt-10 pl-16">
-        <span className="text-xl font-semibold text-red-500 ">Rejected</span>
-        {data.map((value, index) => (
-          <div key={index} className="mt-3">
-            {value.Status === "false" ? (
-              <Link to={`/manage_user/kyc/${value._id}`}>
-                <span className="cursor-pointer">{value.email}</span>
-              </Link>
-            ) : (
-              ""
-            )}
-          </div>
-        ))}
-      </section>
-      <section className="flex gap-2 flex-col pt-10 pl-16">
-        <span className="text-xl font-semibold text-green-500 ">Approved</span>
-        {data.map((value, index) => (
-          <div key={index} className="mt-3">
-            {value.Status === "true" ? (
-              <Link to={`/manage_user/kyc/${value._id}`}>
-                <span className="cursor-pointer">{value.email}</span>
-              </Link>
-            ) : (
-              ""
-            )}
-          </div>
-        ))}
-      </section>
-    </div>
+    </>
   );
 }
+
+const DashboardSection = ({ data, status, title, color }) => (
+  <section
+    className={`flex flex-col gap-2 border border-gray-300 rounded-lg p-4 transform transition duration-500  hover:scale-110`}
+  >
+    <span className={`text-xl font-semibold text-${color ?? "black"}-500`}>
+      {title}
+    </span>
+    {data
+      .filter((value) => value.Status === status)
+      .map((value, index) => (
+        <div key={index} className="mt-3">
+          <Link
+            to={`/manage_user/kyc/${value._id}`}
+            className="text-blue-500 hover:underline"
+          >
+            <span className="cursor-pointer">{value.email}</span>
+          </Link>
+          {/* Render other fields here */}
+        </div>
+      ))}
+  </section>
+);
 
 export default Manage_user;

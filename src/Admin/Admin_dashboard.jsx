@@ -25,17 +25,12 @@ function Admin_dashboard() {
       }
     };
     fetchData();
-  }, [data]);
-
-  useEffect(() => {
-    // Use navigate within useEffect
-    navigate("/admin_dashboard"); // Adjust this to the appropriate route
-  }, [navigate]); // Add navigate to dependency array
+  }, []);
 
   const adminEmail = localStorage.getItem("adminEmail");
-  const handlelogout = () => {
-    localStorage.removeItem("adminEmail");
 
+  const handleLogout = () => {
+    localStorage.removeItem("adminEmail");
     navigate("/Login");
   };
 
@@ -44,95 +39,38 @@ function Admin_dashboard() {
       navigate("/admin_login");
     }, [adminEmail]);
   }
+
   return (
-    <div>
-      <div className="">
-        <div className="flex justify-between text-center items-center ml-8 mr-8 mt-3">
-          <div className="">
-            <span className="font-bold text-4xl bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">
-              Akorn
-            </span>
-          </div>
-          <div className=" flex gap-5 items-center text-center ">
-            <Link to={"/withdrawInvestment"}>
-              <span className="font-semibold text-xl text-red-500">
-                Withdraw requests
-              </span>
-            </Link>
-            <Link to={"/manage_user"}>
-              <span className="font-semibold text-xl">Manage User’s</span>
-            </Link>
-            <span className="text-xl" onClick={handlelogout}>
-              Logout
-            </span>
-          </div>
+    <>
+      
+
+      <div className="w-full mt-16 flex  justify-center max-w-4xl">
+        <div className="grid grid-cols-3 gap-8">
+          <DashboardSection data={data} status={null} title="Pending" color="blue" />
+          <DashboardSection data={data} status={false} title="Rejected" color="red" />
+          <DashboardSection data={data} status={true} title="Approved" color="green" />
         </div>
       </div>
-      <section className="flex gap-2 flex-col pt-10 pl-16">
-        <span className="text-2xl font-semibold">Admin Dashboard</span>
-
-        {data.map((value, index) => (
-          <div key={index} className="mt-3">
-            {value.status === null ? (
-              <Link to={`/${value._id}`}>
-                {value.pan && (
-                  <span className="cursor-pointer">
-                    Application Detail: {value.pan}
-                  </span>
-                )}
-              </Link>
-            ) : (
-              ""
-            )}
-
-            {/* Render other fields here */}
-          </div>
-        ))}
-      </section>
-      <section className="flex gap-2 flex-col pt-10 pl-16">
-        <span className="text-xl font-semibold text-red-500">Rejected</span>
-
-        {data.map((value, index) => (
-          <div key={index} className="mt-3">
-            {value.status === false ? (
-              <Link to={`/${value._id}`}>
-                {value.pan && (
-                  <span className="cursor-pointer">
-                    Application Detail: {value.pan}
-                  </span>
-                )}
-              </Link>
-            ) : (
-              ""
-            )}
-
-            {/* Render other fields here */}
-          </div>
-        ))}
-      </section>
-      <section className="flex gap-2 flex-col pt-10 pl-16">
-        <span className="text-xl font-semibold text-green-500">Approved</span>
-
-        {data.map((value, index) => (
-          <div key={index} className="mt-3">
-            {value.status === true ? (
-              <Link to={`/${value._id}`}>
-                {value.pan && (
-                  <span className="cursor-pointer">
-                    Application Detail: {value.pan}
-                  </span>
-                )}
-              </Link>
-            ) : (
-              ""
-            )}
-
-            {/* Render other fields here */}
-          </div>
-        ))}
-      </section>
-    </div>
+    </>
   );
 }
+
+const DashboardSection = ({ data, status, title, color }) => (
+  <section className={`flex flex-col gap-2 border border-gray-300 rounded-lg p-4 transform transition duration-500  hover:scale-110`}>
+    <span className={`text-xl font-semibold text-${color}-500`}>{title}</span>
+    {data
+      .filter((value) => value.status === status)
+      .map((value, index) => (
+        <div key={index} className="mt-3">
+          {value.pan && (
+            <Link to={`/${value._id}`} className="text-blue-500 hover:underline">
+              Application Detail: {value.pan}
+            </Link>
+          )}
+          {/* Render other fields here */}
+        </div>
+      ))}
+  </section>
+);
 
 export default Admin_dashboard;
