@@ -8,7 +8,7 @@ function MiniPortfolio({ handleclosetogglebutton, selectedLots }) {
 const [formdata , setFormdata] = useState({
   lotSize:'',
   price:'',
-  email: localStorage.getItem('email'),
+  email: localStorage.getItem('userEmail'),
 })
 
 const posttosquare = async ()=>{

@@ -14,23 +14,23 @@ router.put("/", async (req, res) => {
     const lots = req.body.lots;
     const price = req.body.price;
     const companyEmail = req.body.companyEmail;
-    console.log(lots)
-    console.log(companyId)
-    console.log(email)
+    console.log(lots);
+    console.log(companyId);
+    console.log(email);
     // Check if a document with the same companyId and email already exists
     const moneyData = await Money.findOne({ email: email });
-    console.log(moneyData)
+    console.log(moneyData);
     const isMatch = await Userlots.findOne({
       companyId: companyId,
       email: email,
     });
-    console.log(isMatch,'ooo')
+    console.log(isMatch, "ooo");
     const companylotsData = await Registraion.findOne({
       email: companyEmail,
       _id: companyId,
     });
     console.log(email);
-    console.log(companylotsData,'ppp');
+    console.log(companylotsData, "ppp");
     const newlotsEntryCD = companylotsData.lots - lots;
     console.log("lll");
 
@@ -126,7 +126,7 @@ router.put("/squareLots", async (req, res) => {
 
     //seller lots minus
     const sellerLots = sellEmailMatch.lots - lots;
-
+    console.log(moneyData.money);
     if (moneyData.money >= price) {
       if (isMatch) {
         //user buy
@@ -144,12 +144,12 @@ router.put("/squareLots", async (req, res) => {
           email: sellEmail,
         });
         const sellEmailUpdatedamountInvested =
-        sellEmailMatch.amountInvested - lots * 10000;
-      console.log(sellEmailUpdatedamountInvested);
-      await Userlots.findOneAndUpdate(
-        { companyId: companyId, email: sellEmail },
-        { lots: sellerLots, amountInvested: sellEmailUpdatedamountInvested }
-      );
+          sellEmailMatch.amountInvested - lots * 10000;
+        console.log(sellEmailUpdatedamountInvested);
+        await Userlots.findOneAndUpdate(
+          { companyId: companyId, email: sellEmail },
+          { lots: sellerLots, amountInvested: sellEmailUpdatedamountInvested }
+        );
         await Money.findOneAndUpdate(
           { email: sellEmail },
           { money: newSellerMoney }

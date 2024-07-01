@@ -120,36 +120,29 @@ router.post("/googleLogin", async (req, res) => {
 });
 
 router.post("/gSingIn", async (req, res) => {
-  console.log("ppp")
+  console.log("ppp");
   const usertype = req.body.usertype;
   if (usertype === "user") {
+    console.log(req.body.email)
     const isMatch = await User.findOne({ email: req.body.email });
-    
 
     if (isMatch && isMatch.isVerified === true) {
-      
       return res.status(201).json({ message: "sucess" }).end();
-
-     
     } else {
       return res.status(201).json({ message: "Sign up" }).end();
     }
-  } else {
+  }
+  if (usertype === "founder") {
     const isMatch = await Registraion.findOne({ email: req.body.email });
     console.log(isMatch);
 
-
     if (isMatch) {
-
       return res.status(201).json({ message: "sucess" }).end();
-
-
     } else {
       return res.status(201).json({ message: "Sign up" }).end();
     }
   }
 });
-
 
 export default router;
 

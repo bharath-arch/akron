@@ -26,6 +26,7 @@ function Square() {
 
     //userEmail
     const email = localStorage.getItem("userEmail");
+    console.log(sellEmail,'userEmail')
 
     try {
       const response = await axios.put(

@@ -30,6 +30,7 @@ function Sign_in() {
       localStorage.setItem("userEmail", email);
       // localStorage.setItem("token", response.data.token);
       localStorage.setItem("usertype", usertype);
+      console.log(email,usertype)
       const response = await axios.post(
         "http://localhost:4000/register/gSingIn",
         { email, usertype }

@@ -8,6 +8,7 @@ import Add_money from "../Wallet/Add_money";
 import Withdraw_money from "../Wallet/Withdraw_money.jsx";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 function Explore() {
   const [toggle, setActivetoggle] = useState(false);
@@ -42,7 +43,7 @@ function Explore() {
     fetchWalletData();
   }, [walletdata]);
 
-  console.log(walletdata)
+  // console.log(walletdata)
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -73,10 +74,14 @@ function Explore() {
   const withdrawtogglebutton = () => {
     withdrawsetActivetoggle(!withdrawtoggle);
   };
+
+  const moneyData = ()=>{
+  }
   
 
   return (
-    <div className="ml-6 mr-6">
+    <div className="ml-6 mr-6">-
+          <Toaster position="top-center" reverseOrder={false} />
       <section>
         <div className="md:flex  ">
           <span className="text-3xl font-bold mb-5">What's hot</span>
@@ -163,7 +168,7 @@ function Explore() {
         {toggle && (
           <div className="bg-white flex justify-center relative ">
             <span className="absolute top-[-10.75rem] ">
-              <Add_money handleclosetogglebutton={handleclosetogglebutton} />
+              <Add_money handleclosetogglebutton={handleclosetogglebutton} moneyCallback = {moneyData}/>
             </span>
           </div>
         )}

@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { IoCloseOutline } from "react-icons/io5";
 
-function Add_money({ handleclosetogglebutton }) {
+function Add_money({ handleclosetogglebutton, moneyCallback }) {
   const [money, setMoney] = useState(0);
   const inputRef = useRef(null);
   //userEmail
@@ -22,7 +22,7 @@ function Add_money({ handleclosetogglebutton }) {
       setwalletData(response.data.result);
     };
     fetchWalletData();
-  }, [walletdata]);
+  }, []);
 
   const walletAmount = async () => {
     const response = await axios.put(
@@ -45,12 +45,15 @@ function Add_money({ handleclosetogglebutton }) {
 
   const handle2000 = () => {
     setMoney((pre) => pre + 2000);
+    moneyCallback(money);
   };
   const handle4000 = () => {
     setMoney((pre) => pre + 4000);
+    moneyCallback(money);
   };
   const handle6000 = () => {
     setMoney((pre) => pre + 6000);
+    moneyCallback(money);
   };
 
   useEffect(() => {
