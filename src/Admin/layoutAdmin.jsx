@@ -43,7 +43,7 @@ function LayoutAdmin() {
       </div>
       <div className="flex">
         {/* Sidebar */}
-        <div className="w-80 bg-white border h-lvh  border-gray-300 rounded-lg shadow-md text-center">
+        <div className="w-80 bg-white border h-[77vh]  border-gray-300 rounded-lg shadow-md text-center">
           <div className="mt-10 flex flex-col">
             <Link to={"/admindashboard"}>
               <button className="mb-5  px-[4.8rem] py-3 text-xl font-semibold text-gray-700 hover:text-red-500 cursor-pointer border border-gray-300">

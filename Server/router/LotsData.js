@@ -41,12 +41,14 @@ router.put("/", async (req, res) => {
         const newLots = isMatch.lots + lots;
         await Userlots.findOneAndUpdate(
           { companyId: companyId, email: email },
-          { lots: newLots, amountInvested: newPrice }
+          { lots: newLots, amountInvested: newPrice },
+          {new:true}
         );
-        await Money.findOneAndUpdate({ email: email }, { money: newMoney });
+        await Money.findOneAndUpdate({ email: email }, { money: newMoney },{new:true});
         await Registraion.findOneAndUpdate(
           { email: companyEmail, _id: companyId },
-          { lots: newlotsEntryCD }
+          { lots: newlotsEntryCD },
+          {new:true}
         );
         return res.status(200).json({ message: "Updated" });
       } else {

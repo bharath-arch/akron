@@ -28,7 +28,7 @@ router.put("/add", async (req, res) => {
     console.log(isMatch)
     if (isMatch) {
       const totalMoney = isMatch.money + money;
-      await Money.findOneAndUpdate({ email: email }, { money: totalMoney });
+      await Money.findOneAndUpdate({ email: email }, { money: totalMoney },{new:true});
       return res.status(200).json({ message: "Updated" });
     } else {
       const newData = new Money({ email, money });

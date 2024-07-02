@@ -22,7 +22,7 @@ function Add_money({ handleclosetogglebutton, moneyCallback }) {
       setwalletData(response.data.result);
     };
     fetchWalletData();
-  }, []);
+  }, [walletdata]);
 
   const walletAmount = async () => {
     const response = await axios.put(
