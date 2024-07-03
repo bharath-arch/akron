@@ -61,10 +61,11 @@ function App() {
         <Route path="/company_dashboard" element={<Company_dashboard />}></Route>
 
         <Route path="/adminLogin"  element={<Admin_login />}></Route>
-        <Route path="/admin/layout" element={<LayoutAdmin />}></Route>
-        <Route path="/admindashboard" element={<Admin_dashboard />}></Route>
-        <Route path="/manage_user"  element={<Manage_user/>}></Route>
-        <Route path="/withdrawInvestment"  element={<WithdrawInvestmentAmount/>}></Route>
+        
+        <Route path="/admin/layout" element={<LayoutAdmin />}>
+        <Route path="admindashboard" element={<Admin_dashboard />}></Route>
+        <Route path="manage_user"  element={<Manage_user/>}></Route>
+        <Route path="withdrawInvestment"  element={<WithdrawInvestmentAmount/>}></Route></Route>
         {/* <Route path="/Application_data/admin_dashboard" element={<Admin_dashboard />}></Route> */}
         <Route path="/manage_user/kyc/:id" element={<Kyc_approval/>}></Route>
         <Route path="/:id" element={<Application_data />}> </Route>

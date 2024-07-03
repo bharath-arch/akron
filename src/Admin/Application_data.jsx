@@ -45,7 +45,7 @@ function Application_data() {
   const acceptCompany = async () => {
     try {
       await axios.put(`http://localhost:4000/company_approve/${id}`);
-      navigate("/admin_dashboard");
+      navigate("/admin/layout/admindashboard");
     } catch (err) {
       console.log(err);
     }
@@ -56,7 +56,7 @@ function Application_data() {
       await axios.put(
         `http://localhost:4000/company_approve/rejectCompany/${id}`
       );
-      navigate("/admin_dashboard");
+      navigate("/admin/layout/admindashboard");
     } catch (err) {
       console.log(err);
     }
@@ -84,7 +84,7 @@ function Application_data() {
             <div className="flex gap-5 items-center">
               <span
                 className="font-semibold text-xl cursor-pointer"
-                onClick={() => navigate("/admin_dashboard")}
+                onClick={() => navigate("/admin/layout/admindashboard")}
               >
                 Admin Dashboard
               </span>

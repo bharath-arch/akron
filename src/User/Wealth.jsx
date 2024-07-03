@@ -64,10 +64,20 @@ function Wealth() {
         companyEmail,
         price,
       });
-      setLots(1);
-      if (response.data.message !== "Updated") {
-        toast.error("insufficient Money!");
+      if (response.data.message !== "Updated" ) {
+        if(response.data.message ==="please do kyc befor investing...")
+          {
+            toast.error("please do kyc befor investing...");
+          }else{
+
+            toast.error("insufficient Money!");
+          }
       }
+      else{
+        toast.success(`${lots} Lots buyed`);
+      }
+      setLots(1);
+
     } catch (err) {
       console.log(err);
     }

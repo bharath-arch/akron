@@ -45,17 +45,17 @@ function LayoutAdmin() {
         {/* Sidebar */}
         <div className="w-80 bg-white border h-[77vh]  border-gray-300 rounded-lg shadow-md text-center">
           <div className="mt-10 flex flex-col">
-            <Link to={"/admindashboard"}>
+            <Link to={"admindashboard"}>
               <button className="mb-5  px-[4.8rem] py-3 text-xl font-semibold text-gray-700 hover:text-red-500 cursor-pointer border border-gray-300">
                 Home
               </button>
             </Link>
-            <Link to={"/withdrawInvestment"}>
+            <Link to={"withdrawInvestment"}>
               <button className="px-4 py-3 text-xl font-semibold text-gray-700 hover:text-red-500 cursor-pointer border border-gray-300">
                 Withdraw Requests
               </button>
             </Link>
-            <Link to={"/manage_user"}>
+            <Link to={"manage_user"}>
               <button className=" mt-5 px-10 py-3 text-xl font-semibold text-gray-700 hover:text-red-500 cursor-pointer border border-gray-300">
                 Manage Users
               </button>

@@ -33,7 +33,7 @@ function Admin_login() {
       console.log(response.data.result);
 
       if(response.data && response.data.result === 'sucess'){
-        navigate('/admin_dashboard')
+        navigate('/admin/layout/admindashboard')
         localStorage.setItem('adminEmail',formdata.email)
       }
       else{
@@ -87,7 +87,7 @@ function Admin_login() {
               {/* <Link to={"/verification"}> */}
                 {" "}
                 <div className="flex justify-center items-center  ">
-                 {/* <Link to={"/admin_dashboard"}> */}
+                 
                   <button 
                     onClick={handleSubmit}
                     className="mt-3 text-center border-2 rounded-lg w-[22rem] p-2 font-arima bg-blue-600 text-white text-xl items-center hover:bg-blue-700 transition-transform duration-300 ease-in-out transform hover:scale-95 "
