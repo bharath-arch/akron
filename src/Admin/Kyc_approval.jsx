@@ -41,7 +41,7 @@ function Kyc_approval() {
   const acceptRequest = async () => {
     try {
       await axios.put(`http://localhost:4000/kyc_approval/accept/${id}`);
-      navigate("/manage_user");
+      navigate("/admin/layout/admindashboard");
     } catch (err) {
       console.log(err);
     }
@@ -51,7 +51,7 @@ function Kyc_approval() {
   const rejectRequest = async () => {
     try {
       await axios.put(`http://localhost:4000/kyc_approval/reject/${id}`);
-      navigate("/manage_user");
+      navigate("/admin/layout/admindashboard");
     } catch (err) {
       console.log(err);
     }

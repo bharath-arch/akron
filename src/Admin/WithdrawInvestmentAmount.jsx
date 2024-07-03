@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 function WithdrawInvestmentAmount() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
+  const [state, setState] = useState(false);
   const [error, setError] = useState(null);
   const adminEmail = localStorage.getItem("adminEmail");
 
@@ -32,13 +33,15 @@ function WithdrawInvestmentAmount() {
       }
     };
     fetchData();
-  }, []);
+  }, [state]);
 
   const acceptWithdraw = async (email, companyId) => {
     await axios.put("http://localhost:4000/companyWithdrawMoney/accept", {
       email,
       companyId,
     });
+
+    setState(true);
   };
 
   const rejectWithdraw = async (email, companyId) => {
@@ -46,12 +49,12 @@ function WithdrawInvestmentAmount() {
       email,
       companyId,
     });
+    setState(true);
+
   };
 
   return (
     <>
-      
-
       <section className="w-full max-w-4xl mt-16 grid grid-cols-3 gap-8">
         <DashboardSection
           data={data}

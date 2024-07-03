@@ -73,6 +73,8 @@ function Company_dashboard() {
   // let totalPercent = (raiserAmount / toCrcal) * 100;
   let raiserAmount = (data?.lotsOriginal - data?.lots) * 10000;
   let toCrcal = data?.amount_expected_to_raise * 10000000; // expected amount
+
+  console.log(raiserAmount, toCrcal);
   let totalPercent = (raiserAmount / toCrcal) * 100;
 
   let rawgrapData = [
@@ -94,7 +96,7 @@ function Company_dashboard() {
             </span>
           </div>
           <div className="flex gap-5 items-center">
-          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=bharathkumar100q@gmail.com&su=Complaints%20Here">
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=bharathkumar100q@gmail.com&su=Complaints%20Here">
               <RiCustomerService2Line
                 size={20}
                 title="Customer Support"
@@ -157,7 +159,7 @@ function Company_dashboard() {
 
       <section className="flex gap-2 flex-col pt-10 pl-16 mb-14">
         {" "}
-        {toCrcal === raiserAmount ? (
+        {raiserAmount >= toCrcal ? (
           <>
             {statusInfo?.status === "null" ? (
               <>

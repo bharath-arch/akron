@@ -27,7 +27,7 @@ function Wealth() {
       }
     };
     fetchData();
-  }, []);
+  }, [lots ]);
 
   const positivelotshandle = () => {
     if (lots >= data[count].lots) {
