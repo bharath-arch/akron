@@ -5,11 +5,15 @@ import setBodyColor from "../setBodyColor";
 import { RxHamburgerMenu } from "react-icons/rx";
 
 function Layout() {
-  const [selectLink, setSelectLink] = useState("Home");
+  const navLink = (window.location.pathname)
+  console.log(navLink)
+  const [selectLink, setSelectLink] = useState(navLink);
   const [isOpen, setActivetoogle] = useState(false);
   const navtoggle = () => setActivetoogle(!isOpen);
   setBodyColor({ color: "white" });
   const navigate = useNavigate()
+  // console.log(window.location.pathname.split('/'))
+  console.log(selectLink)
   return (
     <div className="">
       <div className="flex items-center justify-between mt-5 mr-5 ml-5 md:flex md:justify-between md:text-center md:items-center md:ml-8 md:mr-8 md:mt-3">
@@ -21,42 +25,37 @@ function Layout() {
         <div className="">
           <ul className=" hidden md:flex gap-5 font-semibold text-xl">
             <li
-              onClick={() => setSelectLink("Home")}
-              className={`${
-                selectLink === "Home" ? "text-blue-900 p-2" : "p-2"
-              }`}
+              onClick={() => setSelectLink("/")}
+              className={`${selectLink === "/" ? "text-blue-900 p-2" : "p-2"
+                }`}
             >
               <Link to={""}>Home</Link>
             </li>
             <li
-              onClick={() => setSelectLink("startup")}
-              className={`${
-                selectLink === "startup" ? "text-blue-900 p-2" : "p-2"
-              }`}
+              onClick={() => setSelectLink('/startup')}
+              className={`${selectLink === "/startup" ? "text-blue-900 p-2" : "p-2"
+                }`}
             >
               <Link to={"/startup"}>Startup</Link>
             </li>
             <li
-              onClick={() => setSelectLink("academy")}
-              className={`${
-                selectLink === "academy" ? "text-blue-900 p-2" : "p-2"
-              }`}
+              onClick={() => setSelectLink("/academy")}
+              className={`${selectLink === "/academy" ? "text-blue-900 p-2" : "p-2"
+                }`}
             >
               <Link to={"/academy"}>Academy</Link>
             </li>
             <li
-              onClick={() => setSelectLink("partnership")}
-              className={`${
-                selectLink === "partnership" ? "text-blue-900 p-2" : "p-2"
-              }`}
+              onClick={() => setSelectLink("/partnership")}
+              className={`${selectLink === "/partnership" ? "text-blue-900 p-2" : "p-2"
+                }`}
             >
               <Link to={"/partnership"}>Partnership</Link>
             </li>
             <li
-              onClick={() => setSelectLink("Aboutus")}
-              className={`${
-                selectLink === "Aboutus" ? "text-blue-900 p-2" : "p-2"
-              }`}
+              onClick={() => setSelectLink("/Aboutus")}
+              className={`${selectLink === "/Aboutus" ? "text-blue-900 p-2" : "p-2"
+                }`}
             >
               <Link to={"/Aboutus"}>About Us</Link>
             </li>
@@ -85,55 +84,49 @@ function Layout() {
               <div className="relative ">
                 <ul className=" absolute flex flex-col items-center text-[12px] top-5  right-4 font-semibold  bg-white md:hidden">
                   <li
-                    onClick={() => setSelectLink("Home")}
-                    className={`${
-                      selectLink === "Home" ? "text-blue-900 p-2" : "p-2"
-                    }`}
+                    onClick={() => setSelectLink("/")}
+                    className={`${selectLink === "/" ? "text-blue-900 p-2" : "p-2"
+                      }`}
                   >
                     <Link to={""}>Home</Link>
                   </li>
                   <hr className="" />
                   <li
-                    onClick={() => setSelectLink("startup")}
-                    className={`${
-                      selectLink === "startup" ? "text-blue-900 p-2" : "p-2"
-                    }`}
+                    onClick={() => setSelectLink(navLink)}
+                    className={`${selectLink === "/startup" ? "text-blue-900 p-2" : "p-2"
+                      }`}
                   >
                     <Link to={"/startup"}>Startup</Link>
                   </li>
                   <hr className="" />
                   <li
-                    onClick={() => setSelectLink("academy")}
-                    className={`${
-                      selectLink === "academy" ? "text-blue-900 p-2" : "p-2"
-                    }`}
+                    onClick={() => setSelectLink("/academy")}
+                    className={`${selectLink === "/academy" ? "text-blue-900 p-2" : "p-2"
+                      }`}
                   >
                     <Link to={"/academy"}>Academy</Link>
                   </li>
                   <hr className="" />
                   <li
-                    onClick={() => setSelectLink("partnership")}
-                    className={`${
-                      selectLink === "partnership" ? "text-blue-900 p-2" : "p-2"
-                    }`}
+                    onClick={() => setSelectLink("/partnership")}
+                    className={`${selectLink === "/partnership" ? "text-blue-900 p-2" : "p-2"
+                      }`}
                   >
                     <Link to={"/partnership"}>Partnership</Link>
                   </li>
                   <hr className="" />
                   <li
-                    onClick={() => setSelectLink("Aboutus")}
-                    className={`${
-                      selectLink === "Aboutus" ? "text-blue-900 p-2" : "p-2"
-                    }`}
+                    onClick={() => setSelectLink("/Aboutus")}
+                    className={`${selectLink === "/Aboutus" ? "text-blue-900 p-2" : "p-2"
+                      }`}
                   >
                     <Link to={"/Aboutus"}>About Us</Link>
                   </li>
                   <hr className="" />
                   <li
                     onClick={() => setSelectLink("sign_in")}
-                    className={`${
-                      selectLink === "sign_in" ? "text-blue-900 p-2" : "p-2"
-                    }`}
+                    className={`${selectLink === "sign_in" ? "text-blue-900 p-2" : "p-2"
+                      }`}
                   >
                     <Link to={"/sign_in"}>Sign In</Link>
                   </li>

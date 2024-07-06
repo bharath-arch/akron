@@ -1,8 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { RiCustomerService2Line } from "react-icons/ri";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 
 function LayoutAdmin() {
+  const navLink = (window.location.pathname)
+  console.log(navLink)
+  ///admin/layout/admindashboard
+  const [selectLink, setSelectLink] = useState(navLink);
+
+  console.log(selectLink, 'ppp')
+
   const navigate = useNavigate();
   const adminEmail = localStorage.getItem("adminEmail");
 
@@ -17,7 +24,7 @@ function LayoutAdmin() {
       navigate("/admin_login");
     }
   }, [adminEmail, navigate]);
-
+  // console.log(selectLink === "/admin/layout/admindashboard")
   return (
     <div className="p-8 flex flex-col bg-gray-100 min-h-screen">
       {/* Header */}
@@ -46,17 +53,17 @@ function LayoutAdmin() {
         <div className="w-80 bg-white border h-[77vh]  border-gray-300 rounded-lg shadow-md text-center">
           <div className="mt-10 flex flex-col">
             <Link to={"admindashboard"}>
-              <button className="mb-5  px-[4.8rem] py-3 text-xl font-semibold text-gray-700 hover:text-red-500 cursor-pointer border border-gray-300">
+              <button className={`${selectLink === "/admin/layout/admindashboard" ? "mb-5  px-[4.8rem] py-3 text-xl font-semibold text-blue-900 hover:text-red-500 cursor-pointer border border-gray-300 " : "mb-5  px-[4.8rem] py-3 text-xl font-semibold text-gray-700 hover:text-red-500 cursor-pointer border border-gray-300"}`} onClick={() => { setSelectLink('/admin/layout/admindashboard') }}>
                 Home
               </button>
             </Link>
             <Link to={"withdrawInvestment"}>
-              <button className="px-4 py-3 text-xl font-semibold text-gray-700 hover:text-red-500 cursor-pointer border border-gray-300">
+              <button className={`${selectLink === "/admin/layout/withdrawInvestment" ? "px-4 py-3 text-xl font-semibold text-blue-900 hover:text-red-500 cursor-pointer border border-gray-300" : "px-4 py-3 text-xl font-semibold text-gray-700 hover:text-red-500 cursor-pointer border border-gray-300"}`} onClick={() => setSelectLink('/admin/layout/withdrawInvestment')}>
                 Withdraw Requests
               </button>
             </Link>
             <Link to={"manage_user"}>
-              <button className=" mt-5 px-10 py-3 text-xl font-semibold text-gray-700 hover:text-red-500 cursor-pointer border border-gray-300">
+              <button className={`${selectLink === "/admin/layout/manage_user" ? "mt-5 px-10 py-3 text-xl font-semibold  text-blue-900 hover:text-red-500 cursor-pointer border border-gray-300" : " mt-5 px-10 py-3 text-xl font-semibold text-gray-700 hover:text-red-500 cursor-pointer border border-gray-300"}`} onClick={() => { setSelectLink('/admin/layout/manage_user') }}>
                 Manage Users
               </button>
             </Link>
