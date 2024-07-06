@@ -2,17 +2,17 @@ import express from 'express'
 
 const router = express();
 
-const userData = {
-    email: 'b8344001@gmail.com',
-    password: 'bharath@001'
-};
+// const userData = {
+//     email: process.env.ADMINEMAIL,
+//     password: process.env.ADMINPASSWORD
+// };
 
-
+// console.log(email,password)
 router.post('/',async (req,res)=>{
     
-    const isEmailMatch = userData.email === req.body.email;
+    const isEmailMatch = process.env.ADMINEMAIL === req.body.email;
     // console.log(isEmailMatch)
-    const isPasswordMatch = userData.password === req.body.password;
+    const isPasswordMatch = process.env.ADMINPASSWORD === req.body.password;
     // console.log(isPasswordMatch)
 
     if(isEmailMatch && isPasswordMatch){

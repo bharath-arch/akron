@@ -13,7 +13,7 @@ import toast, { Toaster } from "react-hot-toast";
 function Explore() {
   const [toggle, setActivetoggle] = useState(false);
   const [withdrawtoggle, withdrawsetActivetoggle] = useState(false);
-  const [walletdata, setwalletData] = useState();
+  const [walletdata, setwalletData] = useState(null);
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -41,9 +41,9 @@ function Explore() {
       setwalletData(response.data.result);
     };
     fetchWalletData();
-  }, [walletdata]);
+  }, [walletdata,color]);
 
-  // console.log(walletdata)
+  console.log(walletdata)
   useEffect(() => {
     const fetchData = async () => {
       try {
