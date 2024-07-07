@@ -138,7 +138,7 @@ function Founder_form() {
             value={formdata.name}
             onChange={handleChangeEvent}
             className=" border-2 rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
-            placeholder="Company Name"
+            placeholder="Founder Name"
           />
           <label htmlFor="" className="font-semibold text-xl">
             Sector
@@ -182,7 +182,7 @@ function Founder_form() {
             value={formdata.linkedin_founder}
             onChange={handleChangeEvent}
             className=" border-2 rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
-            placeholder="Your Name"
+            placeholder="LinkedIn URL Of Founder"
           />
 
           <label htmlFor="" className="font-semibold text-xl">
@@ -194,7 +194,7 @@ function Founder_form() {
             value={formdata.company_name}
             onChange={handleChangeEvent}
             className=" border-2 rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
-            placeholder="Your Name"
+            placeholder="Company Name"
           />
           <label htmlFor="" className="font-semibold text-xl">
             LinkedIn Page of the Company
@@ -205,7 +205,7 @@ function Founder_form() {
             value={formdata.linkedin_company}
             onChange={handleChangeEvent}
             className=" border-2 rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
-            placeholder="Your Name"
+            placeholder="LinkedIn URL Of Company"
           />
 
           <label htmlFor="" className="font-semibold text-xl">
@@ -238,7 +238,7 @@ function Founder_form() {
             value={formdata.website}
             onChange={handleChangeEvent}
             className=" border-2 rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
-            placeholder="Aadhar"
+            placeholder="Website URL"
           />
           <label htmlFor="" className="font-semibold text-xl">
             Describe your previous fundraising rounds
@@ -248,7 +248,7 @@ function Founder_form() {
             value={formdata.previous_fundraising_rounds_discription}
             onChange={handleChangeEvent}
             className=" border-2 rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
-            placeholder="Contact Number"
+            placeholder="Previous Round Discription"
           />
           <label htmlFor="" className="font-semibold text-xl">
             Describe your product
@@ -258,7 +258,7 @@ function Founder_form() {
             value={formdata.product_discription}
             onChange={handleChangeEvent}
             className=" border-2 rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
-            placeholder="Contact Number"
+            placeholder="Product Discription"
           />
           <label htmlFor="" className="font-semibold text-xl">
             Describe the traction
@@ -268,10 +268,10 @@ function Founder_form() {
             value={formdata.traction}
             onChange={handleChangeEvent}
             className=" border-2 rounded-2xl w-[100%] h-auto p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
-            placeholder="Describe about yourself"
+            placeholder="Traction"
           />
           <label htmlFor="" className="font-semibold text-xl">
-            Describe the revenue you are making
+            Describe the revenue you are making in Cr
           </label>
 
           <textarea
@@ -279,7 +279,7 @@ function Founder_form() {
             value={formdata.revenue_and_making}
             onChange={handleChangeEvent}
             className=" border-2 rounded-2xl w-[100%] h-auto p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
-            placeholder="Describe about yourself"
+            placeholder="Revenue"
           />
           <label htmlFor="" className="font-semibold text-xl">
             How big is the team ?
@@ -300,13 +300,13 @@ function Founder_form() {
             type="text"
             value={formdata.community_fund_raising_reason}
             onChange={handleChangeEvent}
-            className=" border-2  border-dashed rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
+            className=" border-2   rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
             placeholder="Why do you want to raise a Community round ?"
           />
           <label htmlFor="" className="font-semibold text-xl">
             From where you learn about us
           </label>
-          <textarea
+          <input
             name="where_you_learn_about_us"
             value={formdata.where_you_learn_about_us}
             onChange={handleChangeEvent}
@@ -366,14 +366,14 @@ function Founder_form() {
             placeholder="Upload your Financials"
           />
           <label htmlFor="" className="font-semibold text-xl">
-            How much do you expect to raise with us ?
+            How much do you expect to raise with us ? in Cr
           </label>
           <input
             type="text"
             name="amount_expected_to_raise"
             value={formdata.amount_expected_to_raise}
             onChange={handleChangeEvent}
-            className=" border-2 border-dashed rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
+            className=" border-2 border rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
             placeholder="Amount"
           />
           <div className="flex justify-center mt-3 mb-3">

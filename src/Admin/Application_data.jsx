@@ -233,7 +233,7 @@ function Application_data() {
                       <thead>
                         <tr className="bg-gray-200">
                           <th className="p-3 text-center text-xs font-medium text-gray-700 uppercase border border-gray-400"></th>
-                          {data.incomeExpenses.incomeExpenses.map(
+                          {data.incomeExpenses?.incomeExpenses.map(
                             (column, index) => (
                               <th
                                 key={index}

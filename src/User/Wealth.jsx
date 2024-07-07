@@ -27,7 +27,7 @@ function Wealth() {
       }
     };
     fetchData();
-  }, [lots ]);
+  }, [lots]);
 
   const positivelotshandle = () => {
     if (lots >= data[count].lots) {
@@ -64,16 +64,15 @@ function Wealth() {
         companyEmail,
         price,
       });
-      if (response.data.message !== "Updated" ) {
-        if(response.data.message ==="please do kyc befor investing...")
-          {
-            toast.error("please do kyc befor investing...");
-          }else{
+      if (response.data.message !== "Updated") {
+        if (response.data.message === "please do kyc befor investing...") {
+          toast.error("please do kyc befor investing...");
+        } else {
 
-            toast.error("insufficient Money!");
-          }
+          toast.error("insufficient Money!");
+        }
       }
-      else{
+      else {
         toast.success(`${lots} Lots buyed`);
       }
       setLots(1);
@@ -144,33 +143,38 @@ function Wealth() {
       </div>
 
       <div className="w-full h-full bg-gradient-to-br pt-5 pr-8 pl-8">
-        <p className="font-semibold ">Investment Amount - {lots * 10000}</p>
+        {data[count]?.lots === 0 ? ('Lots are Taken please Check Squre for lots Avalibility') : (<p className="font-semibold ">Investment Amount - {lots * 10000}</p>)}
+
         <div className="flex flex-col">
           <div className="flex justify-between">
             <span className="font-bold text-3xl">
               {data && data[count]?.company_name}
             </span>
-            <div className="flex gap-2 text-center items-center">
-              <span
-                className="p-2 border cursor-pointer select-none"
-                onClick={negativelotshandle}
-              >
-                &minus;
-              </span>
+            {data[count]?.lots === 0 ? ('') : (<>
+              <div className="flex gap-2 text-center items-center">
+                <span
+                  className="p-2 border cursor-pointer select-none"
+                  onClick={negativelotshandle}
+                >
+                  &minus;
+                </span>
 
-              <button
-                className="p-2 cursor-pointer bg-blue-700 text-white rounded-md px-6 text-xl hover:scale-95 "
-                onClick={handleLotsize}
-              >
-                Buy {lots} lots
-              </button>
-              <span
-                className="p-2 border cursor-pointer select-none"
-                onClick={positivelotshandle}
-              >
-                &#43;
-              </span>
-            </div>
+                <button
+                  className="p-2 cursor-pointer bg-blue-700 text-white rounded-md px-6 text-xl hover:scale-95 "
+                  onClick={handleLotsize}
+                >
+                  Buy {lots} lots
+                </button>
+                <span
+                  className="p-2 border cursor-pointer select-none"
+                  onClick={positivelotshandle}
+                >
+                  &#43;
+                </span>
+              </div>
+            </>)}
+
+
           </div>
           <span className="mt-2">
             <span className="font-bold">Sector :</span>{" "}
@@ -250,7 +254,7 @@ function Wealth() {
         {view && (
           <div className="overflow-x-auto flex justify-center flex-col">
             {exceldata?.incomeExpenses.incomeExpenses &&
-            exceldata.incomeExpenses.incomeExpenses.length > 0 ? (
+              exceldata.incomeExpenses.incomeExpenses.length > 0 ? (
               <table className="table-auto border-collapse border border-gray-400">
                 <thead>
                   <tr className="bg-gray-200">

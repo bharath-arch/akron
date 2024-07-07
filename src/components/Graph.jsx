@@ -7,11 +7,11 @@ function Graph({ data }) {
   let arr2 = [];
   
   if (data) {
-    data?.incomeExpenses.incomeExpenses[0]["values"].forEach((item) => {
+    data?.incomeExpenses?.incomeExpenses[0]["values"].forEach((item) => {
       arr.push(item);
     });
 
-    data?.incomeExpenses.quaters.forEach((item) => {
+    data?.incomeExpenses?.quaters.forEach((item) => {
       if (item !== "Column1") {
         arr1.push(item);
       }

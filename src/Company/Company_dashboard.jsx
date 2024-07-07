@@ -72,6 +72,7 @@ function Company_dashboard() {
   // let toCrcal = 10;
   // let totalPercent = (raiserAmount / toCrcal) * 100;
   let raiserAmount = (data?.lotsOriginal - data?.lots) * 10000;
+  console.log(raiserAmount)
   let toCrcal = data?.amount_expected_to_raise * 10000000; // expected amount
 
   console.log(raiserAmount, toCrcal);
