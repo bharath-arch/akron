@@ -12,7 +12,7 @@ function User_popup() {
   const handleMouseLeave = () => setIsOpen(false);
 
   const handlelogout = () => {
-    localStorage.removeItem("email");
+    localStorage.removeItem("userEmail");
     localStorage.removeItem("usertype");
     localStorage.removeItem("token");
     navigate("/Login");
