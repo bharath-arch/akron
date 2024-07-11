@@ -373,7 +373,7 @@ function Founder_form() {
             name="amount_expected_to_raise"
             value={formdata.amount_expected_to_raise}
             onChange={handleChangeEvent}
-            className=" border-2 border rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
+            className=" border-2  rounded-2xl w-[100%]  p-2  border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500"
             placeholder="Amount"
           />
           <div className="flex justify-center mt-3 mb-3">
