@@ -8,15 +8,34 @@ import setBodyColor from "../setBodyColor";
 function Verification() {
   setBodyColor({ color: "lightgray" });
   const navigate = useNavigate();
-  const [otp, setOtp] = useState(['', '', '', '', '','']);
+  const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [data, setData] = useState({
     email: '',
     token: '',
     otp: '',
   });
 
+//Nav Backward
+
+  // useEffect(() => {
+  //   const emailcheck = () => {
+  //     const localuEmail = localStorage.getItem('userEmail')
+  //     const founderEmails = localStorage.getItem('founderEmail')
+
+  //     const userType = localStorage.getItem('usertype')
+  //     console.log(localuEmail, '')
+  //     if (userType==='user' && localuEmail) {
+  //       navigate('/user/explore')
+  //     }
+  //     if (userType==='founder' && founderEmails) {
+  //       navigate('/company_dashboard')
+  //     }
+  //   }
+  //   emailcheck()
+  // }, [])
+
   const otpInputs = useRef([]);
-const usertype = localStorage.getItem('usertype')
+  const usertype = localStorage.getItem('usertype')
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -27,18 +46,18 @@ const usertype = localStorage.getItem('usertype')
       );
       const response_data = response.data; // Response data is accessed directly from response, no need for response.json()
       console.log(response_data.message); // Logging the response message
-      
+
       if (response_data && response_data.message === 'user created') {
-        if(usertype === 'user'){
+        if (usertype === 'user') {
           navigate("/user/explore");
           // localStorage.removeItem("usertype");
           console.log("user")
         }
-        else{
+        else {
           navigate('/Company_dashboard')
           // localStorage.removeItem("usertype");
         }
-       
+
       } else {
         toast.error(response_data.message); // Displaying error message from response_data
       }
@@ -100,12 +119,13 @@ const usertype = localStorage.getItem('usertype')
                   />
                 ))}
               </div>
-              <p className="text-[0.75rem] mr-4 font-serif font-light mt-2 flex justify-between">
+              {/* resend OTP */}
+              {/* <p className="text-[0.75rem] mr-4 font-serif font-light mt-2 flex justify-between">
                 <span className="ml-6">Didn’t receive the code?</span>
                 <span className="text-blue-800 ml-3">Resend OTP </span>
-              </p>
+              </p> */}
               <div className="flex justify-center items-center">
-               <button type="submit" onClick={handleSubmit} className="mt-3 text-center border-2 rounded-lg w-[100%] p-2 font-arima bg-blue-600 text-white text-xl items-center hover:bg-blue-700 transition-transform duration-300 ease-in-out transform hover:scale-95 ">
+                <button type="submit" onClick={handleSubmit} className="mt-3 text-center border-2 rounded-lg w-[100%] p-2 font-arima bg-blue-600 text-white text-xl items-center hover:bg-blue-700 transition-transform duration-300 ease-in-out transform hover:scale-95 ">
                   Continue
                 </button>
               </div>

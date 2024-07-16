@@ -72,14 +72,15 @@ function Company_dashboard() {
   // let toCrcal = 10;
   // let totalPercent = (raiserAmount / toCrcal) * 100;
   let raiserAmount = (data?.lotsOriginal - data?.lots) * 10000;
-  console.log(raiserAmount)
+  // console.log(raiserAmount)
   let toCrcal = data?.amount_expected_to_raise * 10000000; // expected amount
 
   console.log(raiserAmount, toCrcal);
-  let totalPercent = (raiserAmount / toCrcal) * 100;
 
+  let totalPercent = (raiserAmount / toCrcal) * 10;
+  const amountneeded =  toCrcal*10 - raiserAmount 
   let rawgrapData = [
-    { name: " Amount needed", value: toCrcal - raiserAmount },
+    { name: " Amount needed", value: amountneeded },
     { name: "Raised Amount", value: raiserAmount },
   ];
   let percentageGraphData = [

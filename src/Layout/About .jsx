@@ -1,15 +1,23 @@
 import React from "react";
 import image from "../assets/ceo.png";
+import p1 from '../assets/p1.webp';
+import p2 from '../assets/p2.webp';
+import p3 from '../assets/p3.webp';
+import p4 from '../assets/p4.webp';
+import p5 from '../assets/p5.jpeg';
+import p6 from '../assets/p6.jpeg';
+import p7 from '../assets/p7.webp';
+import p8 from '../assets/p8.webp';
 
 const teamData = [
-  { id: 1, name: "Amal", position: "CEO", image: image },
-  { id: 2, name: "Deepak", position: "CFO", image: image },
-  { id: 3, name: "Vishnu", position: "Developer", image: image },
-  { id: 4, name: "Rahul", position: "Developer", image: image },
-  { id: 5, name: "Jithusha", position: "Developer", image: image },
-  { id: 6, name: "Aparna", position: "Investment Advisor", image: image },
-  { id: 7, name: "Sanijith", position: "Investment Advisor", image: image },
-  { id: 8, name: "Shafeque", position: "Investment Advisor", image: image },
+  { id: 1, name: "Amal", position: "CEO", image: p1 },
+  { id: 2, name: "Deepak", position: "CFO", image: p2 },
+  { id: 3, name: "Vishnu", position: "Developer", image: p3 },
+  { id: 4, name: "Rahul", position: "Developer", image: p4 },
+  { id: 5, name: "Jithusha", position: "Developer", image: p5 },
+  { id: 6, name: "Aparna", position: "Investment Advisor", image: p6 },
+  { id: 7, name: "Sanijith", position: "Investment Advisor", image: p7 },
+  { id: 8, name: "Shafeque", position: "Investment Advisor", image: p8 },
 ];
 
 function About() {
