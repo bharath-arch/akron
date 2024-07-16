@@ -3,10 +3,11 @@ import axios from "axios";
 import { FaRegEdit } from "react-icons/fa";
 import setBodyColor from "../setBodyColor";
 import InputBox from "./components/InputBox";
+import { useNavigate } from "react-router-dom";
 
 function Profile() {
   setBodyColor({ color: "white" });
-
+  const navigate = useNavigate();
   const [data, setData] = useState({});
   const [show, setShow] = useState(false);
   const [param, setParam] = useState("");
@@ -73,7 +74,8 @@ function Profile() {
             Akorn
           </span>
         </div>
-        <span>Logout</span>
+        <span onClick={() => { navigate("/user/explore") }} className="transform transition duration-500 hover:scale-125 cursor-pointer">Go Back</span>
+
       </div>
 
       <section className="pl-[6rem] pt-16 pr-[6rem]">
