@@ -105,7 +105,7 @@ function Kyc() {
                   Akorn
                 </span>
               </div>
-              <span>Logout</span>
+              <span onClick={() => { navigate("/user/explore") }} className="hover:scale-125">Go Back</span>
             </div>
           </div>
           <section className="pl-16 pt-10 pr-16">
@@ -367,7 +367,8 @@ function Kyc() {
                   Akorn
                 </span>
               </div>
-              <span>Logout</span>
+              <span onClick={() => { navigate("/user/explore") }} className="transform transition duration-500 hover:scale-125 cursor-pointer">Go Back</span>
+
             </div>
           </div>
           <section className="pl-16 pt-10 pr-16">
