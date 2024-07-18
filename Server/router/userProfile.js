@@ -9,9 +9,15 @@ router.get("/", async (req, res) => {
     console.log(email);
     const isMatch = await Userkyc.findOne({ email });
 
-    console.log(isMatch);
+    if (isMatch === null) {
+      console.log(isMatch)
+      return res.status(200).json({ message: "Do KYC" });
+    }
+    else {
 
-    return res.status(200).json({ message: "success", result: isMatch });
+      return res.status(200).json({ message: "success", result: isMatch });
+    }
+
   } catch (error) {
     return res
       .status(500)
@@ -24,7 +30,7 @@ router.put("/updateuserDetail", async (req, res) => {
   const formdata = req.body.formdata;
   console.log(email, formdata);
   const isMatch = await Userkyc.findOneAndUpdate({ email }, formdata);
-  res.status(200).json({result:isMatch})
+  res.status(200).json({ result: isMatch })
 });
 
 export default router;

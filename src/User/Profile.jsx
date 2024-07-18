@@ -4,6 +4,7 @@ import { FaRegEdit } from "react-icons/fa";
 import setBodyColor from "../setBodyColor";
 import InputBox from "./components/InputBox";
 import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 function Profile() {
   setBodyColor({ color: "white" });
@@ -17,14 +18,21 @@ function Profile() {
   const email = localStorage.getItem("userEmail");
 
   // const address = data?.address
-
+  const [toggle, setToggle] = useState(true)
   useEffect(() => {
     const userProfile = async () => {
       try {
         const response = await axios.get("http://localhost:4000/profile", {
           params: { email },
         });
-        setData(response.data.result);
+        if (response.data.message === 'Do KYC') {
+          toast.error('please do KYC to veiw details')
+          setToggle(false)
+        }
+        else {
+
+          setData(response.data.result);
+        }
       } catch (error) {
         console.error("Error fetching user profile:", error);
       }
@@ -67,7 +75,8 @@ function Profile() {
   };
 
   return (
-    <div>
+    <>
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="flex justify-between text-center items-center ml-8 mr-8 mt-3">
         <div>
           <span className="font-bold text-4xl bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">
@@ -88,7 +97,8 @@ function Profile() {
             handleUpdate={handleUpdate}
           />
         )}
-        <span className="font-semibold text-xl">Profile</span>
+
+        {toggle === true ? (<><span className="font-semibold text-xl">Profile</span>
         <div className="flex mt-5">
           <div>
             <img
@@ -152,9 +162,10 @@ function Profile() {
               <span className="ml-[9.25rem]">{data?.aadhar}</span>
             </div>
           </div>
-        </div>
+        </div></>) : (<>please DO KYC to view profile</>)}
+
       </section>
-    </div>
+    </>
   );
 }
 

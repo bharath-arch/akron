@@ -130,70 +130,45 @@ router.put("/squareLots", async (req, res) => {
     const sellEmail = req.body.sellEmail;
     const email = req.body.email;
     console.log(sellEmail, email, "0000", lots, price);
-    const sellEmailMatch = await Userlots.findOne({
-      email: sellEmail,
-      companyId: companyId,
-    });
-    const isMatch = await Userlots.findOne({
-      companyId: companyId,
-      email: email,
-    });
-    const moneyData = await Money.findOne({ email: email });
-    const sellUserMoney = await Money.findOneAndUpdate({ email: sellEmail });
-    let newMoney = moneyData.money - price;
-    let newSellerMoney = sellUserMoney.money + price;
+    const kycDetails = await Userkyc.findOne({ email: email })
+    console.log(kycDetails, '---')
+    if (kycDetails === null) {
+      res.status(200).json({ message: 'please do Kyc before investing' })
+    }
+    else {
+      const sellEmailMatch = await Userlots.findOne({
+        email: sellEmail,
+        companyId: companyId,
+      });
+      const isMatch = await Userlots.findOne({
+        companyId: companyId,
+        email: email,
+      });
+      const moneyData = await Money.findOne({ email: email });
+      const sellUserMoney = await Money.findOneAndUpdate({ email: sellEmail });
 
-    //seller lots minus
-    const sellerLots = sellEmailMatch.lots - lots;
-    // console.log(moneyData.money);
-    if (moneyData.money >= price) {
-      if (isMatch) {
-        //user buy
-        const newLots = isMatch.lots + lots;
-        const newAmountInvested = isMatch.amountInvested + price;
-        await Userlots.findOneAndUpdate(
-          { companyId: companyId, email: email },
-          { lots: newLots, amountInvested: newAmountInvested }
-        );
-        await Money.findOneAndUpdate({ email: email }, { money: newMoney });
-        // selled user
+      let newMoney = moneyData.money - price;
+      let newSellerMoney = sellUserMoney.money + price;
 
-        await profileSquare.findOneAndDelete({
-          companyId: companyId,
-          email: sellEmail,
-        });
-        const sellEmailUpdatedamountInvested =
-          sellEmailMatch.amountInvested - lots * 10000;
-        // console.log(sellEmailUpdatedamountInvested);
-        await Userlots.findOneAndUpdate(
-          { companyId: companyId, email: sellEmail },
-          { lots: sellerLots, amountInvested: sellEmailUpdatedamountInvested }
-        );
-        await Money.findOneAndUpdate(
-          { email: sellEmail },
-          { money: newSellerMoney }
-        );
-      } else {
-        // console.log("Creating...");
-        if (moneyData.money >= price) {
-          let newMoney = moneyData.money - price;
-          const newLotEntry = new Userlots({
-            companyId,
-            companyName,
-            email,
-            lots,
-            price,
-            amountInvested: price, // Set initial amount invested
-          });
-
-          await newLotEntry.save();
-
+      //seller lots minus
+      const sellerLots = sellEmailMatch.lots - lots;
+      // console.log(moneyData.money);
+      if (moneyData.money >= price) {
+        if (isMatch) {
+          //user buy
+          const newLots = isMatch.lots + lots;
+          const newAmountInvested = isMatch.amountInvested + price;
+          await Userlots.findOneAndUpdate(
+            { companyId: companyId, email: email },
+            { lots: newLots, amountInvested: newAmountInvested }
+          );
           await Money.findOneAndUpdate({ email: email }, { money: newMoney });
+          // selled user
+
           await profileSquare.findOneAndDelete({
             companyId: companyId,
             email: sellEmail,
           });
-          //update sellUser Data
           const sellEmailUpdatedamountInvested =
             sellEmailMatch.amountInvested - lots * 10000;
           // console.log(sellEmailUpdatedamountInvested);
@@ -205,8 +180,42 @@ router.put("/squareLots", async (req, res) => {
             { email: sellEmail },
             { money: newSellerMoney }
           );
+        } else {
+          // console.log("Creating...");
+          if (moneyData.money >= price) {
+            let newMoney = moneyData.money - price;
+            const newLotEntry = new Userlots({
+              companyId,
+              companyName,
+              email,
+              lots,
+              price,
+              amountInvested: price, // Set initial amount invested
+            });
+
+            await newLotEntry.save();
+
+            await Money.findOneAndUpdate({ email: email }, { money: newMoney });
+            await profileSquare.findOneAndDelete({
+              companyId: companyId,
+              email: sellEmail,
+            });
+            //update sellUser Data
+            const sellEmailUpdatedamountInvested =
+              sellEmailMatch.amountInvested - lots * 10000;
+            // console.log(sellEmailUpdatedamountInvested);
+            await Userlots.findOneAndUpdate(
+              { companyId: companyId, email: sellEmail },
+              { lots: sellerLots, amountInvested: sellEmailUpdatedamountInvested }
+            );
+            await Money.findOneAndUpdate(
+              { email: sellEmail },
+              { money: newSellerMoney }
+            );
+          }
         }
       }
+
     }
     // return res.json()
   } catch (err) {

@@ -55,7 +55,7 @@ const posttosquare = async ()=>{
         />
       </div>
 
-      <div className="flex justify-center mt-2">
+      {/* <div className="flex justify-center mt-2">
         <div className="w-full h-30 border-2 p-3">
           <div className="flex justify-between mb-1">
             <span className="text-gray-400">Before</span>
@@ -71,7 +71,7 @@ const posttosquare = async ()=>{
             <span className="text-gray-400">{selectedLots.lots}</span>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="mt-5 flex justify-center">
         <button className="border bg-red-600 hover:bg-red-700 text-white px-8 py-1 font-arima rounded-lg" onClick={posttosquare}>
           sell

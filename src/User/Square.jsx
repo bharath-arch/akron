@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Search_filter from "../components/Search_filter";
+import toast, { Toaster } from "react-hot-toast";
 
 function Square() {
   const [data, setData] = useState([]);
@@ -22,11 +23,11 @@ function Square() {
   }, [data]);
 
   const handleBuy = async (companyId, amount, lots, companyName, sellEmail) => {
-    console.log(companyId, amount, lots, companyName, sellEmail);
+    // console.log(companyId, amount, lots, companyName, sellEmail);
 
     //userEmail
     const email = localStorage.getItem("userEmail");
-    console.log(sellEmail,'userEmail')
+    // console.log(sellEmail,'userEmail')
 
     try {
       const response = await axios.put(
@@ -40,13 +41,15 @@ function Square() {
           email,
         }
       );
-      console.log(response);
+      if(response.data.message === 'please do Kyc before investing'){
+        toast.error("please do kyc befor investing...");
+      }
     } catch (err) {
       console.log(err);
     }
   };
 
-  console.log(data);
+  // console.log(data);
   const [search, setSearch] = useState("");
   const [dropdown, setDropdown] = useState();
 
@@ -60,6 +63,7 @@ function Square() {
   }
   return (
     <div className="container mx-auto p-4 sm:p-6 lg:p-8">
+      <Toaster position="top-center" reverseOrder={false} />
       <section className="mb-6">
       <Search_filter data={data} searchContents={searchContent} dropDown = {dropDownContent} />
       </section>

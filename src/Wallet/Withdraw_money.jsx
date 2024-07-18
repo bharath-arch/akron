@@ -81,7 +81,7 @@ function Withdraw_money({ withdrawclosetogglebutton }) {
             value={money === 0 ? "" : `${money}`}
             type="text"
             onChange={handleChange}
-            placeholder="Minimum Amount &#8377;200"
+            placeholder="Minimum Amount in &#8377; "
             className="  mb-2  w-[98%] px-1 py-1  border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500 bg-gray-300"
           />
         </div>
