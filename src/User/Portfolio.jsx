@@ -47,17 +47,17 @@ function Portfolio() {
   const searchContent = (searchValue) => {
     setSearch(searchValue);
   };
-  
-  const dropDownContent = (dropdownfromChild)=>{
+
+  const dropDownContent = (dropdownfromChild) => {
     setDropdown(dropdownfromChild)
   }
   console.log(data)
-  
+
   return (
     <div className="container mx-auto p-4 sm:p-6 lg:p-8">
-    <section className="mb-6">
-      <Search_filter data={data} searchContents={searchContent} dropDown = {dropDownContent} />
-    </section>
+      <section className="mb-6">
+        <Search_filter data={data} searchContents={searchContent} dropDown={dropDownContent} />
+      </section>
 
       <section className="mt-6">
         {data && data.length > 0 ? (
@@ -65,7 +65,7 @@ function Portfolio() {
             {data?.filter((item) => {
               return (
                 search.toLowerCase() === "" ? item :
-                item.companyName.toLowerCase().includes(search.toLowerCase())
+                  item.companyName.toLowerCase().includes(search.toLowerCase())
               );
             }).map((item, index) => (
               <div key={index} className="bg-white p-4 rounded-lg shadow-md">
@@ -80,7 +80,7 @@ function Portfolio() {
                   Lot size: <span>{item.lots} </span>
                 </span>
                 <div className="mt-2 flex justify-between">
-                  <button
+                  {item.lots === 0 ? ('') : (<button
                     className="px-3 py-1 text-xl rounded-md text-white bg-red-700 font-arima hover:bg-red-800 transition-transform duration-300 ease-in-out transform hover:scale-95"
                     onClick={() =>
                       handletogglebutton(
@@ -91,7 +91,8 @@ function Portfolio() {
                     } // Pass lots value to the function
                   >
                     Sell
-                  </button>
+                  </button>)}
+
                   {/* <button className="px-3 py-1 text-xl rounded-md text-white bg-blue-700 font-arima hover:bg-blue-800 transition-transform duration-300 ease-in-out transform hover:scale-95">
                     View More
                   </button> */}

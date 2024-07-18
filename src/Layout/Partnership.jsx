@@ -124,7 +124,7 @@ function Partnership() {
           Startups Benefits
         </h2>
         <p className="text-lg text-center">
-          Exclusive benefits when you raise through Tyke
+          Exclusive benefits when you raise through Akorn
         </p>
       </section>
 
