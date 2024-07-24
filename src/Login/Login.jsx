@@ -6,6 +6,8 @@ import { Toaster } from "react-hot-toast";
 import toast from "react-hot-toast";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
+import { FcGoogle } from "react-icons/fc";
+
 
 function Sign_in() {
   setBodyColor({ color: "lightgray" });
@@ -170,7 +172,7 @@ function Sign_in() {
               <span className="flex-shrink mx-4 text-gray-400">OR</span>
               <div className="flex-grow border-t border-gray-400"></div>
             </div>
-            <div className="flex justify-center place-items-center items-center">
+            {/* <div className="flex justify-center place-items-center items-center">
               {" "}
               <GoogleLogin
                 onSuccess={(credentialResponse) => {
@@ -184,6 +186,12 @@ function Sign_in() {
                   console.log("Login Failed");
                 }}
               />
+            </div> */}
+            <div className="flex justify-between border-2 p-2 rounded-lg text-center items-center">
+              <span className="">
+                <FcGoogle size={26} />
+              </span>
+              <span className="mr-16 font-arima">Continue with Google</span>
             </div>
 
             <div className="text-center items-center text-[0.75rem] mr-4 font-serif font-light mt-2">

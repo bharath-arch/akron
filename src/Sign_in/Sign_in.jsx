@@ -135,7 +135,7 @@ function Sign_in() {
               <span className="flex-shrink mx-4 text-gray-400">OR</span>
               <div className="flex-grow border-t border-gray-400"></div>
             </div>
-            <div className="flex justify-center place-items-center items-center">
+            {/* <div className="flex justify-center place-items-center items-center">
               <GoogleLogin
                 onSuccess={(credentialResponse) => {
                   const credentialResponseDecode = jwtDecode(
@@ -149,14 +149,14 @@ function Sign_in() {
                   console.log("Login Failed");
                 }}
               />
-            </div>
+            </div> */}
 
-            {/* <div className="flex justify-between border-2 p-2 rounded-lg text-center items-center">
+            <div className="flex justify-between border-2 p-2 rounded-lg text-center items-center">
               <span className="">
                 <FcGoogle size={26} />
               </span>
               <span className="mr-16 font-arima">Continue with Google</span>
-            </div> */}
+            </div>
             <div className="text-center items-center text-[0.75rem] mr-4 font-serif font-light mt-2">
               <p>
                 <span> Don’t have an account ? </span>{" "}
