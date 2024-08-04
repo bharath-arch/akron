@@ -8,7 +8,6 @@ import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import { FcGoogle } from "react-icons/fc";
 
-
 function Sign_in() {
   setBodyColor({ color: "lightgray" });
   const [loading, setLoading] = useState(false);
@@ -27,34 +26,20 @@ function Sign_in() {
   }
 
   const handlegoogle = async (mail) => {
-    localStorage.setItem( "userEmail", mail );
+    localStorage.setItem("userEmail", mail);
     try {
       const response = await axios.post(
         "http://localhost:4000/register/googleLogin",
-        { email: mail, type: "user" } // Send email in the correct format
+        { email: mail, type: "user" }
       );
       if (response.data.message === "Already email exist please Login") {
         toast("user found please login", {
           duration: 4000,
           position: "top-center",
-
-          // Styling
-          style: {},
-          className: "",
-
-          // Custom Icon
           icon: "👏",
-
-          // Change colors of success/error/loading icon
           iconTheme: {
             primary: "#000",
             secondary: "#fff",
-          },
-
-          // Aria
-          ariaProps: {
-            role: "status",
-            "aria-live": "polite",
           },
         });
       }
@@ -63,12 +48,11 @@ function Sign_in() {
       }
       
       console.log(response.data.message);
-      // Handle response as needed
     } catch (error) {
       console.error(error);
     }
   };
-  //
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formdata.email === "" || !validateEmail(formdata.email)) {
@@ -83,32 +67,17 @@ function Sign_in() {
         );
 
         console.log(response.data.message);
-        //userEmail
         localStorage.setItem("userEmail", response.data.email);
         localStorage.setItem("token", response.data.token);
         console.log(response.data.token);
-        if (response.data.message == "mail is existing") {
+        if (response.data.message === "mail is existing") {
           toast("user found please login", {
             duration: 4000,
             position: "top-center",
-
-            // Styling
-            style: {},
-            className: "",
-
-            // Custom Icon
             icon: "👏",
-
-            // Change colors of success/error/loading icon
             iconTheme: {
               primary: "#000",
               secondary: "#fff",
-            },
-
-            // Aria
-            ariaProps: {
-              role: "status",
-              "aria-live": "polite",
             },
           });
           setLoading(false);
@@ -124,44 +93,47 @@ function Sign_in() {
 
   const founder = "founder";
   const user = "user";
+  
   return (
     <div className="m-4">
       <Toaster position="top-center" reverseOrder={false} />
 
-      <div className="">
+      <div className="text-center mb-8">
         <span className="font-bold text-4xl bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">
           Akron
         </span>
       </div>
 
-      <div className="flex justify-center text-center items-center mt-[2rem]">
-        <div className="bg-slate-50 h-[32rem] w-[25rem] rounded-[39px] ">
-          <div className="mt-9 font-bold text-3xl">Get Started </div>
-          <div className="mt-10 text-left ml-9 mr-6">
-            <p className="text-[0.75rem] font-serif font-light mb-2">Email</p>
+      <div className="flex justify-center items-center mt-8">
+        <div className="bg-slate-50 w-full max-w-md rounded-xl shadow-lg p-6">
+          <div className="font-bold text-3xl mb-6">Get Started</div>
+          <div className="text-left">
+            <p className="text-sm font-serif font-light mb-2">Email</p>
             <form onSubmit={handleSubmit}>
               <input
                 type="text"
                 name="email"
                 value={formdata.email}
                 onChange={handleChangeEvent}
-                className={`border-2 rounded-lg w-[100%] p-2 border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500 ${
+                className={`border-2 rounded-lg w-full p-2 border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500 ${
                   invalidEmail && "border-red-500"
                 }`}
-                placeholder="Enter your Email "
+                placeholder="Enter your Email"
               />
               {invalidEmail && (
-                <p className="text-red-500 text-[0.75rem] ml-2 mt-1">
+                <p className="text-red-500 text-xs mt-1">
                   Invalid email address
                 </p>
               )}
-              <p className="text-[0.75rem] mr-4 font-serif font-light mt-2">
+              <p className="text-xs font-serif font-light mt-2 mb-4">
                 By clicking Continue, you agree to our{" "}
                 <span className="text-blue-800">Terms & Conditions</span> and{" "}
-                <span className="text-blue-800">Privacy Policy</span> Continue
+                <span className="text-blue-800">Privacy Policy</span>
               </p>
-              <div className="flex justify-center items-center  ">
-                <button className="mt-3 text-center border-2 rounded-lg w-[22rem] p-2 font-arima bg-blue-600 text-white text-xl items-center hover:bg-blue-700 transition-transform duration-300 ease-in-out transform hover:scale-95 ">
+              <div className="flex justify-center">
+                <button
+                  className="mt-3 text-center border-2 rounded-lg w-full p-2 font-arima bg-blue-600 text-white text-xl hover:bg-blue-700 transition-transform duration-300 ease-in-out transform hover:scale-95"
+                >
                   {loading ? <p>loading...</p> : "Continue"}
                 </button>
               </div>
@@ -172,39 +144,23 @@ function Sign_in() {
               <span className="flex-shrink mx-4 text-gray-400">OR</span>
               <div className="flex-grow border-t border-gray-400"></div>
             </div>
-            {/* <div className="flex justify-center place-items-center items-center">
-              {" "}
-              <GoogleLogin
-                onSuccess={(credentialResponse) => {
-                  const credentialResponseDecode = jwtDecode(
-                    credentialResponse.credential
-                  );
-                  const userEmail = credentialResponseDecode.email;
-                  handlegoogle(userEmail); // Pass userEmail to handlegoogle function
-                }}
-                onError={() => {
-                  console.log("Login Failed");
-                }}
-              />
-            </div> */}
-            <div className="flex justify-between border-2 p-2 rounded-lg text-center items-center">
-              <span className="">
+
+            <div className="flex justify-center items-center border-2 p-2 rounded-lg text-center">
+              <span className="mr-2">
                 <FcGoogle size={26} />
               </span>
-              <span className="mr-16 font-arima">Continue with Google</span>
+              <span className="font-arima">Continue with Google</span>
             </div>
 
-            <div className="text-center items-center text-[0.75rem] mr-4 font-serif font-light mt-2">
+            <div className="text-center text-xs font-serif font-light mt-4">
               <p>
-                <span>Don’t have an account ? </span>{" "}
+                <span>Don’t have an account?</span>{" "}
                 <Link to={`login_in/${user}`}>
-                  {" "}
                   <span className="text-blue-800">Sign in instead</span>
                 </Link>
               </p>
               <p>
                 <Link to={`login_in/${founder}`}>
-                  {" "}
                   <span className="text-blue-800">Login as Founder</span>
                 </Link>
               </p>
