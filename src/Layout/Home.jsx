@@ -23,10 +23,7 @@ function Home() {
           </div>
         </div>
 
-        {/* Optional: Side Image */}
-        {/* <div className="hidden md:flex md:flex-1 md:ml-6 lg:ml-12">
-          <Sideimage />
-        </div> */}
+       
       </div>
     </div>
   );
