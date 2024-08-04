@@ -16,7 +16,7 @@ function Layout() {
   console.log(selectLink)
   return (
     <div className="">
-      <div className="flex items-center justify-between mt-5 mr-5 ml-5 md:flex md:justify-between md:text-center md:items-center md:ml-8 md:mr-8 md:mt-3">
+      <div className="flex items-center  p-4 justify-between mt-5 mr-5 ml-5 md:flex md:justify-between md:text-center md:items-center md:ml-8 md:mr-8 md:mt-3">
         <div className="">
           <span className="font-bold text-2xl  md:text-4xl bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">
             Akron
@@ -82,7 +82,7 @@ function Layout() {
 
             {isOpen && (
               <div className="relative z-40">
-                <ul className=" absolute flex flex-col items-center text-[12px] top-5  right-4 font-semibold  bg-white md:hidden">
+                <ul className=" absolute flex flex-col items-center text-[12px]  border  right-1 font-semibold  bg-white md:hidden">
                   <li
                     onClick={() => setSelectLink("/")}
                     className={`${selectLink === "/" ? "text-blue-900 p-2" : "p-2"
@@ -92,7 +92,7 @@ function Layout() {
                   </li>
                   <hr className="" />
                   <li
-                    onClick={() => setSelectLink(navLink)}
+                    onClick={() => setSelectLink("/startup")}
                     className={`${selectLink === "/startup" ? "text-blue-900 p-2" : "p-2"
                       }`}
                   >
