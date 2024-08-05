@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-function MobileNav({ nav }) {
+function MobileNav() {
     const [activeLink, setActiveLink] = useState(null);
 
     const { pathname } = useLocation();
@@ -10,16 +10,11 @@ function MobileNav({ nav }) {
         setActiveLink(item);
     };
 
-    const handlelogout = () => {
-        localStorage.removeItem("userEmail");
-        localStorage.removeItem("usertype");
-        localStorage.removeItem("token");
-        navigate("/Login");
-      };
+    
 
     return (
 
-        <ul className=" absolute flex flex-col items-center text-[12px]  border top-0  right-5 font-semibold  bg-white md:hidden">
+        <ul className=" absolute flex flex-col items-center text-[12px]  border top-12  right-5 font-semibold  bg-white md:hidden">
 
             {["explore", "id", "wealth", "square", "portfolio" ].map((item) => (
                 <li

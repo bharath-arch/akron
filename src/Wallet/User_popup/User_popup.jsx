@@ -13,6 +13,7 @@ function User_popup() {
   
   const handleMouseEnter = useCallback(() => {
     // Clear any existing timeout when mouse enters
+    console.log("object")
     if (timeoutId) {
       clearTimeout(timeoutId);
       setTimeoutId(null);

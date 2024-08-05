@@ -125,8 +125,8 @@ function SearchFilter({ searchContents, dropDown }) {
 
   const handleSelectChange = (event) => {
     setSelectedValue(event.target.value);
-    dropDown(event.target.value);
   };
+  dropDown(selectedValue);
 
   const searchSet = (e) => {
     setSearch(e.target.value);
@@ -146,8 +146,8 @@ function SearchFilter({ searchContents, dropDown }) {
   };
 
   return (
-    <section className="flex  justify-center gap-1 p-4">
-      <div className="flex items-center w-full md:w-auto">
+    <section className="flex  justify-center gap-1 ">
+      <div className="flex items-center md:w-auto ">
         <select
           className="outline-none focus:outline-none  p-2 rounded-lg  max-w-20 bg-gray-300"
           value={selectedValue}

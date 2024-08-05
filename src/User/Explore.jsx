@@ -133,7 +133,7 @@ function Explore() {
         </div>
       </section>
       <section className="flex flex-col">
-        <div className="bg-gray-400 h-auto md:w-[95%] mt-6 bg-gradient-to-tr from-gray-400 rounded-md to-gray-200">
+        <div className="bg-gray-400 h-auto md:p-5 md:w-[100%] mt-6 bg-gradient-to-tr from-gray-400 rounded-md to-gray-200">
           <div className="p-3">
             <div className="flex">
               <FaWallet size={30} />
@@ -183,7 +183,7 @@ function Explore() {
         )}
       </section>
       <section>
-        <div className="bg-gray-400 min-h-[15rem] md:w-[95%] mt-6 bg-gradient-to-b rounded-md from-gray-300 to-gray-200 p-5">
+        <div className="bg-gray-400 min-h-[15rem] md:w-[100%] mt-6 bg-gradient-to-b rounded-md from-gray-300 to-gray-200 p-5">
           <div className="flex justify-between">
             <span className={`text-${color}-500 font-semibold text-xl`}>
               {" "}
