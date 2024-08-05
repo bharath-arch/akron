@@ -100,7 +100,7 @@ function Sign_in() {
 
       <div className="flex justify-center items-center w-full max-w-md">
         <div className="bg-slate-50 w-full rounded-xl shadow-lg p-6 md:p-8">
-          <div className="font-bold text-2xl sm:text-3xl md:text-4xl mb-6">Get Started</div>
+          <div className="font-bold text-2xl sm:text-3xl md:text-4xl mb-6">Sign In</div>
           <div className="text-left">
             <p className="text-sm sm:text-base font-serif font-light mb-2">Email</p>
             <form onSubmit={handleSubmit}>

@@ -101,7 +101,7 @@ function Sign_in() {
 
 
         <div className=" mb-6">
-          <div className="font-bold text-2xl sm:text-3xl md:text-4xl">Sign In</div>
+          <div className="font-bold text-2xl sm:text-3xl md:text-4xl">Get Started</div>
         </div>
 
         <div className="text-left">
@@ -151,7 +151,7 @@ function Sign_in() {
             <p>
               <span>Don’t have an account?</span>{" "}
               <Link to={`/login_in/${user}`}>
-                <span className="text-blue-800">Sign in instead</span>
+                <span className="text-blue-800">Sign in</span>
               </Link>
             </p>
             <p>
