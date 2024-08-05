@@ -50,7 +50,7 @@ function App() {
           {/* <Route path="/Login" element={<Login />}></Route> */}
         </Route>
 
-        <Route path="/Login/:usertype" element={<Login />} />
+        <Route path="/signup/:usertype" element={<Login />} />  {/* signup page */}
         <Route path="/verification" element={<Verification />} />
         <Route path="/sign_in" element={<Sign_in />} />
         <Route path="/login_in/:usertype" element={<Sign_in />} />

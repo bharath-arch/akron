@@ -151,7 +151,7 @@ function Sign_in() {
             <p>
               <span>Don’t have an account?</span>{" "}
               <Link to={`/login_in/${user}`}>
-                <span className="text-blue-800">Sign in</span>
+                <span className="text-blue-800">Login</span>
               </Link>
             </p>
             <p>
