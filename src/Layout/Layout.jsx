@@ -66,7 +66,7 @@ function Layout() {
             <p className=" md:items-center md:p-2 md:text-xl">
               <Link to={"/login_in/user"}>Sign In</Link>
             </p>
-            <Link to={"/Login"}>
+            <Link to={"/login_in/user"}>
               {" "}
               <button
                 className={`md:p-3  md:text-xl md:bg-blue-800 md:text-white md:rounded-lg hover:bg-blue-700 transition-transform duration-300 ease-in-out transform hover:scale-95 `}
