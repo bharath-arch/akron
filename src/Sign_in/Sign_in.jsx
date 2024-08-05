@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import setBodyColor from "../setBodyColor";
 import axios from "axios";
 import { Toaster } from "react-hot-toast";
@@ -12,7 +12,8 @@ function Sign_in() {
   const navigate = useNavigate();
   const [formdata, setFormdata] = useState({ email: "" });
   const [invalidEmail, setInvalidEmail] = useState(false);
-  const usertype = "user";  // Simplified user type setting
+  const {usertype} = useParams(); // Simplified user type setting
+  console.log(usertype)
 
   const handleChangeEvent = (e) => {
     setFormdata({ ...formdata, [e.target.name]: e.target.value });
