@@ -1,19 +1,30 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import setBodyColor from "../setBodyColor";
 import axios from "axios";
 import { Toaster } from "react-hot-toast";
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 
-function Sign_in() {
+function Login() {
   setBodyColor({ color: "lightgray" });
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { usertype } = useParams()
+  console.log(usertype)
   const [formdata, setFormdata] = useState({
     email: "",
-    usertype: ''
   });
+  // useEffect(() => {
+  //   if (usertypes) {
+  //     setFormdata(prevFormdata => ({
+  //       ...prevFormdata,
+  //       [usertype]: usertypes
+  //     }));
+  //   }
+  // }, [usertypes]);
+
+  console.log(formdata)
   const [invalidEmail, setInvalidEmail] = useState(false);
 
   const handleChangeEvent = (e) => {
@@ -61,8 +72,8 @@ function Sign_in() {
       try {
         setLoading(true);
         const response = await axios.post(
-          "http://localhost:4000/register/SignIn",
-          formdata.email
+          `http://localhost:4000/register/login`,
+          formdata
         );
 
         localStorage.setItem("userEmail", response.data.email);
@@ -170,4 +181,4 @@ function Sign_in() {
   );
 }
 
-export default Sign_in;
+export default Login;

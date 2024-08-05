@@ -6,16 +6,15 @@ import jwt from "jsonwebtoken";
 
 const router = express();
 
-router.post("/SignIn", async (req, res) => {
-  const usertype = req.body.usertype;
-  if (usertype === "user") {
-    console.log("user");
-    const e = req.body.email
-    console.log(e,'email')
+router.post("/login", async (req, res) => {
+  // const usertype = req.body.usertype;
+  // // console.log(usertype,'oooo')
+  // if (usertype === "user") {
+  //   console.log("user");
     const isMatch = await User.findOne({ email: req.body.email });
     console.log(isMatch);
 
-    console.log(usertype);
+    // console.log(usertype);
 
     if (isMatch && isMatch.isVerified === true) {
       const otp = generateOTP(6);
@@ -39,36 +38,36 @@ router.post("/SignIn", async (req, res) => {
     } else {
       return res.status(409).json({ message: "Sign up" }).end();
     }
-  } else {
-    console.log("founder");
-    const isMatch = await Registraion.findOne({ email: req.body.email });
-    console.log(isMatch);
+  // } else {
+  //   console.log("founder");
+  //   const isMatch = await Registraion.findOne({ email: req.body.email });
+  //   console.log(isMatch);
 
-    console.log(usertype);
+  //   console.log(usertype);
 
-    if (isMatch) {
-      const otp = generateOTP(6);
+  //   if (isMatch) {
+  //     const otp = generateOTP(6);
 
-      if (!req.body.email) {
-        return res.status(400).json({ message: "mail is required" });
-      }
+  //     if (!req.body.email) {
+  //       return res.status(400).json({ message: "mail is required" });
+  //     }
 
-      var token = jwt.sign({ email: req.body.email, otp: otp }, "shhhhh");
+  //     var token = jwt.sign({ email: req.body.email, otp: otp }, "shhhhh");
 
-      await sendMail({
-        email: req.body.email,
-        subject: `opt : ${otp}`,
-        message: "please check our mail",
-      });
-      return res.status(200).json({
-        message: "please check your mail",
-        token: token,
-        email: req.body.email,
-      });
-    } else {
-      return res.status(409).json({ message: "Sign up" }).end();
-    }
-  }
+  //     await sendMail({
+  //       email: req.body.email,
+  //       subject: `opt : ${otp}`,
+  //       message: "please check our mail",
+  //     });
+  //     return res.status(200).json({
+  //       message: "please check your mail",
+  //       token: token,
+  //       email: req.body.email,
+  //     });
+  //   } else {
+  //     return res.status(409).json({ message: "Sign up" }).end();
+  //   }
+  // }
 });
 
 router.post("/newUser", async (req, res) => {
@@ -158,4 +157,4 @@ export function generateOTP(length) {
   return OTP;
 }
 
-router.get("/email", async (req, res) => {});
+
