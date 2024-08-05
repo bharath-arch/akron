@@ -41,10 +41,8 @@ function Graph({ data }) {
 // const theme = useTheme(); //this is from mui
 // const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   return (
-
-
     <>
-    <div className="hidden" style={{ width: '100%', height: 450 }}>
+    <div className="hidden md:flex" style={{ width: '100%', height: 450 }}>
       <ResponsiveContainer>
         <BarChart data={arr2} barCategoryGap={20}>
           {/* <CartesianGrid strokeDasharray="3 3" /> */}
@@ -56,8 +54,7 @@ function Graph({ data }) {
         </BarChart>
       </ResponsiveContainer>
     </div>
-    
-    <div className="" style={{ width: '100%', height: 300  }}>
+    <div className="flex md:hidden" style={{ width: '100%', height: 300  }}>
       <ResponsiveContainer >
         <BarChart data={arr2} barCategoryGap={20}>
           {/* <CartesianGrid strokeDasharray="3 3" /> */}
@@ -69,6 +66,7 @@ function Graph({ data }) {
         </BarChart>
       </ResponsiveContainer>
     </div>
+   
     
     </>
     
