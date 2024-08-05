@@ -10,6 +10,8 @@ router.post("/SignIn", async (req, res) => {
   const usertype = req.body.usertype;
   if (usertype === "user") {
     console.log("user");
+    const e = req.body.email
+    console.log(e,'email')
     const isMatch = await User.findOne({ email: req.body.email });
     console.log(isMatch);
 

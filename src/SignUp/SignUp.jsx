@@ -6,7 +6,7 @@ import { Toaster } from "react-hot-toast";
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 
-function Sign_in() {
+function SignUp() {
   setBodyColor({ color: "lightgray" });
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -148,12 +148,12 @@ function Sign_in() {
             <div className="text-center text-xs sm:text-sm font-serif font-light mt-4">
               <p>
                 <span>Don’t have an account?</span>{" "}
-                <Link to={`/login_in/${usertype}`}>
-                  <span className="text-blue-800">Sign in instead</span>
+                <Link to={`/login/${usertype}`}>
+                  <span className="text-blue-800">Login instead</span>
                 </Link>
               </p>
               <p>
-                <Link to={`/login_in/founder`}>
+                <Link to={`/login/founder`}>
                   <span className="text-blue-800">Login as Founder</span>
                 </Link>
               </p>
@@ -165,4 +165,4 @@ function Sign_in() {
   );
 }
 
-export default Sign_in;
+export default SignUp;

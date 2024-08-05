@@ -64,7 +64,7 @@ function Layout() {
         <div className="">
           <div className="hidden  md:flex md:gap-4 md:items-center ">
             <p className=" md:items-center md:p-2 md:text-xl">
-              <Link to={"/login_in/user"}>Sign In</Link>
+              <Link to={"/login/user"}>Sign In</Link>
             </p>
             <Link to={"/signup/user"}>
               {" "}
@@ -128,7 +128,7 @@ function Layout() {
                     className={`${selectLink === "sign_in" ? "text-blue-900 p-2" : "p-2"
                       }`}
                   >
-                    <Link to={"/sign_in"}>Sign In</Link>
+                    <Link to={"/login"}>Sign In</Link>
                   </li>
                 </ul>
               </div>

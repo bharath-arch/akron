@@ -20,7 +20,7 @@ import Wealth from "./User/Wealth";
 import Layout_user from "./User/Layout_user";
 import Square from "./User/Square";
 import Portfolio from "./User/Portfolio";
-import Sign_in from "./Sign_in/Sign_in";
+import SignUp from "./SignUp/SignUp";
 import Profile from "./User/Profile";
 import Kyc from "./User/Kyc";
 import Founder_form from "./User/Founder_form";
@@ -50,10 +50,10 @@ function App() {
           {/* <Route path="/Login" element={<Login />}></Route> */}
         </Route>
 
-        <Route path="/signup/:usertype" element={<Login />} />  {/* signup page */}
+        <Route path="/login/:usertype" element={<Login />} />  {/* signup page */}
         <Route path="/verification" element={<Verification />} />
-        <Route path="/sign_in" element={<Sign_in />} />
-        <Route path="/login_in/:usertype" element={<Sign_in />} />
+        {/* <Route path="/signup" element={<SignUp />} /> */}
+        <Route path="/signup/:usertype" element={<SignUp />} />
         <Route path="/user/profile" element={<Profile />} />
         <Route path="/user/kyc" element={<Kyc />}></Route>
         <Route path="/startup/founder_form" element={<Founder_form />}></Route>

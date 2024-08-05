@@ -10,43 +10,47 @@ function Sign_in() {
   setBodyColor({ color: "lightgray" });
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const [formdata, setFormdata] = useState({ email: "" });
+  const [formdata, setFormdata] = useState({
+    email: "",
+    usertype: ''
+  });
   const [invalidEmail, setInvalidEmail] = useState(false);
 
   const handleChangeEvent = (e) => {
     setFormdata({ ...formdata, [e.target.name]: e.target.value });
   };
 
+  console.log(formdata)
   function validateEmail(email) {
     const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return pattern.test(email);
   }
 
-  const handleGoogleLogin = async (mail) => {
-    localStorage.setItem("userEmail", mail);
-    try {
-      const response = await axios.post(
-        "http://localhost:4000/register/googleLogin",
-        { email: mail, type: "user" }
-      );
-      if (response.data.message === "Already email exist please Login") {
-        toast("User found, please login", {
-          duration: 4000,
-          position: "top-center",
-          icon: "👏",
-          iconTheme: {
-            primary: "#000",
-            secondary: "#fff",
-          },
-        });
-      }
-      if (response.data.message === "success") {
-        navigate("/user/explore");
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // const handleGoogleLogin = async (mail) => {
+  //   localStorage.setItem("userEmail", mail);
+  //   try {
+  //     const response = await axios.post(
+  //       "http://localhost:4000/register/googleLogin",
+  //       { email: mail, type: "user" }
+  //     );
+  //     if (response.data.message === "Already email exist please Login") {
+  //       toast("User found, please login", {
+  //         duration: 4000,
+  //         position: "top-center",
+  //         icon: "👏",
+  //         iconTheme: {
+  //           primary: "#000",
+  //           secondary: "#fff",
+  //         },
+  //       });
+  //     }
+  //     if (response.data.message === "success") {
+  //       navigate("/user/explore");
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -57,13 +61,13 @@ function Sign_in() {
       try {
         setLoading(true);
         const response = await axios.post(
-          "http://localhost:4000/register/newUser",
-          formdata
+          "http://localhost:4000/register/SignIn",
+          formdata.email
         );
 
         localStorage.setItem("userEmail", response.data.email);
         localStorage.setItem("token", response.data.token);
-
+        console.log(response.data.message)
         if (response.data.message === "mail is existing") {
           toast("User found, please login", {
             duration: 4000,
@@ -101,7 +105,7 @@ function Sign_in() {
 
 
         <div className=" mb-6">
-          <div className="font-bold text-2xl sm:text-3xl md:text-4xl">Get Started</div>
+          <div className="font-bold text-2xl sm:text-3xl md:text-4xl">Sign In</div>
         </div>
 
         <div className="text-left">
@@ -139,8 +143,8 @@ function Sign_in() {
             <span className="flex-shrink mx-4 text-gray-400">OR</span>
             <div className="flex-grow border-t border-gray-300"></div>
           </div>
-
-          <div className="flex items-center justify-center border-2 border-gray-300 p-2 rounded-lg text-center cursor-pointer" onClick={() => handleGoogleLogin(gmail)}>
+          {/* onClick={() => handleGoogleLogin(gmail)} */}
+          <div className="flex items-center justify-center border-2 border-gray-300 p-2 rounded-lg text-center cursor-pointer" >
             <span className="mr-2">
               <FcGoogle size={24} />
             </span>
@@ -150,12 +154,12 @@ function Sign_in() {
           <div className="text-center text-xs sm:text-sm font-serif font-light mt-4">
             <p>
               <span>Don’t have an account?</span>{" "}
-              <Link to={`/login_in/${user}`}>
+              <Link to={`/login/${user}`}>
                 <span className="text-blue-800">Login</span>
               </Link>
             </p>
             <p>
-              <Link to={`/login_in/${founder}`}>
+              <Link to={`/login/${founder}`}>
                 <span className="text-blue-800">Login as Founder</span>
               </Link>
             </p>
