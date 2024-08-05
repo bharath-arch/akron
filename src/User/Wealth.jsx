@@ -112,9 +112,9 @@ function Wealth() {
   };
 
   return (
-    <section className="container mx-auto p-5">
+    <section className="container mx-auto md:p-5">
       <Toaster position="top-center" reverseOrder={false} />
-      <div className="md:flex md:justify-between hidden text-blue-800">
+      <div className=" flex justify-between  text-blue-800">
         <button className="flex items-center" onClick={handlePrevious}>
           <GrPrevious />
           Previous
@@ -123,54 +123,37 @@ function Wealth() {
           Next <GrNext />
         </button>
       </div>
-      <div className="flex mr-2 md:mr-0 mb-3 items-center w-full justify-between">
-        <span className="flex justify-end w-full text-blue-800 text-lg md:hidden">
-          Previous
-        </span>
-        <div className="left-7/12 md:hidden">
-          <span>
-            <GrPrevious />
-          </span>
-        </div>
-        <span className="flex justify-end w-full text-blue-800 text-lg md:hidden">
-          Next
-        </span>
-        <div className="left-7/12 md:hidden">
-          <span>
-            <GrNext />
-          </span>
-        </div>
-      </div>
 
-      <div className="w-full h-full bg-gradient-to-br pt-5 pr-8 pl-8">
-        {data[count]?.lots === 0 ? ('Lots are Taken please Check Squre for lots Avalibility') : (<p className="font-semibold ">Investment Amount - {lots * 10000}</p>)}
+
+      <div className="w-full h-full bg-gradient-to-br p-1 md:pt-5 md:pr-8 md:pl-8">
+        {data[count]?.lots === 0 ? ('Lots are Taken please Check Squre for lots Avalibility') : (<p className="font-semibold text-sm mt-2 md:mt-0 md:text-xl ">Investment Amount - {lots * 10000}</p>)}
 
         <div className="flex flex-col">
-          <div className="flex justify-between">
-            <span className="font-bold text-3xl">
+          <div className="flex justify-between ">
+            <span className="font-bold text-2xl mt-2  md:text-3xl">
               {data && data[count]?.company_name}
             </span>
             {data[count]?.lots === 0 ? ('') : (<>
               <div className="flex gap-2 text-center items-center">
-                <span
+                <button
                   className="p-2 border cursor-pointer select-none"
                   onClick={negativelotshandle}
                 >
                   &minus;
-                </span>
+                </button>
 
                 <button
-                  className="p-2 cursor-pointer bg-blue-700 text-white rounded-md px-6 text-xl hover:scale-95 "
+                  className="p-2 cursor-pointer bg-blue-700 text-white rounded-md px-3 md:px-6 text-lg md:text-xl hover:scale-95 "
                   onClick={handleLotsize}
                 >
                   Buy {lots} lots
                 </button>
-                <span
+                <button
                   className="p-2 border cursor-pointer select-none"
                   onClick={positivelotshandle}
                 >
                   &#43;
-                </span>
+                </button>
               </div>
             </>)}
 
@@ -194,7 +177,7 @@ function Wealth() {
           <span className="mt-2 font-semibold ">Traction</span>
           <span className="mt-2"> {data && data[count]?.traction}</span>
         </div>
-        <div className="flex gap-x-5 mt-9 mb-5">
+        <div className="flex md:gap-x-5 mt-9 mb-5 ">
           <div className="h-auto flex flex-wrap md:w-full gap-10">
             <span>
               <span className="font-bold">Mkt Cap :</span>{" "}
@@ -223,7 +206,8 @@ function Wealth() {
               <span className="font-bold">Lot Size:</span> {data[count]?.lots}{" "}
               Lots
             </span>
-            <div className="flex mt-2 md:mt-0">
+            {/* <div className="flex mt-2 md:mt-0 items-center"> */}
+            <span className="flex">
               <span className="font-bold">Financial Report</span>
               <span className="ml-2">
                 <MdPictureAsPdf
@@ -241,15 +225,17 @@ function Wealth() {
                   }}
                 />
               </span>
-            </div>
+
+            </span>
+            {/* </div> */}
           </div>
         </div>
+        <div className="mr-8">
+          {exceldata && (
 
-        {exceldata && (
-          <div className="flex justify-center items-center text-center mt-20">
             <Graph data={exceldata} />
-          </div>
-        )}
+
+          )}</div>
 
         {view && (
           <div className="overflow-x-auto flex justify-center flex-col">

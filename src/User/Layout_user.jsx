@@ -5,6 +5,7 @@ import setBodyColor from "../setBodyColor";
 import User_popup from "../Wallet/User_popup/User_popup";
 import { RxHamburgerMenu } from "react-icons/rx";
 import axios from "axios";
+import MobileNav from "./MobileNav";
 
 function Layout_user() {
   const path = useLocation();
@@ -48,23 +49,10 @@ function Layout_user() {
   return (
     <div>
       <div
-        className={`${
-          activesidebar ? "translate-y-0" : "-translate-y-96"
-        } duration-1000 fixed top-12 w-full items-center h-auto flex flex-col md:hidden `}
+        className={`${activesidebar ? "translate-y-0 z-10 bg-white text-center" : "-translate-y-96 text-center"
+          } duration-1000 fixed top-12 w-full items-center h-auto flex flex-col z-10 md:hidden `}
       >
-        <div>
-          <ul className="font-semibold text-xl">
-            {["explore", "id", "wealth", "square", "portfolio"].map((item) => (
-              <li
-                key={item}
-                onClick={() => setSelectLink(item)}
-                className={`${selectLink === item ? "text-blue-900 p-2" : "p-2"}`}
-              >
-                <Link to={item}>{item.charAt(0).toUpperCase() + item.slice(1)}</Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <MobileNav ></MobileNav>
       </div>
       <div className="justify-between text-center items-center ml-8 mr-8 mt-3 flex">
         <div>
@@ -77,7 +65,10 @@ function Layout_user() {
             {["explore", "id", "wealth", "square", "portfolio"].map((item) => (
               <li
                 key={item}
-                onClick={() => setSelectLink(item)}
+                onClick={() => {
+                  setSelectLink(item);
+                  setActivesidebar(!activesidebar);
+                }}
                 className={`${selectLink === item ? "text-blue-900 p-2" : "p-2"}`}
               >
                 <Link to={item}>{item.charAt(0).toUpperCase() + item.slice(1)}</Link>
@@ -107,8 +98,8 @@ function Layout_user() {
           <RxHamburgerMenu />
         </div>
       </div>
-      <hr className="mt-1 border-1 border-black w-[100%] self-center" />
-      <div className="ml-8 mr-4 mt-5">
+      <hr className="mt-1 border-1 border-black self-center" />
+      <div className=" md:m-2 md:ml-8 md:mr-4 mt-5">
         <Outlet />
       </div>
     </div>

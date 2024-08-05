@@ -80,14 +80,14 @@ function Explore() {
   
 
   return (
-    <div className="ml-6 mr-6">-
+    <div className="md:ml-6 md:mr-6">
           <Toaster position="top-center" reverseOrder={false} />
       <section>
-        <div className="md:flex  ">
+        <div className=" mt-5 md:flex  ">
           <span className="text-3xl font-bold mb-5">What's hot</span>
         </div>
-        <div className="md:flex gap-5 ">
-          <div className="flex md:flex-col items-center">
+        <div className="md:mt-1 mt-3 flex gap-5 ">
+          <div className="flex flex-col items-center">
             <MdOutlineFiberNew
               size={40}
               color="red"
@@ -95,45 +95,45 @@ function Explore() {
               title="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam sapiente iure quo eius, vel explicabo inventore. Dicta omnis asperiores, quidem corrupti doloremque nobis fugiat?
 "
             />
-            <span className="text-[12px] text-center">
+            <span className="md:text-[12px] text-[10px] text-center">
               New Age <br></br> investments
             </span>
           </div>
-          <div className="flex md:flex-col  items-center">
+          <div className="flex flex-col items-center">
             <GoAlertFill
               size={40}
               className=""
               title="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam sapiente iure quo eius, vel explicabo inventore. Dicta omnis asperiores, quidem corrupti doloremque nobis fugiat?
 "
             />
-            <samp className="text-[12px] text-center">
+            <samp className="md:text-[12px] text-[10px] text-center">
               Avoid these <br></br> mistakes!
             </samp>
           </div>
-          <div className="flex md:flex-col  items-center">
+          <div className="flex flex-col items-center">
             <TbMoneybag
               size={40}
               className=""
               title="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam sapiente iure quo eius, vel explicabo inventore. Dicta omnis asperiores, quidem corrupti doloremque nobis fugiat?
 "
             />
-            <span className="text-[12px] text-center">
+            <span className="md:text-[12px] text-[10px] text-center">
               Start with <br></br>Rs 10,000
             </span>
           </div>
-          <div className="flex md:flex-col  items-center">
+          <div className="flex flex-col items-center">
             <BsFillPeopleFill
               size={40}
               className=""
               title="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam sapiente iure quo eius, vel explicabo inventore. Dicta omnis asperiores, quidem corrupti doloremque nobis fugiat?
 "
             />
-            <span className="text-[12px] text-center">Why Us?</span>
+            <span className="md:text-[12px] text-[10px] text-center">Why Us?</span>
           </div>
         </div>
       </section>
       <section className="flex flex-col">
-        <div className="bg-gray-400 h-auto w-[95%] mt-6 bg-gradient-to-tr from-gray-400 rounded-md to-gray-200">
+        <div className="bg-gray-400 h-auto md:w-[95%] mt-6 bg-gradient-to-tr from-gray-400 rounded-md to-gray-200">
           <div className="p-3">
             <div className="flex">
               <FaWallet size={30} />
@@ -183,7 +183,7 @@ function Explore() {
         )}
       </section>
       <section>
-        <div className="bg-gray-400 h-[220px] w-[95%] mt-6 bg-gradient-to-b rounded-md from-gray-300 to-gray-200 p-5">
+        <div className="bg-gray-400 h-auto md:w-[95%] mt-6 bg-gradient-to-b rounded-md from-gray-300 to-gray-200 p-5">
           <div className="flex justify-between">
             <span className={`text-${color}-500 font-semibold text-xl`}>
               {" "}
@@ -199,11 +199,11 @@ function Explore() {
           {error && <p className="text-red-500">{error.message}</p>}
 
           {data && (
-            <section className="flex flex-wrap gap-5 mt-9 w-full z-0">
+            <section className="flex flex-wrap gap-5 mt-9 overflow-hidden w-full z-0">
               {data.map((item, index) => (
                 <div
                   key={index}
-                  className="bg-gradient-to-br from-gray-300 to-gray-100  p-5 shadow-md rounded-md cursor-pointer transform hover:scale-105 transition-transform duration-300"
+                  className="bg-gradient-to-br  from-gray-300 to-gray-100  p-5 shadow-md rounded-md cursor-pointer transform hover:scale-105 transition-transform duration-300"
                   onClick={() => navigate("/user/wealth")}
                 >
                   <div className="text-center">
