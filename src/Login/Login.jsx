@@ -100,8 +100,8 @@ function Sign_in() {
       <div className="w-full max-w-md bg-slate-50 rounded-xl shadow-lg p-6 sm:p-8">
 
 
-        <div className="text-center mb-6">
-          <div className="font-bold text-2xl sm:text-3xl md:text-4xl">Get Started</div>
+        <div className=" mb-6">
+          <div className="font-bold text-2xl sm:text-3xl md:text-4xl">Sign In</div>
         </div>
 
         <div className="text-left">

@@ -64,7 +64,7 @@ function Layout() {
         <div className="">
           <div className="hidden  md:flex md:gap-4 md:items-center ">
             <p className=" md:items-center md:p-2 md:text-xl">
-              <Link to={"/login_in/user"}>Sign In</Link>
+              <Link to={"/Login/user"}>Sign In</Link>
             </p>
             <Link to={"/login_in/user"}>
               {" "}
