@@ -48,12 +48,7 @@ function Layout_user() {
 
   return (
     <div>
-      <div
-        className={`${activesidebar ? "translate-y-0 z-10 bg-white text-center" : "-translate-y-96 text-center"
-          } duration-1000 fixed top-12 w-full items-center h-auto flex flex-col z-10 md:hidden `}
-      >
-        <MobileNav ></MobileNav>
-      </div>
+
       <div className="justify-between text-center items-center ml-8 mr-8 mt-3 flex">
         <div>
           <span className="font-bold text-2xl bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text md:text-4xl">
@@ -95,14 +90,22 @@ function Layout_user() {
           className="md:hidden flex"
           onClick={() => setActivesidebar(!activesidebar)}
         >
-          <RxHamburgerMenu />
+          <RxHamburgerMenu className="cursor-pointer"/>
         </div>
+        {activesidebar && <div className="relative z-40">
+        {/* // className={`${activesidebar ? "translate-y-0 z-10 bg-white text-center" : "-translate-y-96 text-center" */}
+        {/* //   } duration-1000   items-center h-auto flex flex-col z-10 md:hidden `} */}
+        < MobileNav ></MobileNav>
+      </div>}
+
       </div>
+      
       <hr className="mt-1 border-1 border-black self-center" />
+      
       <div className=" md:m-2 md:ml-8 md:mr-4 mt-5">
         <Outlet />
       </div>
-    </div>
+    </div >
   );
 }
 

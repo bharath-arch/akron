@@ -10,9 +10,18 @@ function MobileNav({ nav }) {
         setActiveLink(item);
     };
 
+    const handlelogout = () => {
+        localStorage.removeItem("userEmail");
+        localStorage.removeItem("usertype");
+        localStorage.removeItem("token");
+        navigate("/Login");
+      };
+
     return (
-        <ul className="font-semibold text-xl">
-            {["explore", "id", "wealth", "square", "portfolio"].map((item) => (
+
+        <ul className=" absolute flex flex-col items-center text-[12px]  border top-0  right-5 font-semibold  bg-white md:hidden">
+
+            {["explore", "id", "wealth", "square", "portfolio" ].map((item) => (
                 <li
                     key={item}
                     onClick={() => handleLinkClick(item)}
