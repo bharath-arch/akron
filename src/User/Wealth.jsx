@@ -112,7 +112,7 @@ function Wealth() {
   };
 
   return (
-    <section className="container mx-auto md:p-5">
+    <section className="container mx-auto md:p-5 ">
       <Toaster position="top-center" reverseOrder={false} />
       <div className=" flex justify-between  text-blue-800">
         <button className="flex items-center" onClick={handlePrevious}>

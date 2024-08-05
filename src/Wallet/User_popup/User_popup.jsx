@@ -1,70 +1,81 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CiMenuKebab } from "react-icons/ci";
 
 function User_popup() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  const [email, setEmail] = useState(localStorage.getItem("userEmail"));
+  const [timeoutId, setTimeoutId] = useState(null); // Store the timeout ID
+  const email = localStorage.getItem("userEmail");
   const options = ["kyc", "profile", "Logout"];
 
-  const toggleDropdown = () => setIsOpen(!isOpen);
-  const handleMouseLeave = () => setIsOpen(false);
+  const toggleDropdown = useCallback(() => setIsOpen(prev => !prev), []);
+  
+  const handleMouseEnter = useCallback(() => {
+    // Clear any existing timeout when mouse enters
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+      setTimeoutId(null);
+    }
+    setIsOpen(true);
+  }, [timeoutId]);
 
-  const handlelogout = () => {
+  const handleMouseLeave = useCallback(() => {
+    // Set timeout to close dropdown after 2 seconds
+    const id = setTimeout(() => setIsOpen(false), 100);
+    setTimeoutId(id);
+  }, []);
+
+  const handleLogout = useCallback(() => {
     localStorage.removeItem("userEmail");
     localStorage.removeItem("usertype");
     localStorage.removeItem("token");
     navigate("/Login");
-  };
+  }, [navigate]);
 
   useEffect(() => {
     if (!email) {
       navigate("/Login");
     }
-  }, [email]);
+  }, [email, navigate]);
 
   return (
     <div className="relative">
       <div
-        className="dropdown"
-        onMouseEnter={toggleDropdown}
+        onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        className="flex items-center"
       >
         <button>
           <CiMenuKebab size={25} />
         </button>
-        <ul
-          className={`absolute top-6 bg-white p-2 right-1 transition-opacity duration-700 ${
-            isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
-          }`}
-          onBlur={handleMouseLeave}
-        >
-          {options.map((option, index) => (
-            <React.Fragment key={option}>
+        {isOpen && (
+          <ul
+            className="absolute top-full right-0 bg-white mt-2 w-48 md:w-56 transition-opacity duration-300 opacity-100 shadow-lg rounded-lg"
+          >
+            {options.map((option, index) => (
               <li
-                className={
-                  index === options.length - 1 ? "" : "border-b border-gray-200"
-                }
+                key={option}
+                className={`py-2 px-4 ${index < options.length - 1 ? "border-b border-gray-200" : ""}`}
               >
                 {option === "Logout" ? (
                   <span
-                    className="font-arima hover:text-blue-600 cursor-pointer"
-                    onClick={handlelogout}
+                    className="font-arima hover:text-blue-600 cursor-pointer block text-center"
+                    onClick={handleLogout}
                   >
                     {option}
                   </span>
                 ) : (
                   <Link to={option}>
-                    <span className="font-arima hover:text-blue-600">
+                    <span className="font-arima hover:text-blue-600 block text-center">
                       {option}
                     </span>
                   </Link>
                 )}
               </li>
-            </React.Fragment>
-          ))}
-        </ul>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );

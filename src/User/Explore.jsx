@@ -80,7 +80,7 @@ function Explore() {
   
 
   return (
-    <div className="md:ml-6 md:mr-6">
+    <div className="md:ml-6 md:mr-6 m-2">
           <Toaster position="top-center" reverseOrder={false} />
       <section>
         <div className=" mt-5 md:flex  ">
@@ -183,7 +183,7 @@ function Explore() {
         )}
       </section>
       <section>
-        <div className="bg-gray-400 h-auto md:w-[95%] mt-6 bg-gradient-to-b rounded-md from-gray-300 to-gray-200 p-5">
+        <div className="bg-gray-400 min-h-[15rem] md:w-[95%] mt-6 bg-gradient-to-b rounded-md from-gray-300 to-gray-200 p-5">
           <div className="flex justify-between">
             <span className={`text-${color}-500 font-semibold text-xl`}>
               {" "}

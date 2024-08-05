@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import setBodyColor from "../setBodyColor";
-
 import User_popup from "../Wallet/User_popup/User_popup";
 import { RxHamburgerMenu } from "react-icons/rx";
 import axios from "axios";
 import MobileNav from "./MobileNav";
 
 function Layout_user() {
-  const path = useLocation();
+  const { pathname } = useLocation();
   const navigate = useNavigate();
   setBodyColor({ color: "white" });
 
-  const [selectLink, setSelectLink] = useState();
-  const [activesidebar, setActivesidebar] = useState(true);
-  const [data, setData] = useState();
+  const [selectLink, setSelectLink] = useState("");
+  const [activesidebar, setActivesidebar] = useState(false);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const localemail = localStorage.getItem('userEmail');
@@ -24,32 +23,31 @@ function Layout_user() {
   }, [navigate]);
 
   useEffect(() => {
-    if (path.pathname) {
-      setSelectLink(path.pathname.split("/")[2]);
-    }
-  }, [path.pathname]);
+    const pathSegment = pathname.split("/")[2];
+    setSelectLink(pathSegment || "");
+  }, [pathname]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:4000/company_approve/dashboard_data"
-        );
-        const setfilterData = response.data.result.filter(
-          (item) => item.status === true
-        );
-        setData(setfilterData);
+        const { data: responseData } = await axios.get("http://localhost:4000/company_approve/dashboard_data");
+        const filteredData = responseData.result.filter(item => item.status === true);
+        setData(filteredData);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
     fetchData();
   }, []);
 
+  const handleLinkClick = (item) => {
+    setSelectLink(item);
+    setActivesidebar(false); // Close sidebar on link click
+  };
+
   return (
     <div>
-
-      <div className="justify-between text-center items-center ml-8 mr-8 mt-3 flex">
+      <div className="justify-between text-center items-center p-2 ml-8 mr-8 mt-3 flex">
         <div>
           <span className="font-bold text-2xl bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text md:text-4xl">
             Akorn
@@ -57,55 +55,41 @@ function Layout_user() {
         </div>
         <div className="hidden md:flex">
           <ul className="flex gap-5 font-semibold text-xl">
-            {["explore", "id", "wealth", "square", "portfolio"].map((item) => (
+            {["explore", "id", "wealth", "square", "portfolio"].map(item => (
               <li
                 key={item}
-                onClick={() => {
-                  setSelectLink(item);
-                  setActivesidebar(!activesidebar);
-                }}
-                className={`${selectLink === item ? "text-blue-900 p-2" : "p-2"}`}
+                onClick={() => handleLinkClick(item)}
+                className={selectLink === item ? "text-blue-900 p-2" : "p-2"}
               >
                 <Link to={item}>{item.charAt(0).toUpperCase() + item.slice(1)}</Link>
               </li>
             ))}
           </ul>
         </div>
-        <div className="flex justify-center items-center gap-3">
+        <div className="flex justify-center gap-3 items-end">
           {localStorage.getItem("userEmail") && (
             <span>
-              <b className="text-xl">Welcome</b>{" "}
-              {/*userEmail*/}
-              {localStorage.getItem("userEmail").split("@gmail.com")}
+              <b className="text-xl">Welcome</b> {localStorage.getItem("userEmail").split("@")[0]}
             </span>
           )}
-          <div className="flex items-center relative">
-            <span className="rounded-full text-2xl p-2 bg-orange-600 flex items-center text-center">
-              {localStorage.getItem("userEmail") && localStorage.getItem("userEmail").split("")[0].toUpperCase()}
-            </span>
-            <User_popup />
-          </div>
-        </div>
-        <div
-          className="md:hidden flex"
-          onClick={() => setActivesidebar(!activesidebar)}
-        >
-          <RxHamburgerMenu className="cursor-pointer"/>
-        </div>
-        {activesidebar && <div className="relative z-40">
-        {/* // className={`${activesidebar ? "translate-y-0 z-10 bg-white text-center" : "-translate-y-96 text-center" */}
-        {/* //   } duration-1000   items-center h-auto flex flex-col z-10 md:hidden `} */}
-        < MobileNav ></MobileNav>
-      </div>}
 
+          <User_popup />
+         
+        </div>
+        <div className="md:hidden flex" onClick={() => setActivesidebar(!activesidebar)}>
+          <RxHamburgerMenu className="cursor-pointer" />
+        </div>
+        {activesidebar && (
+          <div className="relative z-40">
+            <MobileNav />
+          </div>
+        )}
       </div>
-      
       <hr className="mt-1 border-1 border-black self-center" />
-      
-      <div className=" md:m-2 md:ml-8 md:mr-4 mt-5">
+      <div className="md:m-2 md:ml-8 md:mr-4 mt-5">
         <Outlet />
       </div>
-    </div >
+    </div>
   );
 }
 
