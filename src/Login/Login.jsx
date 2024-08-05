@@ -92,13 +92,13 @@ function Sign_in() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
       <Toaster position="top-center" reverseOrder={false} />
-      <div className="text-center mb-8">
+      {/* <div className="text-center mb-8">
           <span className="font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">
             Akron
           </span>
-        </div>
+        </div> */}
       <div className="w-full max-w-md bg-slate-50 rounded-xl shadow-lg p-6 sm:p-8">
-        
+
 
         <div className="text-center mb-6">
           <div className="font-bold text-2xl sm:text-3xl md:text-4xl">Get Started</div>
@@ -112,9 +112,8 @@ function Sign_in() {
               name="email"
               value={formdata.email}
               onChange={handleChangeEvent}
-              className={`border-2 rounded-lg w-full p-2 border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500 ${
-                invalidEmail ? "border-red-500" : ""
-              }`}
+              className={`border-2 rounded-lg w-full p-2 border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500 ${invalidEmail ? "border-red-500" : ""
+                }`}
               placeholder="Enter your Email"
             />
             {invalidEmail && (

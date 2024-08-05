@@ -92,11 +92,11 @@ function Sign_in() {
     <div className="w-screen h-screen flex flex-col items-center justify-center bg-gray-100 p-4 sm:p-6 md:p-8 lg:p-12">
       <Toaster position="top-center" reverseOrder={false} />
 
-      <div className="text-center mb-8">
+      {/* <div className="text-center mb-8">
         <span className="font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">
           Akron
         </span>
-      </div>
+      </div> */}
 
       <div className="flex justify-center items-center w-full max-w-md">
         <div className="bg-slate-50 w-full rounded-xl shadow-lg p-6 md:p-8">
