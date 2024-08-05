@@ -41,7 +41,7 @@ function Square() {
           email,
         }
       );
-      if(response.data.message === 'please do Kyc before investing'){
+      if (response.data.message === 'please do Kyc before investing') {
         toast.error("please do kyc befor investing...");
       }
     } catch (err) {
@@ -57,27 +57,27 @@ function Square() {
   const searchContent = (searchValue) => {
     setSearch(searchValue);
   };
-  
-  const dropDownContent = (dropdownfromChild)=>{
+
+  const dropDownContent = (dropdownfromChild) => {
     setDropdown(dropdownfromChild)
   }
   return (
     <div className="container mx-auto p-4 sm:p-6 lg:p-8">
       <Toaster position="top-center" reverseOrder={false} />
-      <section className="mb-6">
+      {/* <section className="mb-6">
       <Search_filter data={data} searchContents={searchContent} dropDown = {dropDownContent} />
-      </section>
+      </section> */}
 
       {error && <p className="text-red-500">{error.message}</p>}
 
       {data && data.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {data.filter((item) => {
-              return (
-                search.toLowerCase() === "" ? item :
+            return (
+              search.toLowerCase() === "" ? item :
                 item.companyName.toLowerCase().includes(search.toLowerCase())
-              );
-            }).map((item, index) => (
+            );
+          }).map((item, index) => (
             <div
               key={index}
               className="bg-white rounded-lg shadow-lg overflow-hidden"
